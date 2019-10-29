@@ -8,16 +8,21 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "route.h"
+#include "drider.h"
 
-
-#define CITY_MAX 35
-#define PROVINCE_MAX 25
-#define ADDRESS_MAX 50
-#define SEATS_MAX 10
-
+#define DRIVERS_MAX 101
+#define PASSENGERS_MAX 101
+#define RIDES_MAX 101
 
 int main() {
+    driver drivers[DRIVERS_MAX];
+    int total_drivers = load_drivers(drivers, DRIVERS_MAX);
+  
+    for (int i = 0; i<total_drivers; i++) {
+        printf("%s\n", drivers[i].code);
+    }
     printf("BENVENUTO IN FLAVIA");
     home_result selection = home_drivers;
     
@@ -31,8 +36,21 @@ int main() {
                 while (result != drivers_back) {
                     result = show_driver_menu();
                     switch (result) {
-                        case drivers_create:
+                        case drivers_create: {
+                            driver new_driver;
+                            int isValid = 0;
+                            do {
+                                new_driver = create_driver();
+                                isValid = !contains_driver(&new_driver, drivers, total_drivers);
+                                if (!isValid) {
+                                    printf("Il conducente con codice fiscale %s è già registrato!\n", new_driver.code);
+                                }
+                            } while (!isValid);
+                            drivers[total_drivers] = new_driver;
+                            total_drivers++;
+                            save_drivers(drivers, total_drivers);
                             break;
+                        }
                         case drivers_edit:
                             break;
                         case drivers_delete:

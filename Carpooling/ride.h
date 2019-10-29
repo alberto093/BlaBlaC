@@ -12,16 +12,16 @@
 #include <stdio.h>
 
 #ifndef FISCAL_CODE_MAX
-#define FISCAL_CODE_MAX 15
+#define FISCAL_CODE_MAX 17
 #endif
 
-#define CITY_MAX 35
-#define PROVINCE_MAX 25
-#define ADDRESS_MAX 50
-#define SEATS_MAX 10
+#define CITY_MAX 36
+#define PROVINCE_MAX 26
+#define ADDRESS_MAX 51
+#define SEATS_MAX 11
 
 #ifndef NOTE_MAX
-#define NOTE_MAX 250
+#define NOTE_MAX 251
 #endif
 
 #ifndef hash_code
@@ -53,5 +53,7 @@ typedef struct {
     unsigned short int total_seats;
     hash_code passenger_codes[SEATS_MAX];
 } ride;
+
+int load_rides(ride rides[], int count);
 
 #endif /* ride_h */

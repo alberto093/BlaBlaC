@@ -7,3 +7,14 @@
 //
 
 #include "ride.h"
+
+int load_rides(ride rides[], int count) {
+    FILE *rstream = fopen("/Documents/rides.dat", "rb");
+    if (rstream == NULL) {
+        return 0;
+    }
+
+    int result = (int)fread(rides, sizeof(ride) * count, 1, rstream);
+    fclose(rstream);
+    return result;
+}

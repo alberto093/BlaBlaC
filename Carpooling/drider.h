@@ -12,23 +12,23 @@
 #include <stdio.h>
 
 #ifndef FISCAL_CODE_MAX
-#define FISCAL_CODE_MAX 15
+#define FISCAL_CODE_MAX 17
 #endif
 
 #ifndef NAME_MAX
-#define NAME_MAX 25
+#define NAME_MAX 26
 #endif
 
 #ifndef SURNAME_MAX
-#define SURNAME_MAX 25
+#define SURNAME_MAX 26
 #endif
 
 #ifndef NOTE_MAX
-#define NOTE_MAX 250
+#define NOTE_MAX 251
 #endif
 
 #ifndef REVIEW_MAX
-#define REVIEW_MAX 100
+#define REVIEW_MAX 101
 #endif
 
 #ifndef hash_code
@@ -36,19 +36,19 @@ typedef char hash_code[FISCAL_CODE_MAX];
 #endif
 
 typedef enum {
-    very_poor,
-    poor,
-    good,
-    excellent,
-    oustanding
+    rating_very_poor,
+    rating_poor,
+    rating_good,
+    rating_excellent,
+    rating_oustanding
 } rating;
 
 typedef enum {
-    newcomer,
-    intermediate,
-    experienced,
-    expert,
-    ambassador
+    experience_newcomer,
+    experience_intermediate,
+    experience_experienced,
+    experience_expert,
+    experience_ambassador
 } experience;
 
 typedef struct {
@@ -67,5 +67,10 @@ typedef struct {
     experience experience;
     unsigned int total_rides;
 } driver;
+
+int load_drivers(driver drivers[], int count);
+driver create_driver(void);
+int save_drivers(driver drivers[], int count);
+int contains_driver(driver* new_driver, driver drivers[], int count);
 
 #endif /* rider_h */

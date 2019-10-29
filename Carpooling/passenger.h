@@ -12,19 +12,19 @@
 #include <stdio.h>
 
 #ifndef FISCAL_CODE_MAX
-#define FISCAL_CODE_MAX 15
+#define FISCAL_CODE_MAX 17
 #endif
 
 #ifndef NAME_MAX
-#define NAME_MAX 25
+#define NAME_MAX 26
 #endif
 
 #ifndef SURNAME_MAX
-#define SURNAME_MAX 25
+#define SURNAME_MAX 26
 #endif
 
 #ifndef NOTE_MAX
-#define NOTE_MAX 250
+#define NOTE_MAX 251
 #endif
 
 #ifndef hash_code
@@ -38,5 +38,7 @@ typedef struct {
     unsigned short int age;
     char description[NOTE_MAX];
 } passenger;
+
+int load_passengers(passenger passengers[], int count);
 
 #endif /* passenger_h */
