@@ -1,12 +1,12 @@
 //
-//  drider.c
+//  driver.c
 //  Carpooling
 //
 //  Created by Alberto Saltarelli on 29/10/2019.
 //  Copyright © 2019 Alberto Saltarelli. All rights reserved.
 //
 
-#include "drider.h"
+#include "driver.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -41,13 +41,34 @@ driver create_driver(void) {
     return new_driver;
 }
 
+void edit_driver(driver *edit_driver) {
+    printf("\nIl nome è %s, inserisci il nuovo nome: ", (*edit_driver).name);
+    scanf("%s", (*edit_driver).name);
+    printf("\nIl cognome è %s, inserisci il nuovo cognome: ", (*edit_driver).surname);
+    scanf("%s", (*edit_driver).surname);
+    printf("\nL'età è %hd, inserisci la nuova età: ", (*edit_driver).age);
+    scanf("%hd", &(*edit_driver).age);
+    printf("La biografia è %s, inserisci la nuova biografia: ", (*edit_driver).description);
+    scanf("%s", (*edit_driver).description);
+}
+
 int contains_driver(driver* new_driver, driver drivers[], int count) {
     for (int i=0; i<count; i++) {
-        if (strcmp(drivers[i].code, (*new_driver).code) == 0) {
+        if (!strcmp(drivers[i].code, (*new_driver).code)) {
             return 1;
         }
     }
     return 0;
+}
+
+void existing_driver(hash_code driver_code, driver drivers[], int count, driver *driver) {
+    for (int i=0; i<count; i++) {
+        if (!strcmp(drivers[i].code, driver_code)) {
+            driver = &drivers[i];
+            i=count;
+            break;
+        }
+    }
 }
 
 int save_drivers(driver drivers[], int count) {

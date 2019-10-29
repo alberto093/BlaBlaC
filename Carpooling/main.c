@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "route.h"
-#include "drider.h"
+#include "driver.h"
 
 #define DRIVERS_MAX 101
 #define PASSENGERS_MAX 101
@@ -51,8 +51,21 @@ int main() {
                             save_drivers(drivers, total_drivers);
                             break;
                         }
-                        case drivers_edit:
+                        case drivers_edit: {
+                            hash_code driver_code;
+                            driver *actual_driver = NULL;
+                            do {
+                                printf("\nInserisci il codice fiscale del conducente: ");
+                                scanf("%s", driver_code);
+                                existing_driver(driver_code, drivers, total_drivers, actual_driver);
+                                if (!actual_driver) {
+                                    printf("Conducente non trovato!");
+                                }
+                            } while (!actual_driver);
+                            edit_driver(actual_driver);
+                            save_drivers(drivers, total_drivers);
                             break;
+                        }
                         case drivers_delete:
                             break;
                         case drivers_list:

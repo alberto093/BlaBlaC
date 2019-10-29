@@ -1,13 +1,13 @@
 //
-//  drider.h
+//  driver.h
 //  Carpooling
 //
 //  Created by Alberto Saltarelli on 29/10/2019.
 //  Copyright © 2019 Alberto Saltarelli. All rights reserved.
 //
 
-#ifndef rider_h
-#define rider_h
+#ifndef driver_h
+#define driver_h
 
 #include <stdio.h>
 
@@ -70,7 +70,9 @@ typedef struct {
 
 int load_drivers(driver drivers[], int count);
 driver create_driver(void);
+void existing_driver(hash_code driver_code, driver drivers[], int count, driver *driver);
+void edit_driver(driver *edit_driver);
 int save_drivers(driver drivers[], int count);
 int contains_driver(driver* new_driver, driver drivers[], int count);
 
-#endif /* rider_h */
+#endif /* driver_h */
