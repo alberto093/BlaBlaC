@@ -52,13 +52,38 @@ void edit_driver(driver *edit_driver) {
     scanf("%s", (*edit_driver).description);
 }
 
-int contains_driver(driver* new_driver, driver drivers[], int count) {
-    for (int i=0; i<count; i++) {
-        if (!strcmp(drivers[i].code, (*new_driver).code)) {
-            return 1;
+int remove_driver(driver *remove_driver, driver drivers[], int count) {
+    int end = count;
+    int found = 0;
+    for (int i=0; i<end; i++) {
+        if (!strcmp((*remove_driver).code, drivers[i].code) && !found) {
+            end--;
+            found = 1;
+        }
+        if (found) {
+            drivers[i] = drivers[i+1];
         }
     }
-    return 0;
+    return found;
+}
+
+int contains_driver(driver* new_driver, driver drivers[], int count) {
+    return existing_driver((*new_driver).code, drivers, count) != NULL;
+}
+
+#warning add exit with NULL
+driver *find_driver(driver drivers[], int count) {
+    hash_code driver_code;
+    driver *actual_driver = NULL;
+    do {
+        printf("\nInserisci il codice fiscale del conducente: ");
+        scanf("%s", driver_code);
+        actual_driver = existing_driver(driver_code, drivers, count);
+        if (!actual_driver) {
+            printf("Conducente non trovato!");
+        }
+    } while (!actual_driver);
+    return actual_driver;
 }
 
 driver *existing_driver(hash_code driver_code, driver drivers[], int count) {

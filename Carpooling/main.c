@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "utils.h"
 #include "route.h"
 #include "driver.h"
 
@@ -52,22 +53,32 @@ int main() {
                             break;
                         }
                         case drivers_edit: {
-                            hash_code driver_code;
-                            driver *actual_driver = NULL;
-                            do {
-                                printf("\nInserisci il codice fiscale del conducente: ");
-                                scanf("%s", driver_code);
-                                actual_driver = existing_driver(driver_code, drivers, total_drivers);
-                                if (!actual_driver) {
-                                    printf("Conducente non trovato!");
-                                }
-                            } while (!actual_driver);
-                            edit_driver(actual_driver);
-                            save_drivers(drivers, total_drivers);
+                            driver *actual_driver = find_driver(drivers, total_drivers);
+                            if (actual_driver != NULL) {
+                                edit_driver(actual_driver);
+                                save_drivers(drivers, total_drivers);
+                            }
                             break;
                         }
-                        case drivers_delete:
+                        case drivers_delete: {
+                            driver *actual_driver = find_driver(drivers, total_drivers);
+                            if (actual_driver != NULL) {
+                                int selection = 0;
+                                do {
+                                    printf("\nPremi 1 per confermare l'eliminazione");
+                                    printf("\nPremi 2 per annullare\n");
+                                    scanf("%i", &selection);
+                                    if (!isincluded(selection, 1, 2)) {
+                                        printf("\nScelta non valida!\n");
+                                    }
+                                } while (!isincluded(selection, 1, 2));
+                                if (selection == 1 && remove_driver(actual_driver, drivers, total_drivers)) {
+                                    total_drivers--;
+                                    save_drivers(drivers, total_drivers);
+                                }
+                            }
                             break;
+                        }
                         case drivers_list:
                             break;
                         case drivers_back:
