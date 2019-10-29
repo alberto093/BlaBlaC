@@ -1,13 +1,13 @@
 //
-//  passenger.h
+//  drider.h
 //  Carpooling
 //
 //  Created by Alberto Saltarelli on 29/10/2019.
 //  Copyright © 2019 Alberto Saltarelli. All rights reserved.
 //
 
-#ifndef passenger_h
-#define passenger_h
+#ifndef rider_h
+#define rider_h
 
 #include <stdio.h>
 
@@ -27,9 +27,35 @@
 #define NOTE_MAX 250
 #endif
 
+#ifndef REVIEW_MAX
+#define REVIEW_MAX 100
+#endif
+
 #ifndef hash_code
 typedef char hash_code[FISCAL_CODE_MAX];
 #endif
+
+typedef enum {
+    very_poor,
+    poor,
+    good,
+    excellent,
+    oustanding
+} rating;
+
+typedef enum {
+    newcomer,
+    intermediate,
+    experienced,
+    expert,
+    ambassador
+} experience;
+
+typedef struct {
+    hash_code passenger_code;
+    char text[NOTE_MAX];
+    rating rating;
+} review;
 
 typedef struct {
     hash_code code;
@@ -37,6 +63,9 @@ typedef struct {
     char surname[SURNAME_MAX];
     unsigned short int age;
     char description[NOTE_MAX];
-} passenger;
+    review reviews[REVIEW_MAX];
+    experience experience;
+    unsigned int total_rides;
+} driver;
 
-#endif /* passenger_h */
+#endif /* rider_h */

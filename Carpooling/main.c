@@ -10,84 +10,12 @@
 #include <stdlib.h>
 #include "route.h"
 
-#define FISCAL_CODE_MAX 15
-#define NAME_MAX 25
-#define SURNAME_MAX 25
-#define NOTE_MAX 250
-#define REVIEW_MAX 100
+
 #define CITY_MAX 35
 #define PROVINCE_MAX 25
 #define ADDRESS_MAX 50
 #define SEATS_MAX 10
 
-typedef char hash_code[FISCAL_CODE_MAX];
-
-typedef enum {
-    very_poor,
-    poor,
-    good,
-    excellent,
-    oustanding
-} rating;
-
-typedef enum {
-    newcomer,
-    intermediate,
-    experienced,
-    expert,
-    ambassador
-} experience;
-
-typedef struct {
-    hash_code passenger_code;
-    char text[NOTE_MAX];
-    rating rating;
-} review;
-
-typedef struct {
-    hash_code code;
-    char name[NAME_MAX];
-    char surname[SURNAME_MAX];
-    unsigned short int age;
-    char description[NOTE_MAX];
-    review reviews[REVIEW_MAX];
-    experience experience;
-    unsigned int total_rides;
-} driver;
-
-typedef struct {
-    hash_code code;
-    char name[NAME_MAX];
-    char surname[SURNAME_MAX];
-    unsigned short int age;
-    char description[NOTE_MAX];
-} passenger;
-
-typedef struct {
-    char city[CITY_MAX];
-    char province[PROVINCE_MAX];
-    char address[ADDRESS_MAX];
-    unsigned int postal_code;
-} place;
-
-typedef struct {
-    unsigned short int day;
-    unsigned short int month;
-    unsigned short int year;
-    unsigned short int hour;
-    unsigned short int minutes;
-} date;
-
-typedef struct {
-    hash_code driver_code;
-    place source;
-    place destination;
-    date date;
-    float price;
-    char description[NOTE_MAX];
-    unsigned short int total_seats;
-    hash_code passenger_codes[SEATS_MAX];
-} ride;
 
 int main() {
     printf("BENVENUTO IN FLAVIA");

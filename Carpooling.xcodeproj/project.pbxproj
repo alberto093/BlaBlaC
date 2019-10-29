@@ -10,7 +10,7 @@
 		D32649252367923D00A2B542 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = D32649242367923D00A2B542 /* main.c */; };
 		D326492D2367A35500A2B542 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = D326492C2367A35500A2B542 /* utils.c */; };
 		D32649302367B87200A2B542 /* route.c in Sources */ = {isa = PBXBuildFile; fileRef = D326492F2367B87200A2B542 /* route.c */; };
-		D32649332367B99F00A2B542 /* rider.c in Sources */ = {isa = PBXBuildFile; fileRef = D32649322367B99F00A2B542 /* rider.c */; };
+		D32649332367B99F00A2B542 /* drider.c in Sources */ = {isa = PBXBuildFile; fileRef = D32649322367B99F00A2B542 /* drider.c */; };
 		D32649362367B9AA00A2B542 /* passenger.c in Sources */ = {isa = PBXBuildFile; fileRef = D32649352367B9AA00A2B542 /* passenger.c */; };
 		D32649392367B9C400A2B542 /* ride.c in Sources */ = {isa = PBXBuildFile; fileRef = D32649382367B9C400A2B542 /* ride.c */; };
 /* End PBXBuildFile section */
@@ -34,8 +34,8 @@
 		D326492C2367A35500A2B542 /* utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
 		D326492E2367B87200A2B542 /* route.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = route.h; sourceTree = "<group>"; };
 		D326492F2367B87200A2B542 /* route.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = route.c; sourceTree = "<group>"; };
-		D32649312367B99F00A2B542 /* rider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rider.h; sourceTree = "<group>"; };
-		D32649322367B99F00A2B542 /* rider.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = rider.c; sourceTree = "<group>"; };
+		D32649312367B99F00A2B542 /* drider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drider.h; sourceTree = "<group>"; };
+		D32649322367B99F00A2B542 /* drider.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drider.c; sourceTree = "<group>"; };
 		D32649342367B9AA00A2B542 /* passenger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = passenger.h; sourceTree = "<group>"; };
 		D32649352367B9AA00A2B542 /* passenger.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = passenger.c; sourceTree = "<group>"; };
 		D32649372367B9C400A2B542 /* ride.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ride.h; sourceTree = "<group>"; };
@@ -77,8 +77,8 @@
 				D326492F2367B87200A2B542 /* route.c */,
 				D326492B2367A35500A2B542 /* utils.h */,
 				D326492C2367A35500A2B542 /* utils.c */,
-				D32649312367B99F00A2B542 /* rider.h */,
-				D32649322367B99F00A2B542 /* rider.c */,
+				D32649312367B99F00A2B542 /* drider.h */,
+				D32649322367B99F00A2B542 /* drider.c */,
 				D32649342367B9AA00A2B542 /* passenger.h */,
 				D32649352367B9AA00A2B542 /* passenger.c */,
 				D32649372367B9C400A2B542 /* ride.h */,
@@ -145,7 +145,7 @@
 			files = (
 				D32649302367B87200A2B542 /* route.c in Sources */,
 				D32649252367923D00A2B542 /* main.c in Sources */,
-				D32649332367B99F00A2B542 /* rider.c in Sources */,
+				D32649332367B99F00A2B542 /* drider.c in Sources */,
 				D32649392367B9C400A2B542 /* ride.c in Sources */,
 				D326492D2367A35500A2B542 /* utils.c in Sources */,
 				D32649362367B9AA00A2B542 /* passenger.c in Sources */,
