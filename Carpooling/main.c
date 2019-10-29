@@ -57,7 +57,7 @@ int main() {
                             do {
                                 printf("\nInserisci il codice fiscale del conducente: ");
                                 scanf("%s", driver_code);
-                                existing_driver(driver_code, drivers, total_drivers, actual_driver);
+                                actual_driver = existing_driver(driver_code, drivers, total_drivers);
                                 if (!actual_driver) {
                                     printf("Conducente non trovato!");
                                 }

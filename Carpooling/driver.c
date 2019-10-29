@@ -61,14 +61,13 @@ int contains_driver(driver* new_driver, driver drivers[], int count) {
     return 0;
 }
 
-void existing_driver(hash_code driver_code, driver drivers[], int count, driver *driver) {
+driver *existing_driver(hash_code driver_code, driver drivers[], int count) {
     for (int i=0; i<count; i++) {
         if (!strcmp(drivers[i].code, driver_code)) {
-            driver = &drivers[i];
-            i=count;
-            break;
+            return &drivers[i];
         }
     }
+    return NULL;
 }
 
 int save_drivers(driver drivers[], int count) {
