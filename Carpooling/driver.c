@@ -10,6 +10,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+
+#define EXPERIENCE_MAX 15
+#define DRIVER_PRINT_MAX NAME_MAX + SURNAME_MAX + EXPERIENCE_MAX + 2
 
 int load_drivers(driver drivers[], int count) {
     FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/drivers.dat", "rb");
@@ -39,6 +43,45 @@ driver create_driver(void) {
     new_driver.experience = experience_newcomer;
     new_driver.total_rides = 0;
     return new_driver;
+}
+
+void print_toprated_drivers(driver drivers[], int count) {
+    float max_rate = 0.0;
+    char toprated_drivers[DRIVERS_MAX][DRIVER_PRINT_MAX];
+    int toprated_drivers_count = 0;
+    
+    for (int i=0; i<count; i++) {
+        float rating_sum = 0;
+        int total_rating = 0;
+        for (int j=0; j<REVIEW_MAX; j++) {
+            if (drivers[i].reviews[j].rating > 0) {
+                rating_sum += drivers[i].reviews[j].rating;
+                total_rating++;
+            }
+        }
+        float rating_average = roundf((rating_sum / total_rating)*10.0f)/10.0f;
+        if (rating_average > max_rate) {
+            max_rate = rating_average;
+            toprated_drivers_count = 0;
+        }
+        if (rating_average == max_rate) {
+            strcat(toprated_drivers[toprated_drivers_count], drivers[i].name);
+            strcat(toprated_drivers[toprated_drivers_count], "\t");
+            strcat(toprated_drivers[toprated_drivers_count], drivers[i].surname);
+            toprated_drivers_count++;
+        }
+    }
+    
+    printf("\nLa media delle valutazioni più alta è pari a:  %f/5", max_rate);
+    
+    if (toprated_drivers_count == 1) {
+        printf("Il conducente è: %s", toprated_drivers[0]);
+    } else {
+        printf("I conducenti sono:\n");
+        for (int i=0; i<toprated_drivers_count; i++) {
+            printf("%s\n", toprated_drivers[i]);
+        }
+    }
 }
 
 void edit_driver(driver *edit_driver) {
@@ -71,18 +114,15 @@ int contains_driver(driver* new_driver, driver drivers[], int count) {
     return existing_driver((*new_driver).code, drivers, count) != NULL;
 }
 
-#warning add exit with NULL
 driver *find_driver(driver drivers[], int count) {
     hash_code driver_code;
     driver *actual_driver = NULL;
-    do {
-        printf("\nInserisci il codice fiscale del conducente: ");
-        scanf("%s", driver_code);
-        actual_driver = existing_driver(driver_code, drivers, count);
-        if (!actual_driver) {
-            printf("Conducente non trovato!");
-        }
-    } while (!actual_driver);
+    printf("\nInserisci il codice fiscale del conducente: ");
+    scanf("%s", driver_code);
+    actual_driver = existing_driver(driver_code, drivers, count);
+    if (!actual_driver) {
+        printf("Conducente non trovato!");
+    }
     return actual_driver;
 }
 

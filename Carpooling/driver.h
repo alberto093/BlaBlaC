@@ -31,6 +31,8 @@
 #define REVIEW_MAX 101
 #endif
 
+#define DRIVERS_MAX 101
+
 #ifndef hash_code
 typedef char hash_code[FISCAL_CODE_MAX];
 #endif
@@ -72,6 +74,7 @@ int load_drivers(driver drivers[], int count);
 driver create_driver(void);
 driver *find_driver(driver drivers[], int count);
 driver *existing_driver(hash_code driver_code, driver drivers[], int count);
+void print_toprated_drivers(driver drivers[], int count);
 void edit_driver(driver *edit_driver);
 int remove_driver(driver *remove_driver, driver drivers[], int count);
 int save_drivers(driver drivers[], int count);

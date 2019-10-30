@@ -13,7 +13,6 @@
 #include "route.h"
 #include "driver.h"
 
-#define DRIVERS_MAX 101
 #define PASSENGERS_MAX 101
 #define RIDES_MAX 101
 
@@ -80,6 +79,7 @@ int main() {
                             break;
                         }
                         case drivers_list:
+                            print_toprated_drivers(drivers, total_drivers);
                             break;
                         case drivers_back:
                             break;
