@@ -40,5 +40,12 @@ typedef struct {
 } passenger;
 
 int load_passengers(passenger passengers[], int count);
+passenger create_passenger(void);
+void edit_passenger(passenger *edit_passenger);
+int remove_passenger(passenger *remove_passenger, passenger passengers[], int *count);
+passenger *find_passenger(passenger passengers[], int count);
+passenger *existing_passenger(hash_code passenger_code, passenger passengers[], int count);
+int contains_passenger(passenger* new_passenger, passenger passengers[], int count);
+int save_passengers(passenger passengers[], int count);
 
 #endif /* passenger_h */

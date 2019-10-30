@@ -56,8 +56,8 @@ void edit_driver(driver *edit_driver) {
     scanf("%s", (*edit_driver).description);
 }
 
-int remove_driver(driver *remove_driver, driver drivers[], int count) {
-    int end = count;
+int remove_driver(driver *remove_driver, driver drivers[], int *count) {
+    int end = *count;
     int found = 0;
     for (int i=0; i<end; i++) {
         if (!strcmp((*remove_driver).code, drivers[i].code) && !found) {
@@ -67,6 +67,9 @@ int remove_driver(driver *remove_driver, driver drivers[], int count) {
         if (found) {
             drivers[i] = drivers[i+1];
         }
+    }
+    if (found) {
+        (*count)--;
     }
     return found;
 }

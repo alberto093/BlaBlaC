@@ -73,7 +73,7 @@ typedef struct {
 int load_drivers(driver drivers[], int count);
 driver create_driver(void);
 void edit_driver(driver *edit_driver);
-int remove_driver(driver *remove_driver, driver drivers[], int count);
+int remove_driver(driver *remove_driver, driver drivers[], int *count);
 driver *find_driver(driver drivers[], int count);
 driver *existing_driver(hash_code driver_code, driver drivers[], int count);
 void print_toprated_drivers(driver drivers[], int count);
