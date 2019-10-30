@@ -8,10 +8,36 @@
 
 #include "utils.h"
 
-int isincluded(int value, int lower_bound, int upper_bound) {
+#define DATE_YEAR_MIN 1900
+#define DATE_YEAR_MAX 9999
+
+int is_included(int value, int lower_bound, int upper_bound) {
     if (lower_bound <= upper_bound) {
         return value >= lower_bound && value <= upper_bound;
     } else {
         return 0;
     }
+}
+
+int is_valid_date(unsigned short int day, unsigned short int month, unsigned short int year) {
+    int is_valid_year = is_included(year, DATE_YEAR_MIN, DATE_YEAR_MAX);
+    int is_valid_month = is_included(month, 1, 12);
+    int is_valid_day = is_included(month, 1, 31);
+    
+    if (!is_valid_day || !is_valid_month || !is_valid_year) {
+        return 0;
+    }
+    
+    if (month == 2) {
+        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+            return day <= 29;
+        } else {
+            return day <= 28;
+        }
+    }
+    
+    if (month == 4 || month == 6 || month == 9 || month == 11) {
+        return day <= 30;
+    }
+    return 1;
 }

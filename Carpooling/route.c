@@ -20,10 +20,10 @@ home_result show_main_menu(void) {
         printf("• Premi 4 per uscire dal programma\n\n");
         scanf("%i", &result);
         result--;
-        if (!isincluded(result, 0, 3)) {
+        if (!is_included(result, 0, 3)) {
             printf("\nScelta non valida\n\n");
         }
-    } while (!isincluded(result, 0, 3));
+    } while (!is_included(result, 0, 3));
     
     return result;
 }
@@ -40,10 +40,10 @@ drivers_result show_driver_menu(void) {
         printf("• Premi 5 per tornare alla home\n\n");
         scanf("%i", &result);
         result--;
-        if (!isincluded(result, 0, 4)) {
+        if (!is_included(result, 0, 4)) {
             printf("\nScelta non valida\n\n");
         }
-    } while (!isincluded(result, 0, 4));
+    } while (!is_included(result, 0, 4));
     
     return result;
 }
@@ -59,10 +59,10 @@ passengers_result show_passengers_menu(void) {
         printf("• Premi 4 per tornare alla home\n\n");
         scanf("%i", &result);
         result--;
-        if (!isincluded(result, 0, 3)) {
+        if (!is_included(result, 0, 3)) {
             printf("\nScelta non valida\n\n");
         }
-    } while (!isincluded(result, 0, 3));
+    } while (!is_included(result, 0, 3));
     
     return result;
 }
@@ -79,10 +79,10 @@ rides_result show_rides_menu(void) {
         printf("• Premi 5 per tornare alla home\n\n");
         scanf("%i", &result);
         result--;
-        if (!isincluded(result, 0, 4)) {
+        if (!is_included(result, 0, 4)) {
             printf("\nScelta non valida\n\n");
         }
-    } while (!isincluded(result, 0, 4));
+    } while (!is_included(result, 0, 4));
     
     return result;
 }

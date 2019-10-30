@@ -114,14 +114,14 @@ int main() {
 
 void show_drivers_create(driver drivers[], int *total_drivers) {
     driver new_driver;
-    int isValid = 0;
+    int is_valid = 0;
     do {
         new_driver = create_driver();
-        isValid = !contains_driver(&new_driver, drivers, *total_drivers);
-        if (!isValid) {
+        is_valid = !contains_driver(&new_driver, drivers, *total_drivers);
+        if (!is_valid) {
             printf("Il conducente con codice fiscale %s è già registrato!\n", new_driver.code);
         }
-    } while (!isValid);
+    } while (!is_valid);
     drivers[*total_drivers] = new_driver;
     (*total_drivers)++;
     save_drivers(drivers, *total_drivers);
@@ -143,10 +143,10 @@ void show_drivers_delete(driver drivers[], int *total_drivers) {
             printf("\nPremi 1 per confermare l'eliminazione");
             printf("\nPremi 2 per annullare\n");
             scanf("%i", &selection);
-            if (!isincluded(selection, 1, 2)) {
+            if (!is_included(selection, 1, 2)) {
                 printf("\nScelta non valida!\n");
             }
-        } while (!isincluded(selection, 1, 2));
+        } while (!is_included(selection, 1, 2));
         if (selection == 1 && remove_driver(actual_driver, drivers, total_drivers)) {
             save_drivers(drivers, *total_drivers);
         }
@@ -155,14 +155,14 @@ void show_drivers_delete(driver drivers[], int *total_drivers) {
 
 void show_passengers_create(passenger passengers[], int *total_passengers) {
     passenger new_passenger;
-    int isValid = 0;
+    int is_valid = 0;
     do {
         new_passenger = create_passenger();
-        isValid = !contains_passenger(&new_passenger, passengers, *total_passengers);
-        if (!isValid) {
+        is_valid = !contains_passenger(&new_passenger, passengers, *total_passengers);
+        if (!is_valid) {
             printf("Il passeggero con codice fiscale %s è già registrato!\n", new_passenger.code);
         }
-    } while (!isValid);
+    } while (!is_valid);
     passengers[*total_passengers] = new_passenger;
     (*total_passengers)++;
     save_passengers(passengers, *total_passengers);
@@ -184,10 +184,10 @@ void show_passengers_delete(passenger passengers[], int *total_passengers) {
             printf("\nPremi 1 per confermare l'eliminazione");
             printf("\nPremi 2 per annullare\n");
             scanf("%i", &selection);
-            if (!isincluded(selection, 1, 2)) {
+            if (!is_included(selection, 1, 2)) {
                 printf("\nScelta non valida!\n");
             }
-        } while (!isincluded(selection, 1, 2));
+        } while (!is_included(selection, 1, 2));
         if (selection == 1 && remove_passenger(actual_passenger, passengers, total_passengers)) {
             save_passengers(passengers, *total_passengers);
         }

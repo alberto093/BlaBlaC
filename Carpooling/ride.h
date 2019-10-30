@@ -24,6 +24,8 @@
 #define NOTE_MAX 251
 #endif
 
+#define MESSAGES_MAX 20
+
 #ifndef hash_code
 typedef char hash_code[FISCAL_CODE_MAX];
 #endif
@@ -49,11 +51,19 @@ typedef struct {
     place destination;
     date date;
     float price;
-    char description[NOTE_MAX];
     unsigned short int total_seats;
+    char description[NOTE_MAX];
+    char messages[MESSAGES_MAX][NOTE_MAX];
     hash_code passenger_codes[SEATS_MAX];
 } ride;
 
 int load_rides(ride rides[], int count);
+ride create_ride(hash_code driver_code);
+void edit_ride(ride *edit_ride);
+int remove_ride(ride *remove_ride, ride rides[], int *count);
+ride *find_ride(ride rides[], int count);
+ride *existing_ride(hash_code driver_code, place source, place destination, date date, ride rides[], int count);
+int contains_ride(ride* new_ride, ride rides[], int count);
+int save_rides(ride rides[], int count);
 
 #endif /* ride_h */

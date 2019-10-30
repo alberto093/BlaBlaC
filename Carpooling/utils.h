@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 
-int isincluded(int value, int lower_bound, int upper_bound);
+int is_included(int value, int lower_bound, int upper_bound);
+int is_valid_date(unsigned short int day, unsigned short int month, unsigned short int year);
 
 #endif /* utils_h */
