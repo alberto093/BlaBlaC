@@ -72,12 +72,12 @@ typedef struct {
 
 int load_drivers(driver drivers[], int count);
 driver create_driver(void);
+void edit_driver(driver *edit_driver);
+int remove_driver(driver *remove_driver, driver drivers[], int count);
 driver *find_driver(driver drivers[], int count);
 driver *existing_driver(hash_code driver_code, driver drivers[], int count);
 void print_toprated_drivers(driver drivers[], int count);
-void edit_driver(driver *edit_driver);
-int remove_driver(driver *remove_driver, driver drivers[], int count);
-int save_drivers(driver drivers[], int count);
 int contains_driver(driver* new_driver, driver drivers[], int count);
+int save_drivers(driver drivers[], int count);
 
 #endif /* driver_h */

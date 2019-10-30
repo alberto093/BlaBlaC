@@ -45,6 +45,53 @@ driver create_driver(void) {
     return new_driver;
 }
 
+void edit_driver(driver *edit_driver) {
+    printf("\nIl nome è %s, inserisci il nuovo nome: ", (*edit_driver).name);
+    scanf("%s", (*edit_driver).name);
+    printf("\nIl cognome è %s, inserisci il nuovo cognome: ", (*edit_driver).surname);
+    scanf("%s", (*edit_driver).surname);
+    printf("\nL'età è %hd, inserisci la nuova età: ", (*edit_driver).age);
+    scanf("%hd", &(*edit_driver).age);
+    printf("La biografia è %s, inserisci la nuova biografia: ", (*edit_driver).description);
+    scanf("%s", (*edit_driver).description);
+}
+
+int remove_driver(driver *remove_driver, driver drivers[], int count) {
+    int end = count;
+    int found = 0;
+    for (int i=0; i<end; i++) {
+        if (!strcmp((*remove_driver).code, drivers[i].code) && !found) {
+            end--;
+            found = 1;
+        }
+        if (found) {
+            drivers[i] = drivers[i+1];
+        }
+    }
+    return found;
+}
+
+driver *find_driver(driver drivers[], int count) {
+    hash_code driver_code;
+    driver *actual_driver = NULL;
+    printf("\nInserisci il codice fiscale del conducente: ");
+    scanf("%s", driver_code);
+    actual_driver = existing_driver(driver_code, drivers, count);
+    if (!actual_driver) {
+        printf("Conducente non trovato!");
+    }
+    return actual_driver;
+}
+
+driver *existing_driver(hash_code driver_code, driver drivers[], int count) {
+    for (int i=0; i<count; i++) {
+        if (!strcmp(drivers[i].code, driver_code)) {
+            return &drivers[i];
+        }
+    }
+    return NULL;
+}
+
 void print_toprated_drivers(driver drivers[], int count) {
     float max_rate = 0.0;
     char toprated_drivers[DRIVERS_MAX][DRIVER_PRINT_MAX];
@@ -84,55 +131,8 @@ void print_toprated_drivers(driver drivers[], int count) {
     }
 }
 
-void edit_driver(driver *edit_driver) {
-    printf("\nIl nome è %s, inserisci il nuovo nome: ", (*edit_driver).name);
-    scanf("%s", (*edit_driver).name);
-    printf("\nIl cognome è %s, inserisci il nuovo cognome: ", (*edit_driver).surname);
-    scanf("%s", (*edit_driver).surname);
-    printf("\nL'età è %hd, inserisci la nuova età: ", (*edit_driver).age);
-    scanf("%hd", &(*edit_driver).age);
-    printf("La biografia è %s, inserisci la nuova biografia: ", (*edit_driver).description);
-    scanf("%s", (*edit_driver).description);
-}
-
-int remove_driver(driver *remove_driver, driver drivers[], int count) {
-    int end = count;
-    int found = 0;
-    for (int i=0; i<end; i++) {
-        if (!strcmp((*remove_driver).code, drivers[i].code) && !found) {
-            end--;
-            found = 1;
-        }
-        if (found) {
-            drivers[i] = drivers[i+1];
-        }
-    }
-    return found;
-}
-
 int contains_driver(driver* new_driver, driver drivers[], int count) {
     return existing_driver((*new_driver).code, drivers, count) != NULL;
-}
-
-driver *find_driver(driver drivers[], int count) {
-    hash_code driver_code;
-    driver *actual_driver = NULL;
-    printf("\nInserisci il codice fiscale del conducente: ");
-    scanf("%s", driver_code);
-    actual_driver = existing_driver(driver_code, drivers, count);
-    if (!actual_driver) {
-        printf("Conducente non trovato!");
-    }
-    return actual_driver;
-}
-
-driver *existing_driver(hash_code driver_code, driver drivers[], int count) {
-    for (int i=0; i<count; i++) {
-        if (!strcmp(drivers[i].code, driver_code)) {
-            return &drivers[i];
-        }
-    }
-    return NULL;
 }
 
 int save_drivers(driver drivers[], int count) {
