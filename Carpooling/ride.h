@@ -54,7 +54,9 @@ typedef struct {
     unsigned short int total_seats;
     char description[NOTE_MAX];
     char messages[MESSAGES_MAX][NOTE_MAX];
-    hash_code passenger_codes[SEATS_MAX];
+    unsigned short int total_messages;
+    hash_code passenger_codes[SEATS_MAX][FISCAL_CODE_MAX];
+    unsigned short int total_passenger_codes;
 } ride;
 
 int load_rides(ride rides[], int count);
