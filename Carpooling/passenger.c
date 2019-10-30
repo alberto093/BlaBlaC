@@ -7,6 +7,7 @@
 //
 
 #include "passenger.h"
+#include "utils.h"
 #include <string.h>
 
 int load_passengers(passenger passengers[], int count) {
@@ -38,14 +39,47 @@ passenger create_passenger(void) {
 }
 
 void edit_passenger(passenger *edit_passenger) {
-    printf("\nIl nome è %s, inserisci il nuovo nome: ", (*edit_passenger).name);
-    scanf("%s", (*edit_passenger).name);
-    printf("\nIl cognome è %s, inserisci il nuovo cognome: ", (*edit_passenger).surname);
-    scanf("%s", (*edit_passenger).surname);
-    printf("\nL'età è %hd, inserisci la nuova età: ", (*edit_passenger).age);
-    scanf("%hd", &(*edit_passenger).age);
-    printf("La biografia è %s, inserisci la nuova biografia: ", (*edit_passenger).description);
-    scanf("%s", (*edit_passenger).description);
+    int selection = 0;
+    do {
+        int is_valid_selection = 0;
+        do {
+            printf("\n• Premi 1 per modificare il nome\n");
+            printf("\n• Premi 2 per modificare il cognome\n");
+            printf("\n• Premi 3 per modificare l'età\n");
+            printf("\n• Premi 4 per modificare la biografia\n");
+            printf("\n• Premi 5 per annullare\n\n");
+            scanf("%i", &selection);
+            is_valid_selection = is_included(selection, 1, 5);
+            if (!is_valid_selection) {
+                printf("\nScelta non valida\n\n");
+            }
+        } while (!is_valid_selection);
+        
+        switch (selection) {
+            case 1: {
+                printf("\nIl nome è %s, inserisci il nuovo nome: ", (*edit_passenger).name);
+                scanf("%s", (*edit_passenger).name);
+                break;
+            }
+            case 2: {
+                printf("\nIl cognome è %s, inserisci il nuovo cognome: ", (*edit_passenger).surname);
+                scanf("%s", (*edit_passenger).surname);
+                break;
+            }
+            case 3: {
+                printf("\nL'età è %hd, inserisci la nuova età: ", (*edit_passenger).age);
+                scanf("%hd", &(*edit_passenger).age);
+                break;
+            }
+            case 4: {
+                printf("La biografia è \n%s\n\nInserisci la nuova biografia: ", (*edit_passenger).description);
+                scanf("%s", (*edit_passenger).description);
+                break;
+            }
+            default:
+                break;
+        }
+    } while (selection != 5);
 }
 
 int remove_passenger(passenger *remove_passenger, passenger passengers[], int *count) {

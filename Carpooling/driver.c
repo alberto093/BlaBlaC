@@ -7,6 +7,7 @@
 //
 
 #include "driver.h"
+#include "utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -46,14 +47,47 @@ driver create_driver(void) {
 }
 
 void edit_driver(driver *edit_driver) {
-    printf("\nIl nome è %s, inserisci il nuovo nome: ", (*edit_driver).name);
-    scanf("%s", (*edit_driver).name);
-    printf("\nIl cognome è %s, inserisci il nuovo cognome: ", (*edit_driver).surname);
-    scanf("%s", (*edit_driver).surname);
-    printf("\nL'età è %hd, inserisci la nuova età: ", (*edit_driver).age);
-    scanf("%hd", &(*edit_driver).age);
-    printf("La biografia è %s, inserisci la nuova biografia: ", (*edit_driver).description);
-    scanf("%s", (*edit_driver).description);
+    int selection = 0;
+    do {
+        int is_valid_selection = 0;
+        do {
+            printf("\n• Premi 1 per modificare il nome\n");
+            printf("\n• Premi 2 per modificare il cognome\n");
+            printf("\n• Premi 3 per modificare l'età\n");
+            printf("\n• Premi 4 per modificare la biografia\n");
+            printf("\n• Premi 5 per annullare\n\n");
+            scanf("%i", &selection);
+            is_valid_selection = is_included(selection, 1, 5);
+            if (!is_valid_selection) {
+                printf("\nScelta non valida\n\n");
+            }
+        } while (!is_valid_selection);
+        
+        switch (selection) {
+            case 1: {
+                printf("\nIl nome è %s, inserisci il nuovo nome: ", (*edit_driver).name);
+                scanf("%s", (*edit_driver).name);
+                break;
+            }
+            case 2: {
+                printf("\nIl cognome è %s, inserisci il nuovo cognome: ", (*edit_driver).surname);
+                scanf("%s", (*edit_driver).surname);
+                break;
+            }
+            case 3: {
+                printf("\nL'età è %hd, inserisci la nuova età: ", (*edit_driver).age);
+                scanf("%hd", &(*edit_driver).age);
+                break;
+            }
+            case 4: {
+                printf("La biografia è \n%s\n\nInserisci la nuova biografia: ", (*edit_driver).description);
+                scanf("%s", (*edit_driver).description);
+                break;
+            }
+            default:
+                break;
+        }
+    } while (selection != 5);
 }
 
 int remove_driver(driver *remove_driver, driver drivers[], int *count) {
