@@ -11,6 +11,8 @@
 #define DATE_YEAR_MIN 1900
 #define DATE_YEAR_MAX 9999
 
+int is_leap(int year);
+
 int is_included(int value, int lower_bound, int upper_bound) {
     if (lower_bound <= upper_bound) {
         return value >= lower_bound && value <= upper_bound;
@@ -29,15 +31,15 @@ int is_valid_date(unsigned short int day, unsigned short int month, unsigned sho
     }
     
     if (month == 2) {
-        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
-            return day <= 29;
-        } else {
-            return day <= 28;
-        }
+        return is_leap(year) ? day <= 29 : day <= 28;
     }
     
     if (month == 4 || month == 6 || month == 9 || month == 11) {
         return day <= 30;
     }
     return 1;
+}
+
+int is_leap(int year) {
+    return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 }

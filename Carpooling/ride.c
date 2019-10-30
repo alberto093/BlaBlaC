@@ -10,6 +10,9 @@
 #include "utils.h"
 #include <string.h>
 
+void edit_place(place *place);
+void edit_date(date *date);
+
 int load_rides(ride rides[], int count) {
     FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/rides.dat", "rb");
     if (rstream == NULL) {
@@ -27,36 +30,11 @@ ride create_ride(hash_code driver_code) {
     strcpy(new_ride.driver_code, driver_code);
     
     printf("\nDa dove parti?\n\n");
-    printf("Città: ");
-    scanf("%s", new_ride.source.city);
-    printf("Provincia: ");
-    scanf("%s", new_ride.source.province);
-    printf("Indirizzo: ");
-    scanf("%s", new_ride.source.address);
-    printf("CAP: ");
-    scanf("%d", &new_ride.source.postal_code);
-    
+    edit_place(&new_ride.source);
     printf("\nDove vai?\n\n");
-    printf("Città: ");
-    scanf("%s", new_ride.destination.city);
-    printf("Provincia: ");
-    scanf("%s", new_ride.destination.province);
-    printf("Indirizzo: ");
-    scanf("%s", new_ride.destination.address);
-    printf("CAP: ");
-    scanf("%d", &new_ride.destination.postal_code);
-    
+    edit_place(&new_ride.destination);
     printf("\nE quando parti?\n\n");
-    int is_valid = 0;
-    do {
-        printf("Inserisci la data nel formato dd/MM/yyyy: ");
-        scanf("%hd/%hd/%hd", &new_ride.date.day, &new_ride.date.month, &new_ride.date.year);
-        is_valid = is_valid_date(new_ride.date.day, new_ride.date.month, new_ride.date.year);
-        if (!is_valid) {
-            printf("\nLa data inserita non è valida!\n");
-        }
-    } while (!is_valid);
-    
+    edit_date(&new_ride.date);
     printf("Inserisci il costo del viaggio per passeggero: ");
     scanf("%2f", &new_ride.price);
     printf("Inserisci il numero di posti disponibili: ");
@@ -88,4 +66,27 @@ int contains_ride(ride* new_ride, ride rides[], int count) {
 
 int save_rides(ride rides[], int count) {
     return 0;
+}
+
+void edit_place(place *place) {
+    printf("Città: ");
+    scanf("%s", (*place).city);
+    printf("Provincia: ");
+    scanf("%s", (*place).province);
+    printf("Indirizzo: ");
+    scanf("%s", (*place).address);
+    printf("CAP: ");
+    scanf("%d", &(*place).postal_code);
+}
+
+void edit_date(date *date) {
+    int is_valid = 0;
+    do {
+        printf("Inserisci la data nel formato dd/MM/yyyy: ");
+        scanf("%hd/%hd/%hd", &(*date).day, &(*date).month, &(*date).year);
+        is_valid = is_valid_date((*date).day, (*date).month, (*date).year);
+        if (!is_valid) {
+            printf("\nLa data inserita non è valida!\n");
+        }
+    } while (!is_valid);
 }
