@@ -16,6 +16,8 @@
 #define EXPERIENCE_MAX 15
 #define DRIVER_PRINT_MAX NAME_MAX + SURNAME_MAX + EXPERIENCE_MAX + 2
 
+int is_same_driver(driver *lhs, driver *rhs);
+
 int load_drivers(driver drivers[], int count) {
     FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/drivers.dat", "rb");
     if (rstream == NULL) {
@@ -95,7 +97,7 @@ int remove_driver(driver *remove_driver, driver drivers[], int *count) {
     int end = *count;
     int found = 0;
     for (int i=0; i<end; i++) {
-        if (!strcmp((*remove_driver).code, drivers[i].code) && !found) {
+        if (!found && is_same_driver(remove_driver, &drivers[i])) {
             end--;
             found = 1;
         }
@@ -193,4 +195,8 @@ int save_drivers(driver drivers[], int count) {
     
     fwrite(drivers, sizeof(driver) * count, 1, wstream);
     return !fclose(wstream);
+}
+
+int is_same_driver(driver *lhs, driver *rhs) {
+    return !strcmp((*lhs).code, (*rhs).code);
 }

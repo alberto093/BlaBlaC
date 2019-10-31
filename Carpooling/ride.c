@@ -12,6 +12,9 @@
 
 void edit_place(place *place);
 void edit_date(date *date);
+int is_same_ride(ride *lhs, ride *rhs);
+int is_same_place(place *lhs, place *rhs);
+int is_same_date(date *lhs, date *rhs);
 
 int load_rides(ride rides[], int count) {
     FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/rides.dat", "rb");
@@ -129,7 +132,21 @@ void edit_ride(ride *edit_ride) {
 }
 
 int remove_ride(ride *remove_ride, ride rides[], int *count) {
-    return 0;
+    int end = *count;
+    int found = 0;
+    for (int i=0; i<end; i++) {
+        if (!found && is_same_ride(remove_ride, &rides[i])) {
+            end--;
+            found = 1;
+        }
+        if (found) {
+            rides[i] = rides[i+1];
+        }
+    }
+    if (found) {
+        (*count)--;
+    }
+    return found;
 }
 
 ride *find_ride(ride rides[], int count) {
@@ -169,4 +186,16 @@ void edit_date(date *date) {
             printf("\nLa data inserita non è valida!\n");
         }
     } while (!is_valid);
+}
+
+int is_same_ride(ride *lhs, ride *rhs) {
+    return strcmp((*lhs).driver_code, (*rhs).driver_code) && is_same_place(&(*lhs).source, &(*rhs).source) && is_same_place(&(*lhs).destination, &(*rhs).destination) && is_same_date(&(*lhs).date, &(*rhs).date);
+}
+
+int is_same_place(place *lhs, place *rhs) {
+    return !strcmp((*lhs).address, (*rhs).address) && !strcmp((*lhs).city, (*rhs).city) && !strcmp((*lhs).province, (*rhs).province) && (*lhs).postal_code == (*rhs).postal_code;
+}
+
+int is_same_date(date *lhs, date *rhs) {
+    return (*lhs).day == (*rhs).day && (*lhs).month == (*rhs).month && (*lhs).year == (*rhs).year && (*lhs).hour == (*rhs).hour && (*lhs).minutes == (*rhs).minutes;
 }

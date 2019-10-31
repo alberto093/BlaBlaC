@@ -10,6 +10,8 @@
 #include "utils.h"
 #include <string.h>
 
+int is_same_passenger(passenger *lhs, passenger *rhs);
+
 int load_passengers(passenger passengers[], int count) {
     FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/passengers.dat", "rb");
     if (rstream == NULL) {
@@ -86,7 +88,7 @@ int remove_passenger(passenger *remove_passenger, passenger passengers[], int *c
     int end = *count;
     int found = 0;
     for (int i=0; i<end; i++) {
-        if (!strcmp((*remove_passenger).code, passengers[i].code) && !found) {
+        if (!found && is_same_passenger(remove_passenger, &passengers[i])) {
             end--;
             found = 1;
         }
@@ -133,4 +135,8 @@ int save_passengers(passenger passengers[], int count) {
     
     fwrite(passengers, sizeof(passenger) * count, 1, wstream);
     return !fclose(wstream);
+}
+
+int is_same_passenger(passenger *lhs, passenger *rhs) {
+    return !strcmp((*lhs).code, (*rhs).code);
 }
