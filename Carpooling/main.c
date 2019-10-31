@@ -125,6 +125,7 @@ void show_drivers_create(driver drivers[], int *total_drivers) {
     drivers[*total_drivers] = new_driver;
     (*total_drivers)++;
     save_drivers(drivers, *total_drivers);
+    printf("Conducente creato con successo!");
 }
 
 void show_drivers_edit(driver drivers[], int total_drivers) {
@@ -132,6 +133,7 @@ void show_drivers_edit(driver drivers[], int total_drivers) {
     if (actual_driver != NULL) {
         edit_driver(actual_driver);
         save_drivers(drivers, total_drivers);
+        printf("Conducente modificato con successo!");
     }
 }
 
@@ -149,6 +151,7 @@ void show_drivers_delete(driver drivers[], int *total_drivers) {
         } while (!is_included(selection, 1, 2));
         if (selection == 1 && remove_driver(actual_driver, drivers, total_drivers)) {
             save_drivers(drivers, *total_drivers);
+            printf("Conducente eliminato con successo!");
         }
     }
 }
@@ -166,6 +169,7 @@ void show_passengers_create(passenger passengers[], int *total_passengers) {
     passengers[*total_passengers] = new_passenger;
     (*total_passengers)++;
     save_passengers(passengers, *total_passengers);
+    printf("Passeggero creato con successo!");
 }
 
 void show_passengers_edit(passenger passengers[], int total_passengers) {
@@ -173,6 +177,7 @@ void show_passengers_edit(passenger passengers[], int total_passengers) {
     if (actual_passenger != NULL) {
         edit_passenger(actual_passenger);
         save_passengers(passengers, total_passengers);
+        printf("Passeggero modificato con successo!");
     }
 }
 
@@ -190,6 +195,7 @@ void show_passengers_delete(passenger passengers[], int *total_passengers) {
         } while (!is_included(selection, 1, 2));
         if (selection == 1 && remove_passenger(actual_passenger, passengers, total_passengers)) {
             save_passengers(passengers, *total_passengers);
+            printf("Passeggero eliminato con successo!");
         }
     }
 }
