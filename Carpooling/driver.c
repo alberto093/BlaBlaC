@@ -43,6 +43,7 @@ driver create_driver(void) {
     printf("\n");
     new_driver.experience = experience_newcomer;
     new_driver.total_rides = 0;
+    new_driver.total_reviews = 0;
     return new_driver;
 }
 
@@ -130,6 +131,11 @@ driver *existing_driver(hash_code driver_code, driver drivers[], int count) {
 }
 
 void print_toprated_drivers(driver drivers[], int count) {
+    if (count == 0) {
+        printf("\nNessun conducente trovato!\n");
+        return;
+    }
+    
     float max_rate = 0.0;
     char toprated_drivers[DRIVERS_MAX][DRIVER_PRINT_MAX];
     int toprated_drivers_count = 0;
@@ -137,34 +143,41 @@ void print_toprated_drivers(driver drivers[], int count) {
     for (int i=0; i<count; i++) {
         float rating_sum = 0;
         int total_rating = 0;
-        for (int j=0; j<REVIEW_MAX; j++) {
+        for (int j=0; j<drivers[i].total_reviews; j++) {
             if (drivers[i].reviews[j].rating > 0) {
                 rating_sum += drivers[i].reviews[j].rating;
                 total_rating++;
             }
         }
-        float rating_average = roundf((rating_sum / total_rating)*10.0f)/10.0f;
-        if (rating_average > max_rate) {
-            max_rate = rating_average;
-            toprated_drivers_count = 0;
-        }
-        if (rating_average == max_rate) {
-            strcat(toprated_drivers[toprated_drivers_count], drivers[i].name);
-            strcat(toprated_drivers[toprated_drivers_count], "\t");
-            strcat(toprated_drivers[toprated_drivers_count], drivers[i].surname);
-            toprated_drivers_count++;
+        
+        if (total_rating > 0) {
+            float rating_average = roundf((rating_sum / total_rating)*10)/10;
+            if (rating_average > max_rate) {
+                max_rate = rating_average;
+                toprated_drivers_count = 0;
+            }
+            if (rating_average == max_rate) {
+                strcat(toprated_drivers[toprated_drivers_count], drivers[i].name);
+                strcat(toprated_drivers[toprated_drivers_count], "\t");
+                strcat(toprated_drivers[toprated_drivers_count], drivers[i].surname);
+                toprated_drivers_count++;
+            }
         }
     }
     
-    printf("\nLa media delle valutazioni più alta è pari a:  %f/5", max_rate);
-    
-    if (toprated_drivers_count == 1) {
-        printf("Il conducente è: %s", toprated_drivers[0]);
-    } else {
-        printf("I conducenti sono:\n");
-        for (int i=0; i<toprated_drivers_count; i++) {
-            printf("%s\n", toprated_drivers[i]);
+    if (toprated_drivers_count > 0) {
+        printf("\nLa media delle valutazioni più alta è pari a:  %1f/5\n", max_rate);
+        
+        if (toprated_drivers_count == 1) {
+            printf("Il conducente è: %s", toprated_drivers[0]);
+        } else {
+            printf("I conducenti sono:\n");
+            for (int i=0; i<toprated_drivers_count; i++) {
+                printf("%s\n", toprated_drivers[i]);
+            }
         }
+    } else {
+        printf("\nIl numero di valutazioni dei conducenti non è sufficiente per eleggere il miglior conducente.\n");
     }
 }
 

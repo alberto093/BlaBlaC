@@ -66,6 +66,7 @@ typedef struct {
     unsigned short int age;
     char description[NOTE_MAX];
     review reviews[REVIEW_MAX];
+    unsigned short int total_reviews;
     experience experience;
     unsigned int total_rides;
 } driver;
