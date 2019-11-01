@@ -10,6 +10,8 @@
 #include "utils.h"
 #include <string.h>
 
+#define RIDE_FILE_NAME "rides.dat"
+
 int is_same_ride(ride *lhs, ride *rhs);
 int is_same_place(place *lhs, place *rhs);
 int is_same_date(date *lhs, date *rhs);

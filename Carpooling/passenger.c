@@ -10,6 +10,8 @@
 #include "utils.h"
 #include <string.h>
 
+#define PASSENGER_FILE_NAME "passengers.dat"
+
 int is_same_passenger(passenger *lhs, passenger *rhs);
 
 int load_passengers(passenger passengers[], int count) {

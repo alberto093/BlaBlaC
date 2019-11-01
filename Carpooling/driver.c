@@ -14,6 +14,7 @@
 #include <math.h>
 
 #define DRIVER_PRINT_MAX NAME_MAX + SURNAME_MAX + 4
+#define DRIVER_FILE_NAME "drivers.dat"
 
 int is_same_driver(driver *lhs, driver *rhs);
 
