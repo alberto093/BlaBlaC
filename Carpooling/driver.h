@@ -62,7 +62,7 @@ typedef struct {
     unsigned int total_rides;
 } driver;
 
-int load_drivers(driver drivers[], int count);
+int load_drivers(driver drivers[], int max_drivers);
 driver create_driver(void);
 void edit_driver(driver *edit_driver);
 int remove_driver(driver *remove_driver, driver drivers[], int *count);

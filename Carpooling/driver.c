@@ -18,14 +18,14 @@
 
 int is_same_driver(driver *lhs, driver *rhs);
 
-int load_drivers(driver drivers[], int count) {
-    FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/drivers.dat", "rb");
+int load_drivers(driver drivers[], int max_drivers) {
+    FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/drivers.dat", "ab");
     if (rstream == NULL) {
         printf("\nErrore durante l'apertura del file dei conducenti.\n");
         return 0;
     }
 
-    fread(drivers, sizeof(driver) * count, 1, rstream);
+    fread(drivers, sizeof(driver) * max_drivers, 1, rstream);
     int total_drivers = (int)ftell(rstream) / sizeof(driver);
     fclose(rstream);
     return total_drivers;

@@ -19,14 +19,14 @@ int is_similar_place(place *complete, place *partial);
 int is_same_day(date *lhs, date *rhs);
 int rides_compare(ride *lhs, ride *rhs, driver drivers[], int drivers_count);
 
-int load_rides(ride rides[], int count) {
-    FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/rides.dat", "rb");
+int load_rides(ride rides[], int max_rides) {
+    FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/rides.dat", "ab");
     if (rstream == NULL) {
         printf("\nErrore durante l'apertura del file dei viaggi.\n");
         return 0;
     }
     
-    fread(rides, sizeof(ride) * count, 1, rstream);
+    fread(rides, sizeof(ride) * max_rides, 1, rstream);
     int total_rides = (int)ftell(rstream) / sizeof(ride);
     fclose(rstream);
     return total_rides;

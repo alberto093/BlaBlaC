@@ -41,7 +41,7 @@ typedef struct {
     char description[NOTE_MAX];
 } passenger;
 
-int load_passengers(passenger passengers[], int count);
+int load_passengers(passenger passengers[], int max_passengers);
 passenger create_passenger(void);
 void edit_passenger(passenger *edit_passenger);
 int remove_passenger(passenger *remove_passenger, passenger passengers[], int *count);

@@ -14,14 +14,14 @@
 
 int is_same_passenger(passenger *lhs, passenger *rhs);
 
-int load_passengers(passenger passengers[], int count) {
-    FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/passengers.dat", "rb");
+int load_passengers(passenger passengers[], int max_passengers) {
+    FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/passengers.dat", "ab");
     if (rstream == NULL) {
         printf("\nErrore durante l'apertura del file dei passeggeri.\n");
         return 0;
     }
     
-    fread(passengers, sizeof(passenger) * count, 1, rstream);
+    fread(passengers, sizeof(passenger) * max_passengers, 1, rstream);
     int total_passengers = (int)ftell(rstream) / sizeof(passenger);
     fclose(rstream);
     return total_passengers;

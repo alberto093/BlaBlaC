@@ -61,7 +61,7 @@ typedef struct {
     unsigned short int total_passenger_codes;
 } ride;
 
-int load_rides(ride rides[], int count);
+int load_rides(ride rides[], int max_rides);
 ride create_ride(hash_code driver_code);
 void edit_ride(ride *edit_ride);
 int remove_ride(ride *remove_ride, ride rides[], int *count);
