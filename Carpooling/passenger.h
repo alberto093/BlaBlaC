@@ -27,6 +27,8 @@
 #define NOTE_MAX 251
 #endif
 
+#define PASSENGERS_MAX 101
+
 #ifndef hash_code
 typedef char hash_code[FISCAL_CODE_MAX];
 #endif

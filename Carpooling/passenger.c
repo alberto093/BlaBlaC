@@ -105,11 +105,11 @@ int remove_passenger(passenger *remove_passenger, passenger passengers[], int *c
 passenger *find_passenger(passenger passengers[], int count) {
     hash_code passenger_code;
     passenger *actual_passenger = NULL;
-    printf("\nInserisci il codice fiscale del conducente: ");
+    printf("\nInserisci il codice fiscale del passeggero: ");
     scanf("%s", passenger_code);
     actual_passenger = existing_passenger(passenger_code, passengers, count);
     if (!actual_passenger) {
-        printf("Conducente non trovato!");
+        printf("Passeggero non trovato!");
     }
     return actual_passenger;
 }
