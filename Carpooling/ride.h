@@ -10,6 +10,7 @@
 #define ride_h
 
 #include <stdio.h>
+#include "driver.h"
 
 #ifndef FISCAL_CODE_MAX
 #define FISCAL_CODE_MAX 17
@@ -25,6 +26,7 @@
 #endif
 
 #define MESSAGES_MAX 20
+#define RIDES_MAX 101
 
 #ifndef hash_code
 typedef char hash_code[FISCAL_CODE_MAX];
@@ -55,7 +57,7 @@ typedef struct {
     char description[NOTE_MAX];
     char messages[MESSAGES_MAX][NOTE_MAX];
     unsigned short int total_messages;
-    hash_code passenger_codes[SEATS_MAX][FISCAL_CODE_MAX];
+    hash_code passenger_codes[SEATS_MAX];
     unsigned short int total_passenger_codes;
 } ride;
 
@@ -63,9 +65,12 @@ int load_rides(ride rides[], int count);
 ride create_ride(hash_code driver_code);
 void edit_ride(ride *edit_ride);
 int remove_ride(ride *remove_ride, ride rides[], int *count);
-ride *find_ride(ride rides[], int count);
-ride *existing_ride(hash_code driver_code, place source, place destination, date date, ride rides[], int count);
+void print_rides(ride rides[], int count, driver drivers[], int drivers_count, ride *find_rides[], int *find_rides_count);
+void search_rides(ride rides[], int count, ride *find_rides[], int *find_rides_count);
+void sort_rides(ride rides[], int count, driver drivers[], int drivers_count);
 int contains_ride(ride* new_ride, ride rides[], int count);
 int save_rides(ride rides[], int count);
+void edit_place(place *place);
+void edit_date(date *date);
 
 #endif /* ride_h */
