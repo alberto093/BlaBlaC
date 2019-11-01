@@ -101,15 +101,17 @@ int main() {
                         case rides_create:
                             show_rides_create(rides, &total_rides, drivers, total_drivers);
                             break;
-                        case rides_edit: {
+                        case rides_edit:
                             show_rides_edit(rides, total_rides, drivers, total_drivers);
                             break;
-                        }
                         case rides_delete:
+                            show_rides_delete(rides, &total_rides, drivers, total_drivers);
                             break;
                         case rides_search:
+                            show_rides_search(rides, total_rides, drivers, total_drivers, passengers, total_passengers);
                             break;
                         case rides_review:
+                            show_rides_review(rides, total_rides, drivers, total_drivers, passengers, total_passengers);
                             break;
                         case rides_back:
                             break;
@@ -374,7 +376,7 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
         return;
     }
     
-    add_review(actual_driver);
+    add_review(actual_driver, (*actual_passenger).code);
     save_drivers(drivers, total_drivers);
     printf("\nRecensione aggiunta con successo!\n");
 }

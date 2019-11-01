@@ -134,10 +134,8 @@ float driver_rating(driver *driver) {
     float rating_sum = 0;
     int total_rating = 0;
     for (int i=0; i<(*driver).total_reviews; i++) {
-        if ((*driver).reviews[i].rating > 0) {
-            rating_sum += (*driver).reviews[i].rating;
-            total_rating++;
-        }
+        rating_sum += (*driver).reviews[i].rating + 1;
+        total_rating++;
     }
     return total_rating > 0 ? roundf((rating_sum / total_rating)*10)/10 : 0;
 }
@@ -184,8 +182,30 @@ void print_toprated_drivers(driver drivers[], int count) {
     }
 }
 
-void add_review(driver *driver) {
-#warning add prints and logic!
+void add_review(driver *driver, hash_code passenger_code) {
+    review new_review;
+    strcpy(new_review.passenger_code, passenger_code);
+    int is_valid = 0;
+    do {
+        printf("\nInserisci un voto compreso tra 1 e 5\n");
+        printf("1: Pessimo\n");
+        printf("2: Mediocre\n");
+        printf("3: Buono\n");
+        printf("4: Ottimo\n");
+        printf("5: Eccellente\n");
+        scanf("%i", &new_review.rating);
+        new_review.rating--;
+        is_valid = is_included(new_review.rating, 0, 4);
+        if (!is_valid) {
+            printf("\nScelta non valida!\n");
+        }
+    } while (!is_valid);
+    
+    printf("Inserisci un breve commento: ");
+    scanf("%250s", new_review.text);
+    
+    (*driver).reviews[(*driver).total_reviews] = new_review;
+    (*driver).total_reviews++;
 }
 
 int contains_driver(driver* new_driver, driver drivers[], int count) {
