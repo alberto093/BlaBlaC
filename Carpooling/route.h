@@ -38,6 +38,7 @@ typedef enum {
     rides_edit,
     rides_delete,
     rides_search,
+    rides_review,
     rides_back
 } rides_result;
 

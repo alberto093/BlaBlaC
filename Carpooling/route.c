@@ -76,13 +76,14 @@ rides_result show_rides_menu(void) {
         printf("• Premi 2 per modificare un viaggio\n");
         printf("• Premi 3 per eliminare un viaggio\n");
         printf("• Premi 4 per cercare un viaggio\n");
-        printf("• Premi 5 per tornare alla home\n\n");
+        printf("• Premi 5 per lasciare una recensione\n");
+        printf("• Premi 6 per tornare alla home\n\n");
         scanf("%i", &result);
         result--;
-        if (!is_included(result, 0, 4)) {
+        if (!is_included(result, 0, 5)) {
             printf("\nScelta non valida\n\n");
         }
-    } while (!is_included(result, 0, 4));
+    } while (!is_included(result, 0, 5));
     
     return result;
 }
