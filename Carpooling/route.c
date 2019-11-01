@@ -29,7 +29,7 @@ home_result show_main_menu(void) {
     return result;
 }
 
-drivers_result show_driver_menu(void) {
+drivers_result show_drivers_menu(void) {
     printf("\n\nSEZIONE CONDUCENTI\n\n");
     int result = 0;
     

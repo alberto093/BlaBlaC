@@ -43,7 +43,7 @@ typedef enum {
 } rides_result;
 
 home_result show_main_menu(void);
-drivers_result show_driver_menu(void);
+drivers_result show_drivers_menu(void);
 passengers_result show_passengers_menu(void);
 rides_result show_rides_menu(void);
 
