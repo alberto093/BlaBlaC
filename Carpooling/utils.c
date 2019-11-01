@@ -7,6 +7,7 @@
 //
 
 #include "utils.h"
+#include <string.h>
 
 #define DATE_YEAR_MIN 1900
 #define DATE_YEAR_MAX 9999
@@ -38,6 +39,10 @@ int is_valid_date(unsigned short int day, unsigned short int month, unsigned sho
         return day <= 30;
     }
     return 1;
+}
+
+int is_string_lenght(const char string[], int desired_lenght) {
+    return strlen(string) == desired_lenght;
 }
 
 int is_leap(int year) {
