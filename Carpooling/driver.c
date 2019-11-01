@@ -21,6 +21,7 @@ int is_same_driver(driver *lhs, driver *rhs);
 int load_drivers(driver drivers[], int count) {
     FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/drivers.dat", "rb");
     if (rstream == NULL) {
+        printf("\nErrore durante l'apertura del file dei conducenti.\n");
         return 0;
     }
 
@@ -258,6 +259,7 @@ int contains_driver(driver* new_driver, driver drivers[], int count) {
 int save_drivers(driver drivers[], int count) {
     FILE *wstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/drivers.dat", "wb");
     if (wstream == NULL) {
+        printf("\nrrore durante il salvataggio del file dei conducenti.\n");
         return 0;
     }
     

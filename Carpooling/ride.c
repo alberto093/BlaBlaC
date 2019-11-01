@@ -22,6 +22,7 @@ int rides_compare(ride *lhs, ride *rhs, driver drivers[], int drivers_count);
 int load_rides(ride rides[], int count) {
     FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/rides.dat", "rb");
     if (rstream == NULL) {
+        printf("\nErrore durante l'apertura del file dei viaggi.\n");
         return 0;
     }
     
@@ -250,6 +251,7 @@ int contains_ride(ride* new_ride, ride rides[], int count) {
 int save_rides(ride rides[], int count) {
     FILE *wstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/rides.dat", "wb");
     if (wstream == NULL) {
+        printf("\nrrore durante il salvataggio del file dei viaggi.\n");
         return 0;
     }
     

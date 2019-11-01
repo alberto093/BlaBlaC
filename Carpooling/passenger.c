@@ -17,6 +17,7 @@ int is_same_passenger(passenger *lhs, passenger *rhs);
 int load_passengers(passenger passengers[], int count) {
     FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/passengers.dat", "rb");
     if (rstream == NULL) {
+        printf("\nErrore durante l'apertura del file dei passeggeri.\n");
         return 0;
     }
     
@@ -162,6 +163,7 @@ int contains_passenger(passenger* new_passenger, passenger passengers[], int cou
 int save_passengers(passenger passengers[], int count) {
     FILE *wstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/passengers.dat", "wb");
     if (wstream == NULL) {
+        printf("\nrrore durante il salvataggio del file dei passeggeri.\n");
         return 0;
     }
     
