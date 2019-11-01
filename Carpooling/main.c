@@ -159,7 +159,8 @@ void show_drivers_delete(driver drivers[], int *total_drivers) {
         do {
             printf("\nPremi 1 per confermare l'eliminazione");
             printf("\nPremi 2 per annullare\n");
-            scanf("%1i", &selection);
+            scanf("%i", &selection);
+            fflush(stdin);
             if (!is_included(selection, 1, 2)) {
                 printf("\nScelta non valida!\n");
             }
@@ -203,7 +204,8 @@ void show_passengers_delete(passenger passengers[], int *total_passengers) {
         do {
             printf("\nPremi 1 per confermare l'eliminazione");
             printf("\nPremi 2 per annullare\n");
-            scanf("%1i", &selection);
+            scanf("%i", &selection);
+            fflush(stdin);
             if (!is_included(selection, 1, 2)) {
                 printf("\nScelta non valida!\n");
             }
@@ -248,6 +250,7 @@ void show_rides_edit(ride rides[], int total_rides, driver drivers[], int total_
     do {
         printf("\nInserisci il numero del viaggio che vuoi modificare: ");
         scanf("%2i", &selection);
+        fflush(stdin);
         is_valid_selection = is_included(selection, 1, total_valid_rides);
         if (!is_valid_selection) {
             printf("\nScelta non valida\n");
@@ -272,6 +275,7 @@ void show_rides_delete(ride rides[], int *total_rides, driver drivers[], int tot
     do {
         printf("\nInserisci il numero del viaggio che vuoi eliminare: ");
         scanf("%2i", &selection);
+        fflush(stdin);
         is_valid_selection = is_included(selection, 1, total_valid_rides);
         selection--;
         if (!is_valid_selection) {
@@ -306,6 +310,7 @@ void show_rides_search(ride rides[], int total_rides, driver drivers[], int tota
     do {
         printf("\nInserisci il numero del viaggio che vuoi prenotare: ");
         scanf("%2i", &selection);
+        fflush(stdin);
         is_valid_selection = is_included(selection, 1, total_find_rides);
         selection--;
         if (!is_valid_selection) {
@@ -363,6 +368,7 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
     do {
         printf("\nInserisci il numero del viaggio che vuoi recensire: ");
         scanf("%2i", &selection);
+        fflush(stdin);
         is_valid_selection = is_included(selection, 1, total_find_rides);
         selection--;
         if (!is_valid_selection) {

@@ -31,17 +31,29 @@ int load_drivers(driver drivers[], int count) {
 
 driver create_driver(void) {
     driver new_driver;
+
     printf("\nInserisci il nome: ");
-    fgets(new_driver.name, 25, stdin);
+    scanf("%25[a-zA-Z ]", new_driver.name);
+    fflush(stdin);
+    
     printf("Inserisci il cognome: ");
-    fgets(new_driver.surname, 25, stdin);
+    scanf("%25[a-zA-Z ]", new_driver.surname);
+    fflush(stdin);
+    
     printf("Inserisci età: ");
     scanf("%2hd", &new_driver.age);
+    fflush(stdin);
+    
     printf("Inserisci il codice fiscale: ");
     scanf("%16s", new_driver.code);
+    fflush(stdin);
+    
     printf("Inserisci una breve biografia: ");
-    fgets(new_driver.description, 250, stdin);
+    scanf("%250[a-zA-Z ]", new_driver.description);
+    fflush(stdin);
+    
     printf("\n");
+
     new_driver.total_rides = 0;
     new_driver.total_reviews = 0;
     return new_driver;
@@ -57,7 +69,9 @@ void edit_driver(driver *edit_driver) {
             printf("\n• Premi 3 per modificare l'età\n");
             printf("\n• Premi 4 per modificare la biografia\n");
             printf("\n• Premi 5 per annullare\n\n");
-            scanf("%1i", &selection);
+            scanf("%i", &selection);
+            fflush(stdin);
+            
             is_valid_selection = is_included(selection, 1, 5);
             if (!is_valid_selection) {
                 printf("\nScelta non valida\n\n");
@@ -67,12 +81,12 @@ void edit_driver(driver *edit_driver) {
         switch (selection) {
             case 1: {
                 printf("\nIl nome è %s, inserisci il nuovo nome: ", (*edit_driver).name);
-                fgets((*edit_driver).name, 25, stdin);
+                scanf("%25[a-zA-Z ]", (*edit_driver).name);
                 break;
             }
             case 2: {
                 printf("\nIl cognome è %s, inserisci il nuovo cognome: ", (*edit_driver).surname);
-                fgets((*edit_driver).surname, 25, stdin);
+                scanf("%25[a-zA-Z ]", (*edit_driver).surname);
                 break;
             }
             case 3: {
@@ -82,12 +96,13 @@ void edit_driver(driver *edit_driver) {
             }
             case 4: {
                 printf("La biografia è \n%s\n\nInserisci la nuova biografia: ", (*edit_driver).description);
-                fgets((*edit_driver).description, 250, stdin);
+                scanf("%250[a-zA-Z ]", (*edit_driver).description);
                 break;
             }
             default:
                 break;
         }
+        fflush(stdin);
     } while (selection != 5);
 }
 
@@ -114,6 +129,8 @@ driver *find_driver(driver drivers[], int count) {
     driver *actual_driver = NULL;
     printf("\nInserisci il codice fiscale del conducente: ");
     scanf("%16s", driver_code);
+    fflush(stdin);
+    
     actual_driver = existing_driver(driver_code, drivers, count);
     if (!actual_driver) {
         printf("Conducente non trovato!");
@@ -185,6 +202,7 @@ void print_toprated_drivers(driver drivers[], int count) {
 void add_review(driver *driver, hash_code passenger_code) {
     review new_review;
     strcpy(new_review.passenger_code, passenger_code);
+    int rating = 0;
     int is_valid = 0;
     do {
         printf("\nInserisci un voto compreso tra 1 e 5\n");
@@ -193,16 +211,19 @@ void add_review(driver *driver, hash_code passenger_code) {
         printf("3: Buono\n");
         printf("4: Ottimo\n");
         printf("5: Eccellente\n");
-        scanf("%1i", &new_review.rating);
-        new_review.rating--;
-        is_valid = is_included(new_review.rating, 0, 4);
+        scanf("%i", &rating);
+        fflush(stdin);
+        
+        rating--;
+        is_valid = is_included(rating, 0, 4);
         if (!is_valid) {
             printf("\nScelta non valida!\n");
         }
     } while (!is_valid);
-    
+    new_review.rating = rating;
     printf("Inserisci un breve commento: ");
-    fgets(new_review.text, 250, stdin);
+    scanf("%250[a-zA-Z ]", new_review.text);
+    fflush(stdin);
     
     (*driver).reviews[(*driver).total_reviews] = new_review;
     (*driver).total_reviews++;

@@ -27,15 +27,25 @@ int load_passengers(passenger passengers[], int count) {
 passenger create_passenger(void) {
     passenger new_passenger;
     printf("\nInserisci il nome: ");
-    fgets(new_passenger.name, 25, stdin);
+    scanf("%25[a-zA-Z ]", new_passenger.name);
+    fflush(stdin);
+    
     printf("Inserisci il cognome: ");
-    fgets(new_passenger.surname, 25, stdin);
+    scanf("%25[a-zA-Z ]", new_passenger.surname);
+    fflush(stdin);
+    
     printf("Inserisci età: ");
     scanf("%2hd", &new_passenger.age);
+    fflush(stdin);
+    
     printf("Inserisci il codice fiscale: ");
     scanf("%16s", new_passenger.code);
+    fflush(stdin);
+    
     printf("Inserisci una breve biografia: ");
-    fgets(new_passenger.description, 250, stdin);
+    scanf("%250[a-zA-Z ]", new_passenger.description);
+    fflush(stdin);
+    
     printf("\n");
     return new_passenger;
 }
@@ -50,7 +60,9 @@ void edit_passenger(passenger *edit_passenger) {
             printf("\n• Premi 3 per modificare l'età\n");
             printf("\n• Premi 4 per modificare la biografia\n");
             printf("\n• Premi 5 per annullare\n\n");
-            scanf("%1i", &selection);
+            scanf("%i", &selection);
+            fflush(stdin);
+            
             is_valid_selection = is_included(selection, 1, 5);
             if (!is_valid_selection) {
                 printf("\nScelta non valida\n\n");
@@ -60,12 +72,12 @@ void edit_passenger(passenger *edit_passenger) {
         switch (selection) {
             case 1: {
                 printf("\nIl nome è %s, inserisci il nuovo nome: ", (*edit_passenger).name);
-                fgets((*edit_passenger).name, 25, stdin);
+                scanf("%25[a-zA-Z ]", (*edit_passenger).name);
                 break;
             }
             case 2: {
                 printf("\nIl cognome è %s, inserisci il nuovo cognome: ", (*edit_passenger).surname);
-                fgets((*edit_passenger).surname, 25, stdin);
+                scanf("%25[a-zA-Z ]", (*edit_passenger).surname);
                 break;
             }
             case 3: {
@@ -75,12 +87,13 @@ void edit_passenger(passenger *edit_passenger) {
             }
             case 4: {
                 printf("La biografia è \n%s\n\nInserisci la nuova biografia: ", (*edit_passenger).description);
-                fgets((*edit_passenger).description, 250, stdin);
+                scanf("%250[a-zA-Z ]", (*edit_passenger).description);
                 break;
             }
             default:
                 break;
         }
+        fflush(stdin);
     } while (selection != 5);
 }
 
@@ -107,6 +120,8 @@ passenger *find_passenger(passenger passengers[], int count) {
     passenger *actual_passenger = NULL;
     printf("\nInserisci il codice fiscale del passeggero: ");
     scanf("%16s", passenger_code);
+    fflush(stdin);
+    
     actual_passenger = existing_passenger(passenger_code, passengers, count);
     if (!actual_passenger) {
         printf("Passeggero non trovato!");

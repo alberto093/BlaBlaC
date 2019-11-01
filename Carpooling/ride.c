@@ -41,12 +41,20 @@ ride create_ride(hash_code driver_code) {
     edit_date(&new_ride.date);
     printf("\nInserisci l'orario di partenza nel formato 24 ore: ");
     scanf("%2hd:%2hd", &new_ride.date.hour, &new_ride.date.minutes);
+    fflush(stdin);
+    
     printf("Inserisci il costo del viaggio per passeggero: € ");
     scanf("%5f", &new_ride.price);
+    fflush(stdin);
+    
     printf("Inserisci il numero di posti disponibili: ");
     scanf("%2hd", &new_ride.total_seats);
+    fflush(stdin);
+    
     printf("Inserisci una breve descrizione del viaggio: ");
-    fgets(new_ride.description, 250, stdin);
+    scanf("%250[a-zA-Z ]", new_ride.description);
+    fflush(stdin);
+    
     new_ride.total_messages = 0;
     new_ride.total_passenger_codes = 0;
     return new_ride;
@@ -65,7 +73,9 @@ void edit_ride(ride *edit_ride) {
             printf("\n• Premi 6 per modificare la descrizione del viaggio\n");
             printf("\n• Premi 7 per aggiungere un messaggio\n");
             printf("\n• Premi 8 per annullare\n\n");
-            scanf("%1i", &selection);
+            scanf("%i", &selection);
+            fflush(stdin);
+            
             is_valid_selection = is_included(selection, 1, 8);
             if (!is_valid_selection) {
                 printf("\nScelta non valida\n\n");
@@ -95,6 +105,7 @@ void edit_ride(ride *edit_ride) {
                 printf("Il prezzo per passeggero è pari a € %-5.2f", (*edit_ride).price);
                 printf("Inserisci il nuovo prezzo: € ");
                 scanf("%5f", &(*edit_ride).price);
+                fflush(stdin);
                 break;
             }
             case 5: {
@@ -104,6 +115,7 @@ void edit_ride(ride *edit_ride) {
                 do {
                     printf("Inserisci il numero di posti aggiornato: ");
                     scanf("%2hd", &new_total_seats);
+                    fflush(stdin);
                     is_valid = new_total_seats >= (*edit_ride).total_passenger_codes;
                     if (!is_valid) {
                         if ((*edit_ride).total_passenger_codes == 1) {
@@ -119,13 +131,15 @@ void edit_ride(ride *edit_ride) {
             }
             case 6: {
                 printf("La descrizione è \n%s\n\nInserisci la nuova descrizione del viaggio: ", (*edit_ride).description);
-                fgets((*edit_ride).description, 250, stdin);
+                scanf("%250[a-zA-Z ]", (*edit_ride).description);
+                fflush(stdin);
                 break;
             }
             case 7: {
                 printf("Inserisci il contenuto del messaggio:\n\n");
-                fgets((*edit_ride).messages[(*edit_ride).total_messages], 250, stdin);
+                scanf("%250[a-zA-Z ]", (*edit_ride).messages[(*edit_ride).total_messages]);
                 (*edit_ride).total_messages++;
+                fflush(stdin);
                 break;
             }
             default:
@@ -189,6 +203,7 @@ void search_rides(ride rides[], int count, ride *find_rides[], int *find_rides_c
     do {
         printf("\nInserisci il numero di posti da prenotare: ");
         scanf("%2hd", &total_seats);
+        fflush(stdin);
         
         if (total_seats == 0) {
             printf("\nIl numero minimo di posti prenotabili è pari a 1!\n");
@@ -239,13 +254,21 @@ int save_rides(ride rides[], int count) {
 
 void edit_place(place *place) {
     printf("Città: ");
-    fgets((*place).city, 35, stdin);
+    scanf("%35[a-zA-Z ]", (*place).city);
+    fflush(stdin);
+    
     printf("Provincia: ");
-    fgets((*place).province, 25, stdin);
+    scanf("%25[a-zA-Z ]", (*place).province);
+    fflush(stdin);
+    
+    
     printf("Indirizzo: ");
-    fgets((*place).address, 50, stdin);
+    scanf("%50[a-zA-Z ]", (*place).address);
+    fflush(stdin);
+    
     printf("CAP: ");
     scanf("%5u", &(*place).postal_code);
+    fflush(stdin);
 }
 
 void edit_date(date *date) {
@@ -253,6 +276,7 @@ void edit_date(date *date) {
     do {
         printf("Inserisci la data nel formato dd/MM/yyyy: ");
         scanf("%2hd/%2hd/%4hd", &(*date).day, &(*date).month, &(*date).year);
+        fflush(stdin);
         is_valid = is_valid_date((*date).day, (*date).month, (*date).year);
         if (!is_valid) {
             printf("\nLa data inserita non è valida!\n");
