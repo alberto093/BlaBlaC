@@ -323,6 +323,11 @@ void show_rides_search(ride rides[], int total_rides, driver drivers[], int tota
         actual_passenger = find_passenger(passengers, total_passengers);
     } while (actual_passenger == NULL);
     
+    if (!strcmp((*actual_passenger).code, (*find_rides)[selection].driver_code)) {
+        printf("\nNon puoi prenotare un viaggio con te stesso!\n");
+        return;
+    }
+    
     strcpy((*find_rides)[selection].passenger_codes[(*find_rides)[selection].total_passenger_codes], (*actual_passenger).code);
     (*find_rides)[selection].total_passenger_codes++;
     save_rides(rides, total_rides);
@@ -382,9 +387,10 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
         return;
     }
     
-    add_review(actual_driver, (*actual_passenger).code);
-    save_drivers(drivers, total_drivers);
-    printf("\nRecensione aggiunta con successo!\n");
+    if (add_review(actual_driver, (*actual_passenger).code)) {
+        save_drivers(drivers, total_drivers);
+        printf("\nRecensione aggiunta con successo!\n");
+    }
 }
 
 void print_full_rides(ride rides[], int total_rides, driver drivers[], int total_drivers) {

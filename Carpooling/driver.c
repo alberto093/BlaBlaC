@@ -199,7 +199,12 @@ void print_toprated_drivers(driver drivers[], int count) {
     }
 }
 
-void add_review(driver *driver, hash_code passenger_code) {
+int add_review(driver *driver, hash_code passenger_code) {
+    if (!strcmp(passenger_code, (*driver).code)) {
+        printf("\nNon puoi lasciare una recensione verso te stesso!\n");
+        return 0;
+    }
+    
     review new_review;
     strcpy(new_review.passenger_code, passenger_code);
     int rating = 0;
@@ -227,6 +232,7 @@ void add_review(driver *driver, hash_code passenger_code) {
     
     (*driver).reviews[(*driver).total_reviews] = new_review;
     (*driver).total_reviews++;
+    return 1;
 }
 
 int contains_driver(driver* new_driver, driver drivers[], int count) {
