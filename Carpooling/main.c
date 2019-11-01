@@ -7,7 +7,6 @@
 //
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include "utils.h"
 #include "route.h"
@@ -49,7 +48,7 @@ int main() {
                 drivers_result result = drivers_create;
 
                 while (result != drivers_back) {
-                    result = show_driver_menu();
+                    result = show_drivers_menu();
         
                     switch (result) {
                         case drivers_create:
@@ -124,7 +123,7 @@ int main() {
         }
     }
     
-    return EXIT_SUCCESS;
+    return 0;
 }
 
 void show_drivers_create(driver drivers[], int *total_drivers) {

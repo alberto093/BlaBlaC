@@ -44,9 +44,16 @@ driver create_driver(void) {
     scanf("%2hd", &new_driver.age);
     fflush(stdin);
     
-    printf("Inserisci il codice fiscale: ");
-    scanf("%16s", new_driver.code);
-    fflush(stdin);
+    int is_valid_code = 0;
+    do {
+        printf("Inserisci il codice fiscale: ");
+        scanf("%16s", new_driver.code);
+        fflush(stdin);
+        is_valid_code = is_string_lenght(new_driver.code, 16);
+        if (!is_valid_code) {
+            printf("\nCodice fiscale non valido!\n");
+        }
+    } while (!is_valid_code);
     
     printf("Inserisci una breve biografia: ");
     scanf("%250[a-zA-Z ]", new_driver.description);
@@ -127,9 +134,17 @@ int remove_driver(driver *remove_driver, driver drivers[], int *count) {
 driver *find_driver(driver drivers[], int count) {
     hash_code driver_code;
     driver *actual_driver = NULL;
-    printf("\nInserisci il codice fiscale del conducente: ");
-    scanf("%16s", driver_code);
-    fflush(stdin);
+    
+    int is_valid_code = 0;
+    do {
+        printf("\nInserisci il codice fiscale del conducente: ");
+        scanf("%16s", driver_code);
+        fflush(stdin);
+        is_valid_code = is_string_lenght(driver_code, 16);
+        if (!is_valid_code) {
+            printf("\nCodice fiscale non valido!\n");
+        }
+    } while (!is_valid_code);
     
     actual_driver = existing_driver(driver_code, drivers, count);
     if (!actual_driver) {

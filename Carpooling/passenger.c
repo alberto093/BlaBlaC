@@ -38,9 +38,16 @@ passenger create_passenger(void) {
     scanf("%2hd", &new_passenger.age);
     fflush(stdin);
     
-    printf("Inserisci il codice fiscale: ");
-    scanf("%16s", new_passenger.code);
-    fflush(stdin);
+    int is_valid_code = 0;
+    do {
+        printf("Inserisci il codice fiscale: ");
+        scanf("%16s", new_passenger.code);
+        fflush(stdin);
+        is_valid_code = is_string_lenght(new_passenger.code, 16);
+        if (!is_valid_code) {
+            printf("\nCodice fiscale non valido!\n");
+        }
+    } while (!is_valid_code);
     
     printf("Inserisci una breve biografia: ");
     scanf("%250[a-zA-Z ]", new_passenger.description);
@@ -118,9 +125,17 @@ int remove_passenger(passenger *remove_passenger, passenger passengers[], int *c
 passenger *find_passenger(passenger passengers[], int count) {
     hash_code passenger_code;
     passenger *actual_passenger = NULL;
-    printf("\nInserisci il codice fiscale del passeggero: ");
-    scanf("%16s", passenger_code);
-    fflush(stdin);
+    
+    int is_valid_code = 0;
+    do {
+        printf("\nInserisci il codice fiscale del passeggero: ");
+        scanf("%16s", passenger_code);
+        fflush(stdin);
+        is_valid_code = is_string_lenght(passenger_code, 16);
+        if (!is_valid_code) {
+            printf("\nCodice fiscale non valido!\n");
+        }
+    } while (!is_valid_code);
     
     actual_passenger = existing_passenger(passenger_code, passengers, count);
     if (!actual_passenger) {

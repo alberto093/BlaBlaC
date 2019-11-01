@@ -61,6 +61,9 @@ ride create_ride(hash_code driver_code) {
 }
 
 void edit_ride(ride *edit_ride) {
+    if ((*edit_ride).total_passenger_codes > 0) {
+        printf("\nQuesto viaggio ha già ricevuto delle prenotazioni! Ricordati di notificare le modifiche ai passeggeri\n");
+    }
     int selection = 0;
     do {
         int is_valid_selection = 0;
