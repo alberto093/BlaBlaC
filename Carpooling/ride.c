@@ -40,9 +40,9 @@ ride create_ride(hash_code driver_code) {
     printf("\nE quando parti?\n\n");
     edit_date(&new_ride.date);
     printf("\nInserisci l'orario di partenza nel formato 24 ore: ");
-    scanf("%hd:%hd", &new_ride.date.hour, &new_ride.date.minutes);
+    scanf("%02hd:%02hd", &new_ride.date.hour, &new_ride.date.minutes);
     printf("Inserisci il costo del viaggio per passeggero: € ");
-    scanf("%2f", &new_ride.price);
+    scanf("%5.2f", &new_ride.price);
     printf("Inserisci il numero di posti disponibili: ");
     scanf("%hd", &new_ride.total_seats);
     printf("Inserisci una breve descrizione del viaggio: ");
@@ -92,9 +92,9 @@ void edit_ride(ride *edit_ride) {
                 break;
             }
             case 4: {
-                printf("Il prezzo per passeggero è pari a € %2f", (*edit_ride).price);
+                printf("Il prezzo per passeggero è pari a € %-5.2f", (*edit_ride).price);
                 printf("Inserisci il nuovo prezzo: € ");
-                scanf("%2f", &(*edit_ride).price);
+                scanf("%5.2f", &(*edit_ride).price);
                 break;
             }
             case 5: {

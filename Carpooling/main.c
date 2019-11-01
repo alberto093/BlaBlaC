@@ -28,6 +28,7 @@ void show_rides_edit(ride rides[], int total_rides, driver drivers[], int total_
 void show_rides_delete(ride rides[], int *total_rides, driver drivers[], int total_drivers);
 void show_rides_search(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers);
 void show_rides_review(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers);
+void print_full_rides(ride rides[], int total_rides, driver drivers[], int total_drivers);
 
 int main() {
     driver drivers[DRIVERS_MAX];
@@ -296,10 +297,7 @@ void show_rides_search(ride rides[], int total_rides, driver drivers[], int tota
     }
     
     sort_rides((*find_rides), total_find_rides, drivers, total_drivers);
-    
-    #warning add print find_ride copiando da print_rides
-    //   |  Ora  | Luogo di partenza |  Luogo di arrivo  |  Prezzo |  Nome, Cognome e Rating  |
-    // 1.| 08:30 | Indirizzo + Città | Indirizzo + Città | € 25,00 | Alberto Saltarelli 4,9/5 |
+    print_full_rides((*find_rides), total_find_rides, drivers, total_drivers);
     
     int selection = 0;
     int is_valid_selection = 0;
@@ -356,9 +354,7 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
         }
     }
     
-    #warning add print find_ride copiando da print_rides
-    //   |  Ora  | Luogo di partenza |  Luogo di arrivo  |  Prezzo |  Nome, Cognome e Rating  |
-    // 1.| 08:30 | Indirizzo + Città | Indirizzo + Città | € 25,00 | Alberto Saltarelli 4,9/5 |
+    print_full_rides((*find_rides), total_find_rides, drivers, total_drivers);
     
     int selection = 0;
     int is_valid_selection = 0;
@@ -381,4 +377,33 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
     add_review(actual_driver);
     save_drivers(drivers, total_drivers);
     printf("\nRecensione aggiunta con successo!\n");
+}
+
+void print_full_rides(ride rides[], int total_rides, driver drivers[], int total_drivers) {
+    //   |  Ora  | Luogo di Partenza |  Luogo di Arrivo  |  Prezzo |  Valutazione Conducente  |
+    // 1.| 08:30 | Indirizzo, Città  | Indirizzo, Città  | € 25,00 | Alberto Saltarelli 4,9/5 |
+    
+    if (total_rides == 0) {
+        printf("\nNessun viaggio disponibile\n");
+        return;
+    }
+    
+    printf("\n    _________________________________________________________________________________________________");
+    printf("____________________________________________________________________________________________________");
+    printf("__________________________________________________________________________________________________\n");
+    printf("\n   |  Ora  |                                    Luogo di Partenza                                    |");
+    printf("                                     Luogo di Arrivo                                     |  Prezzo  |");
+    printf("                                      Valutazione Conducente                                      |\n");
+    
+    
+    for (int i=0; i<total_rides; i++) {
+        driver *ride_driver = existing_driver(rides[i].driver_code, drivers, total_drivers);
+        printf("%2i.| %02hd:%02hd | %-50s, %-35s |", i+1, rides[i].date.hour, rides[i].date.minutes, rides[i].source.address, rides[i].source.city);
+        printf(" %-50s, %-35s | € %-5.2f |", rides[i].destination.address, rides[i].destination.city, rides[i].price);
+        printf(" %-25s  %-25s %-3.1f/5 |\n", (*ride_driver).name, (*ride_driver).surname, driver_rating(ride_driver));
+    }
+    
+    printf("    _________________________________________________________________________________________________");
+    printf("____________________________________________________________________________________________________");
+    printf("__________________________________________________________________________________________________\n");
 }

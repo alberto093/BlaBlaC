@@ -169,7 +169,7 @@ void print_toprated_drivers(driver drivers[], int count) {
     }
     
     if (toprated_drivers_count > 0) {
-        printf("\nLa media delle valutazioni più alta è pari a:  %1f/5\n", max_rate);
+        printf("\nLa media delle valutazioni più alta è pari a: %-3.1f/5\n", max_rate);
         
         if (toprated_drivers_count == 1) {
             printf("Il conducente è: %s", toprated_drivers[0]);
