@@ -184,6 +184,10 @@ void print_toprated_drivers(driver drivers[], int count) {
     }
 }
 
+void add_review(driver *driver) {
+#warning add prints and logic!
+}
+
 int contains_driver(driver* new_driver, driver drivers[], int count) {
     return existing_driver((*new_driver).code, drivers, count) != NULL;
 }

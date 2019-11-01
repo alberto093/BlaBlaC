@@ -261,7 +261,7 @@ void edit_date(date *date) {
 }
 
 int is_same_ride(ride *lhs, ride *rhs) {
-    return strcmp((*lhs).driver_code, (*rhs).driver_code) && is_same_place(&(*lhs).source, &(*rhs).source) && is_same_place(&(*lhs).destination, &(*rhs).destination) && is_same_date(&(*lhs).date, &(*rhs).date);
+    return !strcmp((*lhs).driver_code, (*rhs).driver_code) && is_same_place(&(*lhs).source, &(*rhs).source) && is_same_place(&(*lhs).destination, &(*rhs).destination) && is_same_date(&(*lhs).date, &(*rhs).date);
 }
 
 int is_same_place(place *lhs, place *rhs) {

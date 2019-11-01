@@ -70,6 +70,7 @@ driver *find_driver(driver drivers[], int count);
 driver *existing_driver(hash_code driver_code, driver drivers[], int count);
 float driver_rating(driver *driver);
 void print_toprated_drivers(driver drivers[], int count);
+void add_review(driver *driver);
 int contains_driver(driver* new_driver, driver drivers[], int count);
 int save_drivers(driver drivers[], int count);
 

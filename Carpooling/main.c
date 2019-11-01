@@ -27,7 +27,7 @@ void show_rides_create(ride rides[], int *total_rides, driver drivers[], int tot
 void show_rides_edit(ride rides[], int total_rides, driver drivers[], int total_drivers);
 void show_rides_delete(ride rides[], int *total_rides, driver drivers[], int total_drivers);
 void show_rides_search(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers);
-void show_rides_review(ride rides[], int total_rides);
+void show_rides_review(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers);
 
 int main() {
     driver drivers[DRIVERS_MAX];
@@ -270,13 +270,14 @@ void show_rides_delete(ride rides[], int *total_rides, driver drivers[], int tot
         printf("\nInserisci il numero del viaggio che vuoi eliminare: ");
         scanf("%i", &selection);
         is_valid_selection = is_included(selection, 1, total_valid_rides);
+        selection--;
         if (!is_valid_selection) {
             printf("\nScelta non valida\n");
         }
     } while (!is_valid_selection);
-    driver *actual_driver = existing_driver((*valid_rides[selection - 1]).driver_code, drivers, total_drivers);
+    driver *actual_driver = existing_driver((*valid_rides[selection]).driver_code, drivers, total_drivers);
     
-    if (remove_ride(valid_rides[selection - 1], rides, total_rides)) {
+    if (remove_ride(valid_rides[selection], rides, total_rides)) {
         (*actual_driver).total_rides--;
         save_drivers(drivers, total_drivers);
         save_rides(rides, *total_rides);
@@ -306,6 +307,7 @@ void show_rides_search(ride rides[], int total_rides, driver drivers[], int tota
         printf("\nInserisci il numero del viaggio che vuoi prenotare: ");
         scanf("%i", &selection);
         is_valid_selection = is_included(selection, 1, total_find_rides);
+        selection--;
         if (!is_valid_selection) {
             printf("\nScelta non valida\n");
         }
@@ -316,12 +318,67 @@ void show_rides_search(ride rides[], int total_rides, driver drivers[], int tota
         actual_passenger = find_passenger(passengers, total_passengers);
     } while (actual_passenger == NULL);
     
-    strcpy((*find_rides)[total_find_rides].passenger_codes[(*find_rides)[total_find_rides].total_passenger_codes], (*actual_passenger).code);
-    (*find_rides)[total_find_rides].total_passenger_codes++;
+    strcpy((*find_rides)[selection].passenger_codes[(*find_rides)[selection].total_passenger_codes], (*actual_passenger).code);
+    (*find_rides)[selection].total_passenger_codes++;
     save_rides(rides, total_rides);
     printf("Viaggio prenotato con successo!");
 }
 
-void show_rides_review(ride rides[], int total_rides) {
+void show_rides_review(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers) {
+    passenger *actual_passenger;
+    do {
+        actual_passenger = find_passenger(passengers, total_passengers);
+    } while (actual_passenger == NULL);
     
+    ride *find_rides[total_rides];
+    int total_find_rides = 0;
+    
+    for (int i=0; i<total_rides; i++) {
+        for (int j=0; j<rides[i].total_passenger_codes; j++) {
+            int is_reserved = !strcmp(rides[i].passenger_codes[j], (*actual_passenger).code);
+            int is_review_available = 1;
+            
+            for (int k=0; k<total_drivers; k++) {
+                for (int l=0; l<drivers[k].total_reviews; l++) {
+                    if (!strcmp(drivers[k].reviews[l].passenger_code, (*actual_passenger).code)) {
+                        is_review_available = 0;
+                        l=drivers[k].total_reviews;
+                        k=total_drivers;
+                        break;
+                    }
+                }
+            }
+            
+            if (is_reserved && is_review_available) {
+                find_rides[total_find_rides] = &rides[i];
+                total_find_rides++;
+            }
+        }
+    }
+    
+    #warning add print find_ride copiando da print_rides
+    //   |  Ora  | Luogo di partenza |  Luogo di arrivo  |  Prezzo |  Nome, Cognome e Rating  |
+    // 1.| 08:30 | Indirizzo + Città | Indirizzo + Città | € 25,00 | Alberto Saltarelli 4,9/5 |
+    
+    int selection = 0;
+    int is_valid_selection = 0;
+    do {
+        printf("\nInserisci il numero del viaggio che vuoi recensire: ");
+        scanf("%i", &selection);
+        is_valid_selection = is_included(selection, 1, total_find_rides);
+        selection--;
+        if (!is_valid_selection) {
+            printf("\nScelta non valida\n");
+        }
+    } while (!is_valid_selection);
+    
+    driver *actual_driver = existing_driver((*find_rides)[selection].driver_code, drivers, total_drivers);
+    if (actual_driver == NULL) {
+        printf("\nERRORE: Il conducente non è stato trovato!\n");
+        return;
+    }
+    
+    add_review(actual_driver);
+    save_drivers(drivers, total_drivers);
+    printf("\nRecensione aggiunta con successo!\n");
 }
