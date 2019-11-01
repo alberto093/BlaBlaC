@@ -11,8 +11,8 @@
 
 #include <stdio.h>
 
-#ifndef FISCAL_CODE_MAX
-#define FISCAL_CODE_MAX 17
+#ifndef FISCAL_CODE_LEN
+#define FISCAL_CODE_LEN 17
 #endif
 
 #ifndef NAME_MAX
@@ -31,10 +31,10 @@
 #define REVIEW_MAX 101
 #endif
 
-#define DRIVERS_MAX 101
+#define DRIVERS_MAX 100
 
 #ifndef hash_code
-typedef char hash_code[FISCAL_CODE_MAX];
+typedef char hash_code[FISCAL_CODE_LEN];
 #endif
 
 typedef enum {

@@ -12,24 +12,24 @@
 #include <stdio.h>
 #include "driver.h"
 
-#ifndef FISCAL_CODE_MAX
-#define FISCAL_CODE_MAX 17
+#ifndef FISCAL_CODE_LEN
+#define FISCAL_CODE_LEN 17
 #endif
 
 #define CITY_MAX 36
 #define PROVINCE_MAX 26
 #define ADDRESS_MAX 51
-#define SEATS_MAX 11
+#define SEATS_MAX 10
 
 #ifndef NOTE_MAX
 #define NOTE_MAX 251
 #endif
 
 #define MESSAGES_MAX 20
-#define RIDES_MAX 101
+#define RIDES_MAX 100
 
 #ifndef hash_code
-typedef char hash_code[FISCAL_CODE_MAX];
+typedef char hash_code[FISCAL_CODE_LEN];
 #endif
 
 typedef struct {

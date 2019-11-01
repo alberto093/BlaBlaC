@@ -11,8 +11,8 @@
 
 #include <stdio.h>
 
-#ifndef FISCAL_CODE_MAX
-#define FISCAL_CODE_MAX 17
+#ifndef FISCAL_CODE_LEN
+#define FISCAL_CODE_LEN 17
 #endif
 
 #ifndef NAME_MAX
@@ -27,10 +27,10 @@
 #define NOTE_MAX 251
 #endif
 
-#define PASSENGERS_MAX 101
+#define PASSENGERS_MAX 100
 
 #ifndef hash_code
-typedef char hash_code[FISCAL_CODE_MAX];
+typedef char hash_code[FISCAL_CODE_LEN];
 #endif
 
 typedef struct {
