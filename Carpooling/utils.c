@@ -41,8 +41,8 @@ int is_valid_date(unsigned short int day, unsigned short int month, unsigned sho
     return 1;
 }
 
-int is_string_lenght(const char string[], int desired_lenght) {
-    return strlen(string) == desired_lenght;
+int is_string_lenght(const char string[], int check_lenght) {
+    return strlen(string) == check_lenght;
 }
 
 int is_leap(int year) {
