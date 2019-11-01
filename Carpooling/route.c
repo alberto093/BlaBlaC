@@ -78,7 +78,7 @@ rides_result show_rides_menu(void) {
         printf("• Premi 1 per creare un nuovo viaggio\n");
         printf("• Premi 2 per modificare un viaggio\n");
         printf("• Premi 3 per eliminare un viaggio\n");
-        printf("• Premi 4 per cercare un viaggio\n");
+        printf("• Premi 4 per cercare/prenotare un viaggio\n");
         printf("• Premi 5 per lasciare una recensione\n");
         printf("• Premi 6 per tornare alla home\n\n");
         scanf("%i", &result);
