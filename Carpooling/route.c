@@ -18,7 +18,7 @@ home_result show_main_menu(void) {
         printf("• Premi 2 per accedere alla sezione passeggeri\n");
         printf("• Premi 3 per accedere alla sezione viaggi\n");
         printf("• Premi 4 per uscire dal programma\n\n");
-        scanf("%i", &result);
+        scanf("%1i", &result);
         result--;
         if (!is_included(result, 0, 3)) {
             printf("\nScelta non valida\n\n");
@@ -38,7 +38,7 @@ drivers_result show_driver_menu(void) {
         printf("• Premi 3 per eliminare un conducente\n");
         printf("• Premi 4 per visualizzare i migliori conducenti\n");
         printf("• Premi 5 per tornare alla home\n\n");
-        scanf("%i", &result);
+        scanf("%1i", &result);
         result--;
         if (!is_included(result, 0, 4)) {
             printf("\nScelta non valida\n\n");
@@ -57,7 +57,7 @@ passengers_result show_passengers_menu(void) {
         printf("• Premi 2 per modificare un passeggero\n");
         printf("• Premi 3 per eliminare un passeggero\n");
         printf("• Premi 4 per tornare alla home\n\n");
-        scanf("%i", &result);
+        scanf("%1i", &result);
         result--;
         if (!is_included(result, 0, 3)) {
             printf("\nScelta non valida\n\n");
@@ -78,7 +78,7 @@ rides_result show_rides_menu(void) {
         printf("• Premi 4 per cercare un viaggio\n");
         printf("• Premi 5 per lasciare una recensione\n");
         printf("• Premi 6 per tornare alla home\n\n");
-        scanf("%i", &result);
+        scanf("%1i", &result);
         result--;
         if (!is_included(result, 0, 5)) {
             printf("\nScelta non valida\n\n");

@@ -46,7 +46,7 @@ ride create_ride(hash_code driver_code) {
     printf("Inserisci il numero di posti disponibili: ");
     scanf("%2hd", &new_ride.total_seats);
     printf("Inserisci una breve descrizione del viaggio: ");
-    scanf("%s", new_ride.description);
+    fgets(new_ride.description, 250, stdin);
     new_ride.total_messages = 0;
     new_ride.total_passenger_codes = 0;
     return new_ride;
@@ -65,7 +65,7 @@ void edit_ride(ride *edit_ride) {
             printf("\n• Premi 6 per modificare la descrizione del viaggio\n");
             printf("\n• Premi 7 per aggiungere un messaggio\n");
             printf("\n• Premi 8 per annullare\n\n");
-            scanf("%i", &selection);
+            scanf("%1i", &selection);
             is_valid_selection = is_included(selection, 1, 8);
             if (!is_valid_selection) {
                 printf("\nScelta non valida\n\n");
@@ -103,7 +103,7 @@ void edit_ride(ride *edit_ride) {
                 printf("Il numero di posti totale é %hd", (*edit_ride).total_seats);
                 do {
                     printf("Inserisci il numero di posti aggiornato: ");
-                    scanf("%hd", &new_total_seats);
+                    scanf("%2hd", &new_total_seats);
                     is_valid = new_total_seats >= (*edit_ride).total_passenger_codes;
                     if (!is_valid) {
                         if ((*edit_ride).total_passenger_codes == 1) {
@@ -119,12 +119,12 @@ void edit_ride(ride *edit_ride) {
             }
             case 6: {
                 printf("La descrizione è \n%s\n\nInserisci la nuova descrizione del viaggio: ", (*edit_ride).description);
-                scanf("%s", (*edit_ride).description);
+                fgets((*edit_ride).description, 250, stdin);
                 break;
             }
             case 7: {
                 printf("Inserisci il contenuto del messaggio:\n\n");
-                scanf("%s", (*edit_ride).messages[(*edit_ride).total_messages]);
+                fgets((*edit_ride).messages[(*edit_ride).total_messages], 250, stdin);
                 (*edit_ride).total_messages++;
                 break;
             }
@@ -188,7 +188,7 @@ void search_rides(ride rides[], int count, ride *find_rides[], int *find_rides_c
     
     do {
         printf("\nInserisci il numero di posti da prenotare: ");
-        scanf("%hd", &total_seats);
+        scanf("%2hd", &total_seats);
         
         if (total_seats == 0) {
             printf("\nIl numero minimo di posti prenotabili è pari a 1!\n");
@@ -239,20 +239,20 @@ int save_rides(ride rides[], int count) {
 
 void edit_place(place *place) {
     printf("Città: ");
-    scanf("%s", (*place).city);
+    fgets((*place).city, 35, stdin);
     printf("Provincia: ");
-    scanf("%s", (*place).province);
+    fgets((*place).province, 25, stdin);
     printf("Indirizzo: ");
-    scanf("%s", (*place).address);
+    fgets((*place).address, 50, stdin);
     printf("CAP: ");
-    scanf("%u", &(*place).postal_code);
+    scanf("%5u", &(*place).postal_code);
 }
 
 void edit_date(date *date) {
     int is_valid = 0;
     do {
         printf("Inserisci la data nel formato dd/MM/yyyy: ");
-        scanf("%hd/%hd/%hd", &(*date).day, &(*date).month, &(*date).year);
+        scanf("%2hd/%2hd/%4hd", &(*date).day, &(*date).month, &(*date).year);
         is_valid = is_valid_date((*date).day, (*date).month, (*date).year);
         if (!is_valid) {
             printf("\nLa data inserita non è valida!\n");

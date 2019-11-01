@@ -32,15 +32,15 @@ int load_drivers(driver drivers[], int count) {
 driver create_driver(void) {
     driver new_driver;
     printf("\nInserisci il nome: ");
-    scanf("%s", new_driver.name);
+    fgets(new_driver.name, 25, stdin);
     printf("Inserisci il cognome: ");
-    scanf("%s", new_driver.surname);
+    fgets(new_driver.surname, 25, stdin);
     printf("Inserisci età: ");
-    scanf("%hd", &new_driver.age);
+    scanf("%2hd", &new_driver.age);
     printf("Inserisci il codice fiscale: ");
-    scanf("%s", new_driver.code);
+    scanf("%16s", new_driver.code);
     printf("Inserisci una breve biografia: ");
-    scanf("%s", new_driver.description);
+    fgets(new_driver.description, 250, stdin);
     printf("\n");
     new_driver.total_rides = 0;
     new_driver.total_reviews = 0;
@@ -57,7 +57,7 @@ void edit_driver(driver *edit_driver) {
             printf("\n• Premi 3 per modificare l'età\n");
             printf("\n• Premi 4 per modificare la biografia\n");
             printf("\n• Premi 5 per annullare\n\n");
-            scanf("%i", &selection);
+            scanf("%1i", &selection);
             is_valid_selection = is_included(selection, 1, 5);
             if (!is_valid_selection) {
                 printf("\nScelta non valida\n\n");
@@ -67,22 +67,22 @@ void edit_driver(driver *edit_driver) {
         switch (selection) {
             case 1: {
                 printf("\nIl nome è %s, inserisci il nuovo nome: ", (*edit_driver).name);
-                scanf("%s", (*edit_driver).name);
+                fgets((*edit_driver).name, 25, stdin);
                 break;
             }
             case 2: {
                 printf("\nIl cognome è %s, inserisci il nuovo cognome: ", (*edit_driver).surname);
-                scanf("%s", (*edit_driver).surname);
+                fgets((*edit_driver).surname, 25, stdin);
                 break;
             }
             case 3: {
                 printf("\nL'età è %hd, inserisci la nuova età: ", (*edit_driver).age);
-                scanf("%hd", &(*edit_driver).age);
+                scanf("%2hd", &(*edit_driver).age);
                 break;
             }
             case 4: {
                 printf("La biografia è \n%s\n\nInserisci la nuova biografia: ", (*edit_driver).description);
-                scanf("%s", (*edit_driver).description);
+                fgets((*edit_driver).description, 250, stdin);
                 break;
             }
             default:
@@ -113,7 +113,7 @@ driver *find_driver(driver drivers[], int count) {
     hash_code driver_code;
     driver *actual_driver = NULL;
     printf("\nInserisci il codice fiscale del conducente: ");
-    scanf("%s", driver_code);
+    scanf("%16s", driver_code);
     actual_driver = existing_driver(driver_code, drivers, count);
     if (!actual_driver) {
         printf("Conducente non trovato!");
@@ -193,7 +193,7 @@ void add_review(driver *driver, hash_code passenger_code) {
         printf("3: Buono\n");
         printf("4: Ottimo\n");
         printf("5: Eccellente\n");
-        scanf("%i", &new_review.rating);
+        scanf("%1i", &new_review.rating);
         new_review.rating--;
         is_valid = is_included(new_review.rating, 0, 4);
         if (!is_valid) {
@@ -202,7 +202,7 @@ void add_review(driver *driver, hash_code passenger_code) {
     } while (!is_valid);
     
     printf("Inserisci un breve commento: ");
-    scanf("%250s", new_review.text);
+    fgets(new_review.text, 250, stdin);
     
     (*driver).reviews[(*driver).total_reviews] = new_review;
     (*driver).total_reviews++;
