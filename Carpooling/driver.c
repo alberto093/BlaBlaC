@@ -13,8 +13,7 @@
 #include <string.h>
 #include <math.h>
 
-#define EXPERIENCE_MAX 15
-#define DRIVER_PRINT_MAX NAME_MAX + SURNAME_MAX + EXPERIENCE_MAX + 2
+#define DRIVER_PRINT_MAX NAME_MAX + SURNAME_MAX + 4
 
 int is_same_driver(driver *lhs, driver *rhs);
 
@@ -43,7 +42,6 @@ driver create_driver(void) {
     printf("Inserisci una breve biografia: ");
     scanf("%s", new_driver.description);
     printf("\n");
-    new_driver.experience = experience_newcomer;
     new_driver.total_rides = 0;
     new_driver.total_reviews = 0;
     return new_driver;
@@ -132,6 +130,18 @@ driver *existing_driver(hash_code driver_code, driver drivers[], int count) {
     return NULL;
 }
 
+float driver_rating(driver *driver) {
+    float rating_sum = 0;
+    int total_rating = 0;
+    for (int i=0; i<(*driver).total_reviews; i++) {
+        if ((*driver).reviews[i].rating > 0) {
+            rating_sum += (*driver).reviews[i].rating;
+            total_rating++;
+        }
+    }
+    return total_rating > 0 ? roundf((rating_sum / total_rating)*10)/10 : 0;
+}
+
 void print_toprated_drivers(driver drivers[], int count) {
     if (count == 0) {
         printf("\nNessun conducente trovato!\n");
@@ -143,22 +153,13 @@ void print_toprated_drivers(driver drivers[], int count) {
     int toprated_drivers_count = 0;
     
     for (int i=0; i<count; i++) {
-        float rating_sum = 0;
-        int total_rating = 0;
-        for (int j=0; j<drivers[i].total_reviews; j++) {
-            if (drivers[i].reviews[j].rating > 0) {
-                rating_sum += drivers[i].reviews[j].rating;
-                total_rating++;
-            }
-        }
-        
-        if (total_rating > 0) {
-            float rating_average = roundf((rating_sum / total_rating)*10)/10;
-            if (rating_average > max_rate) {
-                max_rate = rating_average;
+        float rating = driver_rating(&drivers[i]);
+        if (rating > 0) {
+            if (rating > max_rate) {
+                max_rate = rating;
                 toprated_drivers_count = 0;
             }
-            if (rating_average == max_rate) {
+            if (rating == max_rate) {
                 strcat(toprated_drivers[toprated_drivers_count], drivers[i].name);
                 strcat(toprated_drivers[toprated_drivers_count], "\t");
                 strcat(toprated_drivers[toprated_drivers_count], drivers[i].surname);

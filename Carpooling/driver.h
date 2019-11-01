@@ -45,14 +45,6 @@ typedef enum {
     rating_oustanding
 } rating;
 
-typedef enum {
-    experience_newcomer,
-    experience_intermediate,
-    experience_experienced,
-    experience_expert,
-    experience_ambassador
-} experience;
-
 typedef struct {
     hash_code passenger_code;
     char text[NOTE_MAX];
@@ -67,7 +59,6 @@ typedef struct {
     char description[NOTE_MAX];
     review reviews[REVIEW_MAX];
     unsigned short int total_reviews;
-    experience experience;
     unsigned int total_rides;
 } driver;
 
@@ -77,6 +68,7 @@ void edit_driver(driver *edit_driver);
 int remove_driver(driver *remove_driver, driver drivers[], int *count);
 driver *find_driver(driver drivers[], int count);
 driver *existing_driver(hash_code driver_code, driver drivers[], int count);
+float driver_rating(driver *driver);
 void print_toprated_drivers(driver drivers[], int count);
 int contains_driver(driver* new_driver, driver drivers[], int count);
 int save_drivers(driver drivers[], int count);
