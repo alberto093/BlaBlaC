@@ -12,6 +12,14 @@
 
 #define PASSENGER_FILE_NAME "passengers.dat"
 
+/**
+ This function is intended to equate two passenger struct.
+ It returns 1 (true) if both passengers' codes are case insensitive equal.
+
+ @param lhs pointer to passenger struct
+ @param rhs pointer to passenger struct
+ @return It returns 1 (true) if both passengers' codes are case insensitive equal else 0.
+ */
 int is_same_passenger(passenger *lhs, passenger *rhs);
 
 int load_passengers(passenger passengers[], int max_passengers) {

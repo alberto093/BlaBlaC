@@ -59,7 +59,7 @@ typedef struct {
 } review;
 
 /**
- The driver structure. The code should be unique in order to identify the driver within a collection.
+ The driver structure. The code should be unique in order to identify a driver within a collection.
  */
 typedef struct {
     hash_code code;
@@ -77,19 +77,19 @@ typedef struct {
 
  @param drivers pointer to the driver struct
  @param max_drivers the max number of the drivers that can be retrived from the file
- @return the total number of the drivers
+ @return It returns the total number of the drivers
  */
 int load_drivers(driver drivers[], int max_drivers);
 
 /**
  This method using stdin to create and populate a driver struct.
 
- @return the created driver struct
+ @return It returns the created driver struct
  */
 driver create_driver(void);
 
 /**
- It takes a pointer to a driver struct in order to edit it by user using stdin
+ It takes a pointer to a driver struct in order to edit it by user using stdin.
 
  @param edit_driver pointer to a driver struct
  */
@@ -116,7 +116,7 @@ int remove_driver(driver *remove_driver, driver drivers[], int *count);
 driver *find_driver(driver drivers[], int count);
 
 /**
- This function requires the driver's code, an array of drivers and its count in order to find the driver who has the input code.
+ This function requires the driver's code, an array of drivers and its count in order to find the driver who match the input code.
 
  @param driver_code code of the driver
  @param drivers array of driver struct
@@ -156,16 +156,16 @@ int add_review(driver *driver, hash_code passenger_code);
  This function searches into the array of drivers and returns 1 if the driver provided by the first parameter was found within the array else 0.
 
  @param new_driver pointer to a driver struct
- @param drivers array of drivers
+ @param drivers array of driver struct
  @param count count of the drivers array
- @return It returns 1 if driver was found else 0.s
+ @return It returns 1 if the driver was found else 0.
  */
 int contains_driver(driver* new_driver, driver drivers[], int count);
 
 /**
  This function save drivers into the file using "wb" and returns 1 if no error occured else 0.
 
- @param drivers array of drivers are going to be saved
+ @param drivers array of driver struct are going to be saved
  @param count count of the drivers array
  @return It returns 1 if no error occured else 0.
  */
