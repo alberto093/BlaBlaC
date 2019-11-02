@@ -356,7 +356,7 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
             
             for (int k=0; k<total_drivers; k++) {
                 for (int l=0; l<drivers[k].total_reviews; l++) {
-                    if (is_equal_insensitive(drivers[k].reviews[l].passenger_code, (*actual_passenger).code))) {
+                    if (is_equal_insensitive(drivers[k].reviews[l].passenger_code, (*actual_passenger).code)) {
                         is_review_available = 0;
                         l=drivers[k].total_reviews;
                         k=total_drivers;
