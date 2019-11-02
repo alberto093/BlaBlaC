@@ -92,15 +92,14 @@ int is_similar_place(place *complete, place *partial);
  */
 int is_same_day(date *lhs, date *rhs);
 
-#warning Fix impletation and documentation!
 /**
- This method is used to compare two rides by their price and the rating of the driver. It returns 0 if both have the same price and the same driver's rating, 1 if the first ride
+ This method is used to compare two rides by their price and the rating of the driver.
 
- @param lhs <#lhs description#>
- @param rhs <#rhs description#>
- @param drivers <#drivers description#>
- @param drivers_count <#drivers_count description#>
- @return <#return value description#>
+ @param lhs pointer to a ride struct
+ @param rhs pointer to a ride struct
+ @param drivers array of driver struct
+ @param drivers_count count of the drivers array
+ @return It returns 0 if both have the same price and the same driver's rating, 1 if the first ride has an higher price or a minor driver's rating else -1.
  */
 int rides_compare(ride *lhs, ride *rhs, driver drivers[], int drivers_count);
 
@@ -352,7 +351,7 @@ void sort_rides(ride rides[], int count, driver drivers[], int drivers_count) {
     for (i=1; i<count; i++) {
         temp_element = rides[i];
 
-        for (j=i-1; j>=0 && rides_compare(&rides[j], &temp_element, drivers, drivers_count)>0; j--) {
+        for (j=i-1; j>=0 && rides_compare(&rides[j], &temp_element, drivers, drivers_count) == 1; j--) {
             rides[j+1] = rides[j];
         }
         
@@ -532,7 +531,7 @@ int rides_compare(ride *lhs, ride *rhs, driver drivers[], int drivers_count) {
         if (lhs_rating == rhs_rating) {
             return 0;
         } else {
-            return lhs_rating > rhs_rating ? 1 : -1;
+            return lhs_rating > rhs_rating ? -1 : 1;
         }
     } else {
         return (*lhs).price > (*rhs).price ? 1 : -1;
