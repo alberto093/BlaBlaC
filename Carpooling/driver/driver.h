@@ -38,7 +38,7 @@ typedef char hash_code[FISCAL_CODE_LEN];
 #endif
 
 typedef enum {
-    rating_very_poor,
+    rating_very_poor = 1,
     rating_poor,
     rating_good,
     rating_excellent,

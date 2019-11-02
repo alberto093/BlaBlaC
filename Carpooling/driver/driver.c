@@ -172,7 +172,7 @@ driver *find_driver(driver drivers[], int count) {
 }
 
 driver *existing_driver(hash_code driver_code, driver drivers[], int count) {
-    if (drivers == NULL || count < 1) {
+    if (driver_code == NULL || drivers == NULL || count < 1) {
         return NULL;
     }
     
@@ -191,7 +191,7 @@ float driver_rating(driver *driver) {
     float rating_sum = 0;
     int total_rating = 0;
     for (int i=0; i<(*driver).total_reviews; i++) {
-        rating_sum += (*driver).reviews[i].rating + 1;
+        rating_sum += (*driver).reviews[i].rating;
         total_rating++;
     }
     return total_rating > 0 ? roundf((rating_sum / total_rating)*10)/10 : 0;
@@ -240,8 +240,7 @@ void print_toprated_drivers(driver drivers[], int count) {
 }
 
 int add_review(driver *driver, hash_code passenger_code) {
-    if (driver == NULL) {
-        printf("\nConducente non valido!\n");
+    if (driver == NULL || passenger_code == NULL) {
         return 0;
     }
     if (is_equal_insensitive(passenger_code, (*driver).code)) {
@@ -263,8 +262,7 @@ int add_review(driver *driver, hash_code passenger_code) {
         scanf("%i", &rating);
         fflush(stdin);
         
-        rating--;
-        is_valid = is_included(rating, 0, 4);
+        is_valid = is_included(rating, rating_very_poor, rating_oustanding);
         if (!is_valid) {
             printf("\nScelta non valida!\n");
         }
