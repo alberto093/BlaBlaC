@@ -13,6 +13,10 @@
 		D32649332367B99F00A2B542 /* driver.c in Sources */ = {isa = PBXBuildFile; fileRef = D32649322367B99F00A2B542 /* driver.c */; };
 		D32649362367B9AA00A2B542 /* passenger.c in Sources */ = {isa = PBXBuildFile; fileRef = D32649352367B9AA00A2B542 /* passenger.c */; };
 		D32649392367B9C400A2B542 /* ride.c in Sources */ = {isa = PBXBuildFile; fileRef = D32649382367B9C400A2B542 /* ride.c */; };
+		D3CDBC99236D284C001ED7EB /* utils+test.c in Sources */ = {isa = PBXBuildFile; fileRef = D3CDBC98236D284C001ED7EB /* utils+test.c */; };
+		D3CDBC9D236D2BCA001ED7EB /* driver+test.c in Sources */ = {isa = PBXBuildFile; fileRef = D3CDBC9C236D2BCA001ED7EB /* driver+test.c */; };
+		D3CDBCA1236D2BE6001ED7EB /* passenger+test.c in Sources */ = {isa = PBXBuildFile; fileRef = D3CDBCA0236D2BE6001ED7EB /* passenger+test.c */; };
+		D3CDBCA5236D2BF7001ED7EB /* ride+test.c in Sources */ = {isa = PBXBuildFile; fileRef = D3CDBCA4236D2BF7001ED7EB /* ride+test.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +44,14 @@
 		D32649352367B9AA00A2B542 /* passenger.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = passenger.c; sourceTree = "<group>"; };
 		D32649372367B9C400A2B542 /* ride.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ride.h; sourceTree = "<group>"; };
 		D32649382367B9C400A2B542 /* ride.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ride.c; sourceTree = "<group>"; };
+		D3CDBC97236D284C001ED7EB /* utils+test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "utils+test.h"; sourceTree = "<group>"; };
+		D3CDBC98236D284C001ED7EB /* utils+test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "utils+test.c"; sourceTree = "<group>"; };
+		D3CDBC9B236D2BCA001ED7EB /* driver+test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "driver+test.h"; sourceTree = "<group>"; };
+		D3CDBC9C236D2BCA001ED7EB /* driver+test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "driver+test.c"; sourceTree = "<group>"; };
+		D3CDBC9F236D2BE6001ED7EB /* passenger+test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "passenger+test.h"; sourceTree = "<group>"; };
+		D3CDBCA0236D2BE6001ED7EB /* passenger+test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "passenger+test.c"; sourceTree = "<group>"; };
+		D3CDBCA3236D2BF7001ED7EB /* ride+test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ride+test.h"; sourceTree = "<group>"; };
+		D3CDBCA4236D2BF7001ED7EB /* ride+test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "ride+test.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,16 +87,56 @@
 				D32649242367923D00A2B542 /* main.c */,
 				D326492E2367B87200A2B542 /* route.h */,
 				D326492F2367B87200A2B542 /* route.c */,
-				D326492B2367A35500A2B542 /* utils.h */,
-				D326492C2367A35500A2B542 /* utils.c */,
-				D32649312367B99F00A2B542 /* driver.h */,
-				D32649322367B99F00A2B542 /* driver.c */,
-				D32649342367B9AA00A2B542 /* passenger.h */,
-				D32649352367B9AA00A2B542 /* passenger.c */,
-				D32649372367B9C400A2B542 /* ride.h */,
-				D32649382367B9C400A2B542 /* ride.c */,
+				D3CDBC96236D283F001ED7EB /* utils */,
+				D3CDBC9A236D2BBD001ED7EB /* driver */,
+				D3CDBC9E236D2BDB001ED7EB /* passenger */,
+				D3CDBCA2236D2BEB001ED7EB /* ride */,
 			);
 			path = Carpooling;
+			sourceTree = "<group>";
+		};
+		D3CDBC96236D283F001ED7EB /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				D326492B2367A35500A2B542 /* utils.h */,
+				D326492C2367A35500A2B542 /* utils.c */,
+				D3CDBC97236D284C001ED7EB /* utils+test.h */,
+				D3CDBC98236D284C001ED7EB /* utils+test.c */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		D3CDBC9A236D2BBD001ED7EB /* driver */ = {
+			isa = PBXGroup;
+			children = (
+				D32649312367B99F00A2B542 /* driver.h */,
+				D32649322367B99F00A2B542 /* driver.c */,
+				D3CDBC9B236D2BCA001ED7EB /* driver+test.h */,
+				D3CDBC9C236D2BCA001ED7EB /* driver+test.c */,
+			);
+			path = driver;
+			sourceTree = "<group>";
+		};
+		D3CDBC9E236D2BDB001ED7EB /* passenger */ = {
+			isa = PBXGroup;
+			children = (
+				D32649342367B9AA00A2B542 /* passenger.h */,
+				D32649352367B9AA00A2B542 /* passenger.c */,
+				D3CDBC9F236D2BE6001ED7EB /* passenger+test.h */,
+				D3CDBCA0236D2BE6001ED7EB /* passenger+test.c */,
+			);
+			path = passenger;
+			sourceTree = "<group>";
+		};
+		D3CDBCA2236D2BEB001ED7EB /* ride */ = {
+			isa = PBXGroup;
+			children = (
+				D32649372367B9C400A2B542 /* ride.h */,
+				D32649382367B9C400A2B542 /* ride.c */,
+				D3CDBCA3236D2BF7001ED7EB /* ride+test.h */,
+				D3CDBCA4236D2BF7001ED7EB /* ride+test.c */,
+			);
+			path = ride;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,12 +195,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3CDBCA1236D2BE6001ED7EB /* passenger+test.c in Sources */,
 				D32649302367B87200A2B542 /* route.c in Sources */,
 				D32649252367923D00A2B542 /* main.c in Sources */,
+				D3CDBC99236D284C001ED7EB /* utils+test.c in Sources */,
 				D32649332367B99F00A2B542 /* driver.c in Sources */,
 				D32649392367B9C400A2B542 /* ride.c in Sources */,
+				D3CDBC9D236D2BCA001ED7EB /* driver+test.c in Sources */,
 				D326492D2367A35500A2B542 /* utils.c in Sources */,
 				D32649362367B9AA00A2B542 /* passenger.c in Sources */,
+				D3CDBCA5236D2BF7001ED7EB /* ride+test.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +262,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -259,7 +315,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -271,6 +327,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 32GQG5U36S;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -280,6 +337,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 32GQG5U36S;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

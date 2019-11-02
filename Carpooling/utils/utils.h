@@ -9,6 +9,9 @@
 #ifndef utils_h
 #define utils_h
 
+#define DATE_YEAR_MIN 1900
+#define DATE_YEAR_MAX 9999
+
 int is_included(int value, int lower_bound, int upper_bound);
 int is_valid_date(unsigned short int day, unsigned short int month, unsigned short int year);
 int is_valid_time(unsigned short int hour, unsigned short int minutes);

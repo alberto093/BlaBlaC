@@ -9,9 +9,6 @@
 #include "utils.h"
 #include <string.h>
 
-#define DATE_YEAR_MIN 1900
-#define DATE_YEAR_MAX 9999
-
 int is_leap(int year);
 
 int is_included(int value, int lower_bound, int upper_bound) {
@@ -46,7 +43,11 @@ int is_valid_time(unsigned short int hour, unsigned short int minutes) {
 }
 
 int is_string_lenght(const char string[], int check_lenght) {
-    return strlen(string) == check_lenght;
+    if (string == NULL) {
+        return 0;
+    } else {
+        return strlen(string) == check_lenght;
+    }
 }
 
 int is_leap(int year) {

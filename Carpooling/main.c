@@ -30,6 +30,9 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
 void print_full_rides(ride rides[], int total_rides, driver drivers[], int total_drivers);
 
 int main() {
+    if (is_string_lenght(NULL, 0)) {
+        printf("funziona!");
+    }
     driver drivers[DRIVERS_MAX];
     int total_drivers = load_drivers(drivers, DRIVERS_MAX);
     passenger passengers[PASSENGERS_MAX];
