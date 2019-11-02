@@ -346,6 +346,7 @@ void sort_rides(ride rides[], int count, driver drivers[], int drivers_count) {
         return;
     }
     
+    // Insertion sort
     int i, j;
     ride temp_element;
     for (i=1; i<count; i++) {
