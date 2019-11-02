@@ -41,6 +41,10 @@ int is_valid_date(unsigned short int day, unsigned short int month, unsigned sho
     return 1;
 }
 
+int is_valid_time(unsigned short int hour, unsigned short int minutes) {
+    return is_included(hour, 0, 23) && is_included(minutes, 0, 59);
+}
+
 int is_string_lenght(const char string[], int check_lenght) {
     return strlen(string) == check_lenght;
 }

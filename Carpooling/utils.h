@@ -11,6 +11,7 @@
 
 int is_included(int value, int lower_bound, int upper_bound);
 int is_valid_date(unsigned short int day, unsigned short int month, unsigned short int year);
+int is_valid_time(unsigned short int hour, unsigned short int minutes);
 int is_string_lenght(const char string[], int check_lenght);
 
 #endif /* utils_h */
