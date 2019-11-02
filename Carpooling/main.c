@@ -520,29 +520,27 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
 
 void print_full_rides(ride rides[], int total_rides, driver drivers[], int total_drivers) {
     //   |  Ora  | Luogo di Partenza |  Luogo di Arrivo  |  Prezzo |  Valutazione Conducente  |
-    // 1.| 08:30 | Indirizzo, Città  | Indirizzo, Città  | € 25,00 | Alberto Saltarelli 4,9/5 |
+    // 1.| 08:30 |       Città       |       Città       | € 25,00 |     Alberto S. 4,9/5     |
     
     if (total_rides == 0) {
         printf("\nNessun viaggio disponibile\n");
         return;
     }
     
-    printf("\n    _________________________________________________________________________________________________");
-    printf("____________________________________________________________________________________________________");
-    printf("__________________________________________________________________________________________________\n");
-    printf("   |  Ora  |                                    Luogo di Partenza                                    |");
-    printf("                                     Luogo di Arrivo                                     |  Prezzo  |");
-    printf("                                      Valutazione Conducente                                      |\n");
-    
-    
+    printf("\n    _______________________________________________________________________________________________________________________________\n");
+    printf("   |  Ora  |         Luogo di Partenza         |          Luogo di Arrivo          |  Prezzo  |       Valutazione Conducente       |\n");
+
     for (int i=0; i<total_rides; i++) {
         driver *ride_driver = existing_driver(rides[i].driver_code, drivers, total_drivers);
-        printf("%2i.| %02hd:%02hd | %-50s, %-35s |", i+1, rides[i].date.hour, rides[i].date.minutes, rides[i].source.address, rides[i].source.city);
-        printf(" %-50s, %-35s | € %-5.2f |", rides[i].destination.address, rides[i].destination.city, rides[i].price);
-        printf(" %-25s  %-25s %-3.1f/5 |\n", (*ride_driver).name, (*ride_driver).surname, driver_rating(ride_driver));
+        printf("%2i.| %02hd:%02hd | %-35s |", i+1, rides[i].date.hour, rides[i].date.minutes, rides[i].source.city);
+        printf(" %-35s | € %-5.2f |", rides[i].destination.city, rides[i].price);
+        char driver_name[NAME_MAX + 3];
+        strcat(driver_name, (*ride_driver).name);
+        strcat(driver_name, " ");
+        strlcat(driver_name, (*ride_driver).surname, 1);
+        strcat(driver_name, ".");
+        printf(" %-28s %-3.1f/5 |\n", driver_name, driver_rating(ride_driver));
     }
-    
-    printf("    _________________________________________________________________________________________________");
-    printf("____________________________________________________________________________________________________");
-    printf("__________________________________________________________________________________________________\n");
+
+    printf("    -------------------------------------------------------------------------------------------------------------------------------\n");
 }
