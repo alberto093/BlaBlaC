@@ -70,7 +70,5 @@ void search_rides(ride rides[], int count, ride *find_rides[], int *find_rides_c
 void sort_rides(ride rides[], int count, driver drivers[], int drivers_count);
 int contains_ride(ride* new_ride, ride rides[], int count);
 int save_rides(ride rides[], int count);
-void edit_place(place *place);
-void edit_date(date *date);
 
 #endif /* ride_h */
