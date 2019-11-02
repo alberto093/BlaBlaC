@@ -8,6 +8,7 @@
 
 #include "utils.h"
 #include <string.h>
+#include <ctype.h>
 
 int is_leap(int year);
 
@@ -45,9 +46,26 @@ int is_valid_time(unsigned short int hour, unsigned short int minutes) {
 int is_string_lenght(const char string[], int check_lenght) {
     if (string == NULL) {
         return 0;
-    } else {
-        return strlen(string) == check_lenght;
     }
+    return strlen(string) == check_lenght;
+}
+
+int is_equal_insensitive(const char lhs[], const char rhs[]) {
+    if (lhs == NULL || rhs == NULL) {
+        return 0;
+    }
+    unsigned long lhs_len = strlen(lhs);
+
+    if (strlen(rhs) != lhs_len) {
+        return 0;
+    }
+    
+    for (int i=0; i<lhs_len; i++) {
+        if (tolower(lhs[i] != tolower(rhs[i]))) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 int is_leap(int year) {

@@ -194,7 +194,7 @@ void print_rides(ride rides[], int count, driver drivers[], int drivers_count, r
     printf("                                     Luogo di Arrivo                                     |\n");
     (*find_rides_count) = 0;
     for (int i=0; i<drivers_count; i++) {
-        if (!strcmp((*ride_driver).code, rides[i].driver_code)) {
+        if (is_equal_insensitive((*ride_driver).code, rides[i].driver_code)) {
             printf("%2i.| %02hd/%02hd/%4hd | %-50s, %-35s | %-50s, %-35s |\n", (*find_rides_count)+1, rides[i].date.day, rides[i].date.month, rides[i].date.year, rides[i].source.address, rides[i].source.city, rides[i].destination.address, rides[i].destination.city);
             find_rides[(*find_rides_count)] = &rides[i];
             (*find_rides_count)++;
@@ -343,7 +343,7 @@ void edit_total_seats(unsigned short int *seats) {
 }
 
 int is_same_ride(ride *lhs, ride *rhs) {
-    return !strcmp((*lhs).driver_code, (*rhs).driver_code) && is_same_place(&(*lhs).source, &(*rhs).source) && is_same_place(&(*lhs).destination, &(*rhs).destination) && is_same_date(&(*lhs).date, &(*rhs).date);
+    return is_equal_insensitive((*lhs).driver_code, (*rhs).driver_code) && is_same_place(&(*lhs).source, &(*rhs).source) && is_same_place(&(*lhs).destination, &(*rhs).destination) && is_same_date(&(*lhs).date, &(*rhs).date);
 }
 
 int is_same_place(place *lhs, place *rhs) {

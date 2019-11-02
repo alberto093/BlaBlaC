@@ -19,6 +19,9 @@
 int is_same_driver(driver *lhs, driver *rhs);
 
 int load_drivers(driver drivers[], int max_drivers) {
+    if (drivers == NULL || max_drivers < 1) {
+        return 0;
+    }
     FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/drivers.dat", "ab");
     if (rstream == NULL) {
         printf("\nErrore durante l'apertura del file dei conducenti.\n");
@@ -157,7 +160,7 @@ driver *find_driver(driver drivers[], int count) {
 
 driver *existing_driver(hash_code driver_code, driver drivers[], int count) {
     for (int i=0; i<count; i++) {
-        if (!strcmp(drivers[i].code, driver_code)) {
+        if (is_equal_insensitive(drivers[i].code, driver_code)) {
             return &drivers[i];
         }
     }
@@ -221,7 +224,7 @@ int add_review(driver *driver, hash_code passenger_code) {
         printf("\nConducente non valido!\n");
         return 0;
     }
-    if (!strcmp(passenger_code, (*driver).code)) {
+    if (is_equal_insensitive(passenger_code, (*driver).code)) {
         printf("\nNon puoi lasciare una recensione verso te stesso!\n");
         return 0;
     }
@@ -272,5 +275,5 @@ int save_drivers(driver drivers[], int count) {
 }
 
 int is_same_driver(driver *lhs, driver *rhs) {
-    return !strcmp((*lhs).code, (*rhs).code);
+    return is_equal_insensitive((*lhs).code, (*rhs).code);
 }

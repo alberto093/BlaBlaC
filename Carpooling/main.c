@@ -329,7 +329,7 @@ void show_rides_search(ride rides[], int total_rides, driver drivers[], int tota
         actual_passenger = find_passenger(passengers, total_passengers);
     } while (actual_passenger == NULL);
     
-    if (!strcmp((*actual_passenger).code, (*find_rides)[selection].driver_code)) {
+    if (is_equal_insensitive((*actual_passenger).code, (*find_rides)[selection].driver_code)) {
         printf("\nNon puoi prenotare un viaggio con te stesso!\n");
         return;
     }
@@ -351,12 +351,12 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
     
     for (int i=0; i<total_rides; i++) {
         for (int j=0; j<rides[i].total_passenger_codes; j++) {
-            int is_reserved = !strcmp(rides[i].passenger_codes[j], (*actual_passenger).code);
+            int is_reserved = is_equal_insensitive(rides[i].passenger_codes[j], (*actual_passenger).code);
             int is_review_available = 1;
             
             for (int k=0; k<total_drivers; k++) {
                 for (int l=0; l<drivers[k].total_reviews; l++) {
-                    if (!strcmp(drivers[k].reviews[l].passenger_code, (*actual_passenger).code)) {
+                    if (is_equal_insensitive(drivers[k].reviews[l].passenger_code, (*actual_passenger).code))) {
                         is_review_available = 0;
                         l=drivers[k].total_reviews;
                         k=total_drivers;

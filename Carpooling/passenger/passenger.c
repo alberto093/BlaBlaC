@@ -149,7 +149,7 @@ passenger *find_passenger(passenger passengers[], int count) {
 
 passenger *existing_passenger(hash_code passenger_code, passenger passengers[], int count) {
     for (int i=0; i<count; i++) {
-        if (!strcmp(passengers[i].code, passenger_code)) {
+        if (is_equal_insensitive(passengers[i].code, passenger_code)) {
             return &passengers[i];
         }
     }
@@ -172,5 +172,5 @@ int save_passengers(passenger passengers[], int count) {
 }
 
 int is_same_passenger(passenger *lhs, passenger *rhs) {
-    return !strcmp((*lhs).code, (*rhs).code);
+    return is_equal_insensitive((*lhs).code, (*rhs).code);
 }
