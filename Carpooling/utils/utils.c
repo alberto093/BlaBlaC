@@ -10,6 +10,12 @@
 #include <string.h>
 #include <ctype.h>
 
+/**
+ This method checks if the year is a leap year.
+
+ @param year value that represents the year.
+ @return It returns 1 (true) if the year is leap else 0.
+ */
 int is_leap(int year);
 
 int is_included(int value, int lower_bound, int upper_bound) {
