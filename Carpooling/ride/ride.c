@@ -260,7 +260,7 @@ void search_rides(ride rides[], int count, ride *find_rides[], int *find_rides_c
 
 void sort_rides(ride rides[], int count, driver drivers[], int drivers_count) {
     if (rides == NULL || drivers == NULL) {
-        return 0;
+        return;
     }
     
     int i, j;
