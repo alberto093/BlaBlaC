@@ -145,7 +145,7 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
  @param drivers array of driver struct
  @param total_drivers count of the drivers array
  */
-void print_full_rides(ride rides[], int total_rides, driver drivers[], int total_drivers);
+void print_full_rides(const ride rides[], int total_rides, driver drivers[], int total_drivers);
 
 int main() {
     if (RUN_TEST) {
@@ -518,7 +518,7 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
     }
 }
 
-void print_full_rides(ride rides[], int total_rides, driver drivers[], int total_drivers) {
+void print_full_rides(const ride rides[], int total_rides, driver drivers[], int total_drivers) {
     //   |  Ora  | Luogo di Partenza |  Luogo di Arrivo  |  Prezzo |  Valutazione Conducente  |
     // 1.| 08:30 |       Città       |       Città       | € 25,00 |     Alberto S. 4,9/5     |
     

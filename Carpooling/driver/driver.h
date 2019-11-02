@@ -104,7 +104,7 @@ void edit_driver(driver *edit_driver);
  @param count count of the drivers array
  @return It returns 1 if the driver was removed from the input array else 0.
  */
-int remove_driver(driver *remove_driver, driver drivers[], int *count);
+int remove_driver(const driver *remove_driver, driver drivers[], int *count);
 
 /**
  This method takes an array of drivers and its count and returns a pointer to the driver was selected by the user using stdin.
@@ -123,7 +123,7 @@ driver *find_driver(driver drivers[], int count);
  @param count count of the drivers array
  @return It returns a pointer to the found driver
  */
-driver *existing_driver(hash_code driver_code, driver drivers[], int count);
+driver *existing_driver(const hash_code driver_code, driver drivers[], int count);
 
 /**
  This function calculate the average of the ratings of the provided driver. It returns 0 if the driver has not any reviews.
@@ -131,7 +131,7 @@ driver *existing_driver(hash_code driver_code, driver drivers[], int count);
  @param driver pointer to a driver struct
  @return It returns the average of the driver's reviews.
  */
-float driver_rating(driver *driver);
+float driver_rating(const driver *driver);
 
 /**
  It takes an array of drivers and its count in order to filter the drivers who has the highest rating and prints them in a pretty way.
@@ -139,7 +139,7 @@ float driver_rating(driver *driver);
  @param drivers array of driver struct
  @param count count of the drivers array
  */
-void print_toprated_drivers(driver drivers[], int count);
+void print_toprated_drivers(const driver drivers[], int count);
 
 /**
  It takes a pointer to a driver struct and a passenger's code in order to populate a review struct by stdin and adds it to array of reviews of the driver pointed.
@@ -150,7 +150,7 @@ void print_toprated_drivers(driver drivers[], int count);
  @param passenger_code code of the passenger who leave the review
  @return It returns the value of the rating
  */
-int add_review(driver *driver, hash_code passenger_code);
+int add_review(driver *driver, const hash_code passenger_code);
 
 /**
  This function searches into the array of drivers and returns 1 if the driver provided by the first parameter was found within the array else 0.
@@ -160,7 +160,7 @@ int add_review(driver *driver, hash_code passenger_code);
  @param count count of the drivers array
  @return It returns 1 if the driver was found else 0.
  */
-int contains_driver(driver* new_driver, driver drivers[], int count);
+int contains_driver(const driver* new_driver, driver drivers[], int count);
 
 /**
  This function save drivers into the file using "wb" and returns 1 if no error occured else 0.
@@ -169,6 +169,6 @@ int contains_driver(driver* new_driver, driver drivers[], int count);
  @param count count of the drivers array
  @return It returns 1 if no error occured else 0.
  */
-int save_drivers(driver drivers[], int count);
+int save_drivers(const driver drivers[], int count);
 
 #endif /* driver_h */

@@ -85,7 +85,7 @@ int load_rides(ride *rides, int max_rides);
  @param driver_code code of the driver
  @return It returns the created ride struct.
  */
-ride create_ride(hash_code driver_code);
+ride create_ride(const hash_code driver_code);
 
 /**
  It takes a pointer to a ride struct in order to edit it by user using stdin.
@@ -103,7 +103,7 @@ void edit_ride(ride *edit_ride);
  @param count count of the rides array
  @return It returns 1 if the ride was removed from the input array else 0.
  */
-int remove_ride(ride *remove_ride, ride rides[], int *count);
+int remove_ride(const ride *remove_ride, ride rides[], int *count);
 
 /**
  It takes an array of rides and the array of drivers in order to improve printing values.
@@ -146,7 +146,7 @@ void sort_rides(ride rides[], int count, driver drivers[], int drivers_count);
  @param count count of the rides array
  @return It returns 1 if the driver was found else 0.
  */
-int contains_ride(ride* new_ride, ride rides[], int count);
+int contains_ride(const ride* new_ride, const ride rides[], int count);
 
 /**
  This function save rides into the file using "wb" and returns 1 if no error occured else 0.
@@ -155,6 +155,6 @@ int contains_ride(ride* new_ride, ride rides[], int count);
  @param count count of the rides array
  @return It returns 1 if no error occured else 0.
  */
-int save_rides(ride rides[], int count);
+int save_rides(const ride rides[], int count);
 
 #endif /* ride_h */

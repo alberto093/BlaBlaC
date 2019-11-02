@@ -76,7 +76,7 @@ void edit_passenger(passenger *edit_passenger);
  @param count count of the passengers array
  @return It returns 1 if the passenger was removed from the input array else 0.
  */
-int remove_passenger(passenger *remove_passenger, passenger passengers[], int *count);
+int remove_passenger(const passenger *remove_passenger, passenger passengers[], int *count);
 
 /**
  This method takes an array of passengers and its count and returns a pointer to the passenger was selected by the user using stdin.
@@ -95,7 +95,7 @@ passenger *find_passenger(passenger passengers[], int count);
  @param count count of the passengers array
  @return It returns a pointer to the found passenger
  */
-passenger *existing_passenger(hash_code passenger_code, passenger passengers[], int count);
+passenger *existing_passenger(const hash_code passenger_code, passenger passengers[], int count);
 
 /**
  This function searches into the array of passengers and returns 1 if the passenger provided by the first parameter was found within the array else 0.
@@ -105,7 +105,7 @@ passenger *existing_passenger(hash_code passenger_code, passenger passengers[], 
  @param count count of the passengers array
  @return It returns 1 if the passenger was found else 0.
  */
-int contains_passenger(passenger* new_passenger, passenger passengers[], int count);
+int contains_passenger(const passenger* new_passenger, passenger passengers[], int count);
 
 /**
  This function save passengers into the file using "wb" and returns 1 if no error occured else 0.
@@ -114,6 +114,6 @@ int contains_passenger(passenger* new_passenger, passenger passengers[], int cou
  @param count count of the passengers array
  @return It returns 1 if no error occured else 0.
  */
-int save_passengers(passenger passengers[], int count);
+int save_passengers(const passenger passengers[], int count);
 
 #endif /* passenger_h */

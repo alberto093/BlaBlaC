@@ -23,7 +23,7 @@
  @param rhs pointer to driver struct
  @return It returns 1 (true) if both drivers' codes are case insensitive equal else 0.
  */
-int is_same_driver(driver *lhs, driver *rhs);
+int is_same_driver(const driver *lhs, const driver *rhs);
 
 int load_drivers(driver *drivers, int max_drivers) {
     if (drivers == NULL || max_drivers < 1) {
@@ -130,7 +130,7 @@ void edit_driver(driver *edit_driver) {
     } while (selection != 5);
 }
 
-int remove_driver(driver *remove_driver, driver drivers[], int *count) {
+int remove_driver(const driver *remove_driver, driver drivers[], int *count) {
     if (remove_driver == NULL || drivers == NULL || count == NULL) {
         return 0;
     }
@@ -178,7 +178,7 @@ driver *find_driver(driver drivers[], int count) {
     return actual_driver;
 }
 
-driver *existing_driver(hash_code driver_code, driver drivers[], int count) {
+driver *existing_driver(const hash_code driver_code, driver drivers[], int count) {
     if (driver_code == NULL || drivers == NULL || count < 1) {
         return NULL;
     }
@@ -191,7 +191,7 @@ driver *existing_driver(hash_code driver_code, driver drivers[], int count) {
     return NULL;
 }
 
-float driver_rating(driver *driver) {
+float driver_rating(const driver *driver) {
     if (driver == NULL) {
         return 0;
     }
@@ -204,7 +204,7 @@ float driver_rating(driver *driver) {
     return total_rating > 0 ? roundf((rating_sum / total_rating)*10)/10 : 0;
 }
 
-void print_toprated_drivers(driver drivers[], int count) {
+void print_toprated_drivers(const driver drivers[], int count) {
     if (drivers == NULL || count < 1) {
         printf("\nNessun conducente trovato!\n");
         return;
@@ -245,7 +245,7 @@ void print_toprated_drivers(driver drivers[], int count) {
     }
 }
 
-int add_review(driver *driver, hash_code passenger_code) {
+int add_review(driver *driver, const hash_code passenger_code) {
     if (driver == NULL || passenger_code == NULL) {
         return 0;
     }
@@ -283,11 +283,11 @@ int add_review(driver *driver, hash_code passenger_code) {
     return rating;
 }
 
-int contains_driver(driver* new_driver, driver drivers[], int count) {
+int contains_driver(const driver* new_driver, driver drivers[], int count) {
     return existing_driver((*new_driver).code, drivers, count) != NULL;
 }
 
-int save_drivers(driver drivers[], int count) {
+int save_drivers(const driver drivers[], int count) {
     if (drivers == NULL || count < 0) {
         return 0;
     }
@@ -302,7 +302,7 @@ int save_drivers(driver drivers[], int count) {
     return !fclose(wstream);
 }
 
-int is_same_driver(driver *lhs, driver *rhs) {
+int is_same_driver(const driver *lhs, const driver *rhs) {
     if (lhs == NULL || rhs == NULL) {
         return 0;
     }

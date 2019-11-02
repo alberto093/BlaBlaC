@@ -20,7 +20,7 @@
  @param rhs pointer to passenger struct
  @return It returns 1 (true) if both passengers' codes are case insensitive equal else 0.
  */
-int is_same_passenger(passenger *lhs, passenger *rhs);
+int is_same_passenger(const passenger *lhs, const passenger *rhs);
 
 int load_passengers(passenger *passengers, int max_passengers) {
     if (passengers == NULL || max_passengers < 1) {
@@ -122,7 +122,7 @@ void edit_passenger(passenger *edit_passenger) {
     } while (selection != 5);
 }
 
-int remove_passenger(passenger *remove_passenger, passenger passengers[], int *count) {
+int remove_passenger(const passenger *remove_passenger, passenger passengers[], int *count) {
     if (remove_passenger == NULL || passengers == NULL || count == NULL) {
         return 0;
     }
@@ -170,7 +170,7 @@ passenger *find_passenger(passenger passengers[], int count) {
     return actual_passenger;
 }
 
-passenger *existing_passenger(hash_code passenger_code, passenger passengers[], int count) {
+passenger *existing_passenger(const hash_code passenger_code, passenger passengers[], int count) {
     if (passenger_code == NULL || passengers == NULL || count < 1) {
         return NULL;
     }
@@ -183,11 +183,11 @@ passenger *existing_passenger(hash_code passenger_code, passenger passengers[], 
     return NULL;
 }
 
-int contains_passenger(passenger* new_passenger, passenger passengers[], int count) {
+int contains_passenger(const passenger* new_passenger, passenger passengers[], int count) {
     return existing_passenger((*new_passenger).code, passengers, count) != NULL;
 }
 
-int save_passengers(passenger passengers[], int count) {
+int save_passengers(const passenger passengers[], int count) {
     if (passengers == NULL || count < 0) {
         return 0;
     }
@@ -202,7 +202,7 @@ int save_passengers(passenger passengers[], int count) {
     return !fclose(wstream);
 }
 
-int is_same_passenger(passenger *lhs, passenger *rhs) {
+int is_same_passenger(const passenger *lhs, const passenger *rhs) {
     if (lhs == NULL || rhs == NULL) {
         return 0;
     }

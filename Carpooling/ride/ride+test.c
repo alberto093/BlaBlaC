@@ -12,8 +12,8 @@
 #include "ride.h"
 #include "/usr/local/Cellar/cunit/2.1-3/doc/CUnit/headers/Basic.h"
 
-driver create_driver_with(hash_code code, rating ratings[], int total_ratings);
-ride create_ride_with(hash_code driver_code, float price);
+driver create_driver_with(const hash_code code, const rating ratings[], int total_ratings);
+ride create_ride_with(const hash_code driver_code, float price);
 
 void test_load_rides(void) {
     int max_rides = 1;
@@ -124,7 +124,7 @@ void test_save_rides(void) {
     CU_ASSERT_FALSE(save_rides(NULL, 0));
 }
 
-driver create_driver_with(hash_code code, rating ratings[], int total_ratings) {
+driver create_driver_with(const hash_code code, const rating ratings[], int total_ratings) {
     driver new_driver;
     strcpy(new_driver.code, code);
     review reviews[total_ratings];
@@ -136,7 +136,7 @@ driver create_driver_with(hash_code code, rating ratings[], int total_ratings) {
     return new_driver;
 }
 
-ride create_ride_with(hash_code driver_code, float price) {
+ride create_ride_with(const hash_code driver_code, float price) {
     ride new_ride;
     strcpy(new_ride.driver_code, driver_code);
     new_ride.price = price;

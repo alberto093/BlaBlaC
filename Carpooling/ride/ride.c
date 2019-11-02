@@ -54,7 +54,7 @@ void edit_total_seats(unsigned short int *seats);
  @param rhs pointer to a ride struct
  @return It returns 1 (true) if both rides have the same driver, the same source/destination place and the same departure date.
  */
-int is_same_ride(ride *lhs, ride *rhs);
+int is_same_ride(const ride *lhs, const ride *rhs);
 
 /**
  This function is intended to equate two place struct.
@@ -63,7 +63,7 @@ int is_same_ride(ride *lhs, ride *rhs);
  @param rhs pointer to a place struct
  @return It returns 1 (true) if both places are identical.
  */
-int is_same_place(place *lhs, place *rhs);
+int is_same_place(const place *lhs, const place *rhs);
 
 /**
  This function is intended to equate two date struct.
@@ -72,7 +72,7 @@ int is_same_place(place *lhs, place *rhs);
  @param rhs pointer to a date struct
  @return It returns 1 (true) if both dates are identical.
  */
-int is_same_date(date *lhs, date *rhs);
+int is_same_date(const date *lhs, const date *rhs);
 
 /**
  This function is intended to check if two place are similar.
@@ -81,7 +81,7 @@ int is_same_date(date *lhs, date *rhs);
  @param partial pointer to a place struct
  @return It returns 1 (true) is the other place properties are a subsstrings of the original place properties.
  */
-int is_similar_place(place *complete, place *partial);
+int is_similar_place(const place *complete, const place *partial);
 
 /**
  This function checks if two date have the same day.
@@ -90,7 +90,7 @@ int is_similar_place(place *complete, place *partial);
  @param rhs pointer to a date struct
  @return It returns 1 (true) if both dates represent the same date in the gregorian calendar.
  */
-int is_same_day(date *lhs, date *rhs);
+int is_same_day(const date *lhs, const date *rhs);
 
 /**
  This method is used to compare two rides by their price and the rating of the driver.
@@ -101,7 +101,7 @@ int is_same_day(date *lhs, date *rhs);
  @param drivers_count count of the drivers array
  @return It returns 0 if both have the same price and the same driver's rating, 1 if the first ride has an higher price or a minor driver's rating else -1.
  */
-int rides_compare(ride *lhs, ride *rhs, driver drivers[], int drivers_count);
+int rides_compare(const ride *lhs, const ride *rhs, driver drivers[], int drivers_count);
 
 int load_rides(ride *rides, int max_rides) {
     if (rides == NULL || max_rides < 1) {
@@ -120,7 +120,7 @@ int load_rides(ride *rides, int max_rides) {
     return total_rides;
 }
 
-ride create_ride(hash_code driver_code) {
+ride create_ride(const hash_code driver_code) {
     ride new_ride;
     strcpy(new_ride.driver_code, driver_code);
     
@@ -247,7 +247,7 @@ void edit_ride(ride *edit_ride) {
     } while (selection != 8);
 }
 
-int remove_ride(ride *remove_ride, ride rides[], int *count) {
+int remove_ride(const ride *remove_ride, ride rides[], int *count) {
     if (remove_ride == NULL || rides == NULL || count == NULL) {
         return 0;
     }
@@ -360,7 +360,7 @@ void sort_rides(ride rides[], int count, driver drivers[], int drivers_count) {
     }
 }
 
-int contains_ride(ride* new_ride, ride rides[], int count) {
+int contains_ride(const ride* new_ride, const ride rides[], int count) {
     if (new_ride == NULL || rides == NULL) {
         return 0;
     }
@@ -373,7 +373,7 @@ int contains_ride(ride* new_ride, ride rides[], int count) {
     return 0;
 }
 
-int save_rides(ride rides[], int count) {
+int save_rides(const ride rides[], int count) {
     if (rides == NULL || count < 0) {
         return 0;
     }
@@ -478,7 +478,7 @@ void edit_total_seats(unsigned short int *seats) {
     } while (!is_valid_seats);
 }
 
-int is_same_ride(ride *lhs, ride *rhs) {
+int is_same_ride(const ride *lhs, const ride *rhs) {
     if (lhs == NULL || rhs == NULL) {
         return 0;
     }
@@ -486,7 +486,7 @@ int is_same_ride(ride *lhs, ride *rhs) {
     return is_equal_insensitive((*lhs).driver_code, (*rhs).driver_code) && is_same_place(&(*lhs).source, &(*rhs).source) && is_same_place(&(*lhs).destination, &(*rhs).destination) && is_same_date(&(*lhs).date, &(*rhs).date);
 }
 
-int is_same_place(place *lhs, place *rhs) {
+int is_same_place(const place *lhs, const place *rhs) {
     if (lhs == NULL || rhs == NULL) {
         return 0;
     }
@@ -494,7 +494,7 @@ int is_same_place(place *lhs, place *rhs) {
     return !strcmp((*lhs).address, (*rhs).address) && !strcmp((*lhs).city, (*rhs).city) && !strcmp((*lhs).province, (*rhs).province) && (*lhs).postal_code == (*rhs).postal_code;
 }
 
-int is_same_date(date *lhs, date *rhs) {
+int is_same_date(const date *lhs, const date *rhs) {
     if (lhs == NULL || rhs == NULL) {
         return 0;
     }
@@ -502,7 +502,7 @@ int is_same_date(date *lhs, date *rhs) {
     return (*lhs).day == (*rhs).day && (*lhs).month == (*rhs).month && (*lhs).year == (*rhs).year && (*lhs).hour == (*rhs).hour && (*lhs).minutes == (*rhs).minutes;
 }
 
-int is_similar_place(place *complete, place *partial) {
+int is_similar_place(const place *complete, const place *partial) {
     if (complete == NULL || partial == NULL) {
         return 0;
     }
@@ -510,7 +510,7 @@ int is_similar_place(place *complete, place *partial) {
     return strstr((*complete).city, (*partial).city) != NULL && strstr((*complete).province, (*partial).province) != NULL;
 }
 
-int is_same_day(date *lhs, date *rhs) {
+int is_same_day(const date *lhs, const date *rhs) {
     if (lhs == NULL || rhs == NULL) {
         return 0;
     }
@@ -518,7 +518,7 @@ int is_same_day(date *lhs, date *rhs) {
     return (*lhs).day == (*rhs).day && (*lhs).month == (*rhs).month && (*lhs).year == (*rhs).year;
 }
 
-int rides_compare(ride *lhs, ride *rhs, driver drivers[], int drivers_count) {
+int rides_compare(const ride *lhs, const ride *rhs, driver drivers[], int drivers_count) {
     if (lhs == NULL || rhs == NULL || drivers == NULL) {
         return 0;
     }
