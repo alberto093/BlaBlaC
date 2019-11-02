@@ -217,6 +217,10 @@ void print_toprated_drivers(driver drivers[], int count) {
 }
 
 int add_review(driver *driver, hash_code passenger_code) {
+    if (driver == NULL) {
+        printf("\nConducente non valido!\n");
+        return 0;
+    }
     if (!strcmp(passenger_code, (*driver).code)) {
         printf("\nNon puoi lasciare una recensione verso te stesso!\n");
         return 0;
