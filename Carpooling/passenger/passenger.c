@@ -163,7 +163,7 @@ passenger *find_passenger(passenger passengers[], int count) {
 }
 
 passenger *existing_passenger(hash_code passenger_code, passenger passengers[], int count) {
-    if (passengers == NULL || count < 1) {
+    if (passenger_code == NULL || passengers == NULL || count < 1) {
         return NULL;
     }
     
