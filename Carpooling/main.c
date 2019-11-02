@@ -13,6 +13,9 @@
 #include "driver.h"
 #include "passenger.h"
 #include "ride.h"
+#include "unittest.h"
+
+#define RUN_TEST 0
 
 void show_drivers_create(driver drivers[], int *total_drivers);
 void show_drivers_edit(driver drivers[], int total_drivers);
@@ -30,9 +33,10 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
 void print_full_rides(ride rides[], int total_rides, driver drivers[], int total_drivers);
 
 int main() {
-    if (is_string_lenght(NULL, 0)) {
-        printf("funziona!");
+    if (RUN_TEST) {
+        return run_all_test();
     }
+    
     driver drivers[DRIVERS_MAX];
     int total_drivers = load_drivers(drivers, DRIVERS_MAX);
     passenger passengers[PASSENGERS_MAX];
