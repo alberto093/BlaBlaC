@@ -288,7 +288,7 @@ void print_rides(ride rides[], int count, driver drivers[], int drivers_count, r
 
     printf("\nViaggi pubblicati dal conducente con codice fiscale %s\n\n", (*ride_driver).code);
     printf("    ______________________________________________________________________________________________________");
-    printf("_________________________________________________________________________________________\n");
+    printf("__________________________________________________________________________________________\n");
     printf("   |    Data    |                                    Luogo di Partenza                                    |");
     printf("                                     Luogo di Arrivo                                     |\n");
     (*find_rides_count) = 0;
@@ -300,8 +300,8 @@ void print_rides(ride rides[], int count, driver drivers[], int drivers_count, r
         }
     }
     
-    printf("    ______________________________________________________________________________________________________");
-    printf("_________________________________________________________________________________________\n");
+    printf("    ------------------------------------------------------------------------------------------------------");
+    printf("------------------------------------------------------------------------------------------\n");
 }
 
 void search_rides(ride rides[], int count, ride *find_rides[], int *find_rides_count) {
