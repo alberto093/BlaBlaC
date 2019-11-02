@@ -30,7 +30,7 @@
 #define PASSENGERS_MAX 100
 
 #ifndef hash_code
-typedef char hash_code[FISCAL_CODE_LEN];
+typedef char hash_code[FISCAL_CODE_LEN]; // Pointer to a char. Should be unique in order to use it as the hash value
 #endif
 
 typedef struct {

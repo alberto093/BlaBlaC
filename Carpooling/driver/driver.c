@@ -16,6 +16,14 @@
 #define DRIVER_PRINT_MAX NAME_MAX + SURNAME_MAX + 4
 #define DRIVER_FILE_NAME "drivers.dat"
 
+/**
+ This function is intended to equate two driver struct.
+ It returns 1 (true) if both drivers' codes are case insensitive equal.
+
+ @param lhs pointer to driver struct
+ @param rhs pointer to driver struct
+ @return It returns 1 (true) if both drivers' codes are case insensitive equal else 0.
+ */
 int is_same_driver(driver *lhs, driver *rhs);
 
 int load_drivers(driver drivers[], int max_drivers) {
@@ -215,9 +223,7 @@ void print_toprated_drivers(driver drivers[], int count) {
                 toprated_drivers_count = 0;
             }
             if (rating == max_rate) {
-                strcat(toprated_drivers[toprated_drivers_count], drivers[i].name);
-                strcat(toprated_drivers[toprated_drivers_count], "\t");
-                strcat(toprated_drivers[toprated_drivers_count], drivers[i].surname);
+                sprintf(toprated_drivers[toprated_drivers_count], "%-25s  %-25s", drivers[i].name, drivers[i].surname);
                 toprated_drivers_count++;
             }
         }
@@ -229,7 +235,8 @@ void print_toprated_drivers(driver drivers[], int count) {
         if (toprated_drivers_count == 1) {
             printf("Il conducente è: %s", toprated_drivers[0]);
         } else {
-            printf("I conducenti sono:\n");
+            printf("I conducenti sono:\n\n");
+            printf("%-25s %-25s\n", "NOME", "COGNOME")
             for (int i=0; i<toprated_drivers_count; i++) {
                 printf("%s\n", toprated_drivers[i]);
             }
@@ -274,7 +281,7 @@ int add_review(driver *driver, hash_code passenger_code) {
     
     (*driver).reviews[(*driver).total_reviews] = new_review;
     (*driver).total_reviews++;
-    return 1;
+    return rating;
 }
 
 int contains_driver(driver* new_driver, driver drivers[], int count) {
