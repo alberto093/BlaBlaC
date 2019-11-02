@@ -103,7 +103,7 @@ int is_same_day(date *lhs, date *rhs);
  */
 int rides_compare(ride *lhs, ride *rhs, driver drivers[], int drivers_count);
 
-int load_rides(ride rides[], int max_rides) {
+int load_rides(ride *rides, int max_rides) {
     if (rides == NULL || max_rides < 1) {
         return 0;
     }

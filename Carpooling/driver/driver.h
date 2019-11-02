@@ -79,7 +79,7 @@ typedef struct {
  @param max_drivers the max number of the drivers that can be retrived from the file
  @return It returns the total number of the drivers.
  */
-int load_drivers(driver drivers[], int max_drivers);
+int load_drivers(driver *drivers, int max_drivers);
 
 /**
  This method using stdin to create and populate a driver struct.

@@ -77,7 +77,7 @@ typedef struct {
  @param max_rides the max number of the rides that can be retrived from the file
  @return It returns the total number of the rides.
  */
-int load_rides(ride rides[], int max_rides);
+int load_rides(ride *rides, int max_rides);
 
 /**
  This method using stdin to create and populate a ride struct. It requires a valid driver code. If the relative driver does not exist the function returns an empty ride.

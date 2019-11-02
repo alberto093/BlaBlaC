@@ -51,7 +51,7 @@ typedef struct {
  @param max_passengers the max number of the passengers that can be retrived from the file
  @return It returns the total number of the passengers
  */
-int load_passengers(passenger passengers[], int max_passengers);
+int load_passengers(passenger *passengers, int max_passengers);
 
 /**
  This method using stdin to create and populate a passenger struct.

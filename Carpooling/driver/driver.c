@@ -25,7 +25,7 @@
  */
 int is_same_driver(driver *lhs, driver *rhs);
 
-int load_drivers(driver drivers[], int max_drivers) {
+int load_drivers(driver *drivers, int max_drivers) {
     if (drivers == NULL || max_drivers < 1) {
         return 0;
     }

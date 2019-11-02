@@ -22,7 +22,7 @@
  */
 int is_same_passenger(passenger *lhs, passenger *rhs);
 
-int load_passengers(passenger passengers[], int max_passengers) {
+int load_passengers(passenger *passengers, int max_passengers) {
     if (passengers == NULL || max_passengers < 1) {
         return 0;
     }
