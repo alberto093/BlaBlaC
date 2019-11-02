@@ -292,6 +292,10 @@ void show_rides_delete(ride rides[], int *total_rides, driver drivers[], int tot
 }
 
 void show_rides_search(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers) {
+    if (total_rides == 0) {
+        printf("\nNessun viaggio disponibile!\n");
+        return;
+    }
     ride *find_rides[total_rides];
     int total_find_rides = 0;
     search_rides(rides, total_rides, find_rides, &total_find_rides);
@@ -404,7 +408,7 @@ void print_full_rides(ride rides[], int total_rides, driver drivers[], int total
     printf("\n    _________________________________________________________________________________________________");
     printf("____________________________________________________________________________________________________");
     printf("__________________________________________________________________________________________________\n");
-    printf("\n   |  Ora  |                                    Luogo di Partenza                                    |");
+    printf("   |  Ora  |                                    Luogo di Partenza                                    |");
     printf("                                     Luogo di Arrivo                                     |  Prezzo  |");
     printf("                                      Valutazione Conducente                                      |\n");
     

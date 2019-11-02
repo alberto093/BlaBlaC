@@ -38,7 +38,7 @@ passenger create_passenger(void) {
     fflush(stdin);
     
     printf("Inserisci età: ");
-    scanf("%2hd", &new_passenger.age);
+    scanf("%hd", &new_passenger.age);
     fflush(stdin);
     
     int is_valid_code = 0;
@@ -92,7 +92,7 @@ void edit_passenger(passenger *edit_passenger) {
             }
             case 3: {
                 printf("\nL'età è %hd, inserisci la nuova età: ", (*edit_passenger).age);
-                scanf("%2hd", &(*edit_passenger).age);
+                scanf("%hd", &(*edit_passenger).age);
                 break;
             }
             case 4: {

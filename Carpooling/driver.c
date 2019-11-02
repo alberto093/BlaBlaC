@@ -43,7 +43,7 @@ driver create_driver(void) {
     fflush(stdin);
     
     printf("Inserisci età: ");
-    scanf("%2hd", &new_driver.age);
+    scanf("%hd", &new_driver.age);
     fflush(stdin);
     
     int is_valid_code = 0;
@@ -100,7 +100,7 @@ void edit_driver(driver *edit_driver) {
             }
             case 3: {
                 printf("\nL'età è %hd, inserisci la nuova età: ", (*edit_driver).age);
-                scanf("%2hd", &(*edit_driver).age);
+                scanf("%hd", &(*edit_driver).age);
                 break;
             }
             case 4: {
