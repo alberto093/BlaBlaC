@@ -12,16 +12,96 @@
 
 #define RIDE_FILE_NAME "rides.dat"
 
+/**
+ This method edits the place parameter using the user's input (stdin).
+
+ @param place pointer to a place struct
+ */
 void edit_place(place *place);
+
+/**
+ This method edits the date parameter (dd/MM/yyyy) using the user's input (stdin).
+
+ @param date pointer to a date struct
+ */
 void edit_date(date *date);
+
+/**
+ This method edits the time (24H format) of the date parameter using the user's input (stdin).
+
+ @param date pointer to a date struct
+ */
 void edit_time(date *date);
+
+/**
+ This method validates the price of the ride that user provides using stdin.
+
+ @param price pointer to a float value
+ */
 void edit_price(float *price);
+
+/**
+ This method validates the number of seats of the ride that user provides using stdin.
+
+ @param seats pointer to an unsigned short int value
+ */
 void edit_total_seats(unsigned short int *seats);
+
+/**
+ This function is intended to equate two ride struct.
+
+ @param lhs pointer to a ride struct
+ @param rhs pointer to a ride struct
+ @return It returns 1 (true) if both rides have the same driver, the same source/destination place and the same departure date.
+ */
 int is_same_ride(ride *lhs, ride *rhs);
+
+/**
+ This function is intended to equate two place struct.
+
+ @param lhs pointer to a place struct
+ @param rhs pointer to a place struct
+ @return It returns 1 (true) if both places are identical.
+ */
 int is_same_place(place *lhs, place *rhs);
+
+/**
+ This function is intended to equate two date struct.
+
+ @param lhs pointer to a date struct
+ @param rhs pointer to a date struct
+ @return It returns 1 (true) if both dates are identical.
+ */
 int is_same_date(date *lhs, date *rhs);
+
+/**
+ This function is intended to check if two place are similar.
+
+ @param complete pointer to a place struct
+ @param partial pointer to a place struct
+ @return It returns 1 (true) is the other place properties are a subsstrings of the original place properties.
+ */
 int is_similar_place(place *complete, place *partial);
+
+/**
+ This function checks if two date have the same day.
+
+ @param lhs pointer to a date struct
+ @param rhs pointer to a date struct
+ @return It returns 1 (true) if both dates represent the same date in the gregorian calendar.
+ */
 int is_same_day(date *lhs, date *rhs);
+
+#warning Fix impletation and documentation!
+/**
+ This method is used to compare two rides by their price and the rating of the driver. It returns 0 if both have the same price and the same driver's rating, 1 if the first ride
+
+ @param lhs <#lhs description#>
+ @param rhs <#rhs description#>
+ @param drivers <#drivers description#>
+ @param drivers_count <#drivers_count description#>
+ @return <#return value description#>
+ */
 int rides_compare(ride *lhs, ride *rhs, driver drivers[], int drivers_count);
 
 int load_rides(ride rides[], int max_rides) {

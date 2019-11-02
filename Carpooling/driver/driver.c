@@ -18,7 +18,6 @@
 
 /**
  This function is intended to equate two driver struct.
- It returns 1 (true) if both drivers' codes are case insensitive equal.
 
  @param lhs pointer to driver struct
  @param rhs pointer to driver struct
@@ -236,7 +235,7 @@ void print_toprated_drivers(driver drivers[], int count) {
             printf("Il conducente è: %s", toprated_drivers[0]);
         } else {
             printf("I conducenti sono:\n\n");
-            printf("%-25s %-25s\n", "NOME", "COGNOME")
+            printf("%-25s %-25s\n", "NOME", "COGNOME");
             for (int i=0; i<toprated_drivers_count; i++) {
                 printf("%s\n", toprated_drivers[i]);
             }

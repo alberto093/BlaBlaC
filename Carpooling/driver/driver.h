@@ -73,18 +73,18 @@ typedef struct {
 } driver;
 
 /**
- This function load drivers from the file using "ab" format by populating the input driver array and returns the total number of the drivers.
+ This function load drivers from the file using "ab" format by populating the input drivers array and returns the total number of the drivers.
 
  @param drivers pointer to the driver struct
  @param max_drivers the max number of the drivers that can be retrived from the file
- @return It returns the total number of the drivers
+ @return It returns the total number of the drivers.
  */
 int load_drivers(driver drivers[], int max_drivers);
 
 /**
  This method using stdin to create and populate a driver struct.
 
- @return It returns the created driver struct
+ @return It returns the created driver struct.
  */
 driver create_driver(void);
 
