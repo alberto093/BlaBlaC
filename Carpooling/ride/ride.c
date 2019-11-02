@@ -45,6 +45,10 @@ ride create_ride(hash_code driver_code) {
     ride new_ride;
     strcpy(new_ride.driver_code, driver_code);
     
+    if (driver_code == NULL) {
+        return new_ride;
+    }
+    
     printf("\nDa dove parti?\n\n");
     edit_place(&new_ride.source);
     printf("\nDove vai?\n\n");
