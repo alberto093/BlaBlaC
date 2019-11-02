@@ -17,26 +17,141 @@
 
 #define RUN_TEST 0
 
+/**
+ It accepts an array of drivers in which will be appended the driver was created by the user using stdin and an int pointer of its count that will be increased by one.
+ At the end of function the new array will be saved into the drivers file.
+
+ @param drivers array of driver struct
+ @param total_drivers pointer to the count of the array
+ */
 void show_drivers_create(driver drivers[], int *total_drivers);
+
+/**
+ It accepts an array of drivers in which will be edited the driver was selected by the user using stdin and its count.
+ At the end of function the new array will be saved into the drivers file.
+
+ @param drivers array of driver struct
+ @param total_drivers the count of the array
+ */
 void show_drivers_edit(driver drivers[], int total_drivers);
+
+/**
+ It accepts an array of drivers in which will be removed the driver was selected by the user using stdin and an int pointer of its count that will be decreased by one.
+ At the end of function the new array will be saved into the drivers file.
+
+ @param drivers array of driver struct
+ @param total_drivers pointer to the count of the array
+ */
 void show_drivers_delete(driver drivers[], int *total_drivers);
 
+/**
+ It accepts an array of passengers in which will be appended the passenger was created by the user using stdin and an int pointer of its count that will be increased by one.
+ At the end of function the new array will be saved into the passengers file.
+
+ @param passengers array of passenger struct
+ @param total_passengers pointer to the count of the array
+ */
 void show_passengers_create(passenger passengers[], int *total_passengers);
+
+/**
+ It accepts an array of passengers in which will be edited the passenger was selected by the user using stdin and its count.
+ At the end of function the new array will be saved into the passengers file.
+
+ @param passengers array of passenger struct
+ @param total_passengers the count of the array
+ */
 void show_passengers_edit(passenger passengers[], int total_passengers);
+
+/**
+ It accepts an array of passengers in which will be removed the driver was selected by the user using stdin and an int pointer of its count that will be decreased by one.
+ At the end of function the new array will be saved into the passengers file.
+
+ @param passengers array of passenger struct
+ @param total_passengers pointer to the count of the array
+ */
 void show_passengers_delete(passenger passengers[], int *total_passengers);
 
+/**
+ It accepts an array of rides in which will be appended the ride was created by the user using stdin and an int pointer of its count that will be increased by one.
+ show_rides_create requires an array of drivers and its count in order to select the ride's driver.
+ At the end of function both the arrays will be saved into their files.
+
+ @param rides array of ride struct
+ @param total_rides pointer to the count of the rides array
+ @param drivers array of driver struct
+ @param total_drivers count of the drivers array
+ */
 void show_rides_create(ride rides[], int *total_rides, driver drivers[], int total_drivers);
+
+/**
+ It accepts an array of rides in which will be edited the ride was selected by the user using stdin and its count.
+ show_rides_edit requires an array of drivers and its count in order to show the selected driver's rides.
+ At the end of function the array of rides will be saved into the rides file.
+
+ @param rides array of ride struct
+ @param total_rides count of the rides array
+ @param drivers array of driver struct
+ @param total_drivers count of the drivers array
+ */
 void show_rides_edit(ride rides[], int total_rides, driver drivers[], int total_drivers);
+
+/**
+ It accepts an array of rides in which will be removed the ride was selected by the user using stdin and an int pointer of its count that will be decreased by one.
+ show_rides_delete requires an array of drivers and its count in order to show the selected driver's rides.
+ At the end of function both the arrays will be saved into their files.
+
+ @param rides array of ride struct
+ @param total_rides pointer to the count of the rides array
+ @param drivers array of driver struct
+ @param total_drivers count of the drivers array
+ */
 void show_rides_delete(ride rides[], int *total_rides, driver drivers[], int total_drivers);
+
+/**
+ It requires an array of rides, an array of drivers, an array of passengers and their count.
+ show_rides_search takes input from stdin in order to search the matched rides, show them sorted by price and drivers' rating and allows user to reserve a ride.
+ At the end of function the array of rides will be saved into the rides file.
+ 
+
+ @param rides array of ride struct
+ @param total_rides count of the rides array
+ @param drivers array of driver struct
+ @param total_drivers count of the drivers array
+ @param passengers array of passenger struct
+ @param total_passengers count of the passengers array
+ */
 void show_rides_search(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers);
+
+/**
+ It requires an array of rides, an array of drivers, an array of passengers and their count.
+ show_rides_review takes input from stdin in order to show the selected driver's rides and allows user to select and to review a ride.
+ At the end of function the array of drivers will be saved into the drivers file.
+
+ @param rides array of ride struct
+ @param total_rides count of the rides array
+ @param drivers array of driver struct
+ @param total_drivers count of the drivers array
+ @param passengers array of passenger struct
+ @param total_passengers count of the passengers array
+ */
 void show_rides_review(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers);
+
+/**
+ It requires an array of rides, an array of drivers and their count.
+ print_full_rides uses printf (stdout) to show to the user all the input rides in a pretty way.
+
+ @param rides array of ride struct
+ @param total_rides count of the rides array
+ @param drivers array of driver struct
+ @param total_drivers count of the drivers array
+ */
 void print_full_rides(ride rides[], int total_rides, driver drivers[], int total_drivers);
 
 int main() {
     if (RUN_TEST) {
         return run_all_test();
     }
-    
+
     driver drivers[DRIVERS_MAX];
     int total_drivers = load_drivers(drivers, DRIVERS_MAX);
     passenger passengers[PASSENGERS_MAX];
