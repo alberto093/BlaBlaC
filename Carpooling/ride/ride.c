@@ -25,6 +25,10 @@ int is_same_day(date *lhs, date *rhs);
 int rides_compare(ride *lhs, ride *rhs, driver drivers[], int drivers_count);
 
 int load_rides(ride rides[], int max_rides) {
+    if (rides == NULL || max_rides < 1) {
+        return 0;
+    }
+    
     FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/rides.dat", "ab");
     if (rstream == NULL) {
         printf("\nErrore durante l'apertura del file dei viaggi.\n");
@@ -61,6 +65,10 @@ ride create_ride(hash_code driver_code) {
 }
 
 void edit_ride(ride *edit_ride) {
+    if (edit_ride == NULL) {
+        return;
+    }
+    
     if ((*edit_ride).total_passenger_codes > 0) {
         printf("\nQuesto viaggio ha già ricevuto delle prenotazioni! Ricordati di notificare eventuali modifiche ai passeggeri\n");
     }
@@ -157,6 +165,10 @@ void edit_ride(ride *edit_ride) {
 }
 
 int remove_ride(ride *remove_ride, ride rides[], int *count) {
+    if (remove_ride == NULL || rides == NULL || count == NULL) {
+        return 0;
+    }
+    
     int end = *count;
     int found = 0;
     for (int i=0; i<end; i++) {
@@ -177,6 +189,10 @@ int remove_ride(ride *remove_ride, ride rides[], int *count) {
 void print_rides(ride rides[], int count, driver drivers[], int drivers_count, ride *find_rides[], int *find_rides_count) {
     //   |    Data    | Luogo di Partenza |  Luogo di Arrivo  |
     // 1.| 25/12/2019 | Indirizzo, Città  | Indirizzo, Città  |
+    
+    if (rides == NULL || drivers == NULL || find_rides == NULL || find_rides_count == NULL) {
+        return;
+    }
     
     driver *ride_driver = find_driver(drivers, drivers_count);
     if (ride_driver == NULL) {
@@ -206,6 +222,10 @@ void print_rides(ride rides[], int count, driver drivers[], int drivers_count, r
 }
 
 void search_rides(ride rides[], int count, ride *find_rides[], int *find_rides_count) {
+    if (rides == NULL || find_rides == NULL || find_rides_count == NULL) {
+        return;
+    }
+    
     place source;
     place destination;
     date date;
@@ -239,6 +259,10 @@ void search_rides(ride rides[], int count, ride *find_rides[], int *find_rides_c
 }
 
 void sort_rides(ride rides[], int count, driver drivers[], int drivers_count) {
+    if (rides == NULL || drivers == NULL) {
+        return 0;
+    }
+    
     int i, j;
     ride temp_element;
     for (i=1; i<count; i++) {
@@ -253,6 +277,10 @@ void sort_rides(ride rides[], int count, driver drivers[], int drivers_count) {
 }
 
 int contains_ride(ride* new_ride, ride rides[], int count) {
+    if (new_ride == NULL || rides == NULL) {
+        return 0;
+    }
+    
     for (int i=0; i<count; i++) {
         if (is_same_ride(new_ride, &rides[i])) {
             return 1;
@@ -262,6 +290,10 @@ int contains_ride(ride* new_ride, ride rides[], int count) {
 }
 
 int save_rides(ride rides[], int count) {
+    if (rides == NULL || count < 0) {
+        return 0;
+    }
+    
     FILE *wstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/rides.dat", "wb");
     if (wstream == NULL) {
         printf("\nrrore durante il salvataggio del file dei viaggi.\n");
@@ -273,6 +305,10 @@ int save_rides(ride rides[], int count) {
 }
 
 void edit_place(place *place) {
+    if (place == NULL) {
+        return;
+    }
+    
     printf("Città: ");
     scanf("%35[a-zA-Z ]", (*place).city);
     fflush(stdin);
@@ -291,6 +327,10 @@ void edit_place(place *place) {
 }
 
 void edit_date(date *date) {
+    if (date == NULL) {
+        return;
+    }
+    
     int is_valid = 0;
     do {
         printf("Inserisci la data nel formato dd/MM/yyyy: ");
@@ -304,6 +344,10 @@ void edit_date(date *date) {
 }
 
 void edit_time(date *date) {
+    if (date == NULL) {
+        return;
+    }
+    
     int is_valid_24time = 0;
     do {
         printf("\nInserisci l'orario di partenza nel formato 24 ore: ");
@@ -317,6 +361,10 @@ void edit_time(date *date) {
 }
 
 void edit_price(float *price) {
+    if (price == NULL) {
+        return;
+    }
+    
     int is_valid_price = 0;
     do {
         printf("Inserisci il costo del viaggio per passeggero: € ");
@@ -330,6 +378,10 @@ void edit_price(float *price) {
 }
 
 void edit_total_seats(unsigned short int *seats) {
+    if (seats == NULL) {
+        return;
+    }
+    
     int is_valid_seats = 0;
     do {
         printf("Inserisci il numero di posti disponibili (max 10 posti): ");
@@ -343,26 +395,50 @@ void edit_total_seats(unsigned short int *seats) {
 }
 
 int is_same_ride(ride *lhs, ride *rhs) {
+    if (lhs == NULL || rhs == NULL) {
+        return 0;
+    }
+    
     return is_equal_insensitive((*lhs).driver_code, (*rhs).driver_code) && is_same_place(&(*lhs).source, &(*rhs).source) && is_same_place(&(*lhs).destination, &(*rhs).destination) && is_same_date(&(*lhs).date, &(*rhs).date);
 }
 
 int is_same_place(place *lhs, place *rhs) {
+    if (lhs == NULL || rhs == NULL) {
+        return 0;
+    }
+    
     return !strcmp((*lhs).address, (*rhs).address) && !strcmp((*lhs).city, (*rhs).city) && !strcmp((*lhs).province, (*rhs).province) && (*lhs).postal_code == (*rhs).postal_code;
 }
 
 int is_same_date(date *lhs, date *rhs) {
+    if (lhs == NULL || rhs == NULL) {
+        return 0;
+    }
+    
     return (*lhs).day == (*rhs).day && (*lhs).month == (*rhs).month && (*lhs).year == (*rhs).year && (*lhs).hour == (*rhs).hour && (*lhs).minutes == (*rhs).minutes;
 }
 
 int is_similar_place(place *complete, place *partial) {
+    if (complete == NULL || partial == NULL) {
+        return 0;
+    }
+    
     return strstr((*complete).city, (*partial).city) != NULL && strstr((*complete).province, (*partial).province) != NULL;
 }
 
 int is_same_day(date *lhs, date *rhs) {
+    if (lhs == NULL || rhs == NULL) {
+        return 0;
+    }
+    
     return (*lhs).day == (*rhs).day && (*lhs).month == (*rhs).month && (*lhs).year == (*rhs).year;
 }
 
 int rides_compare(ride *lhs, ride *rhs, driver drivers[], int drivers_count) {
+    if (lhs == NULL || rhs == NULL || drivers == NULL) {
+        return 0;
+    }
+    
     if ((*lhs).price == (*rhs).price) {
         driver *lhs_driver = existing_driver((*lhs).driver_code, drivers, drivers_count);
         driver *rhs_driver = existing_driver((*rhs).driver_code, drivers, drivers_count);

@@ -15,6 +15,9 @@
 int is_same_passenger(passenger *lhs, passenger *rhs);
 
 int load_passengers(passenger passengers[], int max_passengers) {
+    if (passengers == NULL || max_passengers < 1) {
+        return 0;
+    }
     FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/passengers.dat", "ab");
     if (rstream == NULL) {
         printf("\nErrore durante l'apertura del file dei passeggeri.\n");
@@ -61,6 +64,10 @@ passenger create_passenger(void) {
 }
 
 void edit_passenger(passenger *edit_passenger) {
+    if (edit_passenger == NULL) {
+        return;
+    }
+    
     int selection = 0;
     do {
         int is_valid_selection = 0;
@@ -108,6 +115,10 @@ void edit_passenger(passenger *edit_passenger) {
 }
 
 int remove_passenger(passenger *remove_passenger, passenger passengers[], int *count) {
+    if (remove_passenger == NULL || passengers == NULL || count == NULL) {
+        return 0;
+    }
+    
     int end = *count;
     int found = 0;
     for (int i=0; i<end; i++) {
@@ -126,6 +137,10 @@ int remove_passenger(passenger *remove_passenger, passenger passengers[], int *c
 }
 
 passenger *find_passenger(passenger passengers[], int count) {
+    if (passengers == NULL || count < 1) {
+        return NULL;
+    }
+    
     hash_code passenger_code;
     passenger *actual_passenger = NULL;
     
@@ -148,6 +163,10 @@ passenger *find_passenger(passenger passengers[], int count) {
 }
 
 passenger *existing_passenger(hash_code passenger_code, passenger passengers[], int count) {
+    if (passengers == NULL || count < 1) {
+        return NULL;
+    }
+    
     for (int i=0; i<count; i++) {
         if (is_equal_insensitive(passengers[i].code, passenger_code)) {
             return &passengers[i];
@@ -161,6 +180,10 @@ int contains_passenger(passenger* new_passenger, passenger passengers[], int cou
 }
 
 int save_passengers(passenger passengers[], int count) {
+    if (passengers == NULL || count < 0) {
+        return 0;
+    }
+    
     FILE *wstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/passengers.dat", "wb");
     if (wstream == NULL) {
         printf("\nrrore durante il salvataggio del file dei passeggeri.\n");
@@ -172,5 +195,8 @@ int save_passengers(passenger passengers[], int count) {
 }
 
 int is_same_passenger(passenger *lhs, passenger *rhs) {
+    if (lhs == NULL || rhs == NULL) {
+        return 0;
+    }
     return is_equal_insensitive((*lhs).code, (*rhs).code);
 }

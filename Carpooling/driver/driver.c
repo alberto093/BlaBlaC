@@ -22,6 +22,7 @@ int load_drivers(driver drivers[], int max_drivers) {
     if (drivers == NULL || max_drivers < 1) {
         return 0;
     }
+    
     FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/drivers.dat", "ab");
     if (rstream == NULL) {
         printf("\nErrore durante l'apertura del file dei conducenti.\n");
@@ -72,6 +73,10 @@ driver create_driver(void) {
 }
 
 void edit_driver(driver *edit_driver) {
+    if (edit_driver == NULL) {
+        return;
+    }
+    
     int selection = 0;
     do {
         int is_valid_selection = 0;
@@ -119,6 +124,10 @@ void edit_driver(driver *edit_driver) {
 }
 
 int remove_driver(driver *remove_driver, driver drivers[], int *count) {
+    if (remove_driver == NULL || drivers == NULL || count == NULL) {
+        return 0;
+    }
+    
     int end = *count;
     int found = 0;
     for (int i=0; i<end; i++) {
@@ -137,6 +146,10 @@ int remove_driver(driver *remove_driver, driver drivers[], int *count) {
 }
 
 driver *find_driver(driver drivers[], int count) {
+    if (drivers == NULL || count < 1) {
+        return NULL;
+    }
+    
     hash_code driver_code;
     driver *actual_driver = NULL;
     
@@ -159,6 +172,10 @@ driver *find_driver(driver drivers[], int count) {
 }
 
 driver *existing_driver(hash_code driver_code, driver drivers[], int count) {
+    if (drivers == NULL || count < 1) {
+        return NULL;
+    }
+    
     for (int i=0; i<count; i++) {
         if (is_equal_insensitive(drivers[i].code, driver_code)) {
             return &drivers[i];
@@ -168,6 +185,9 @@ driver *existing_driver(hash_code driver_code, driver drivers[], int count) {
 }
 
 float driver_rating(driver *driver) {
+    if (driver == NULL) {
+        return 0;
+    }
     float rating_sum = 0;
     int total_rating = 0;
     for (int i=0; i<(*driver).total_reviews; i++) {
@@ -178,7 +198,7 @@ float driver_rating(driver *driver) {
 }
 
 void print_toprated_drivers(driver drivers[], int count) {
-    if (count == 0) {
+    if (drivers == NULL || count < 1) {
         printf("\nNessun conducente trovato!\n");
         return;
     }
@@ -264,6 +284,10 @@ int contains_driver(driver* new_driver, driver drivers[], int count) {
 }
 
 int save_drivers(driver drivers[], int count) {
+    if (drivers == NULL || count < 0) {
+        return 0;
+    }
+    
     FILE *wstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/drivers.dat", "wb");
     if (wstream == NULL) {
         printf("\nrrore durante il salvataggio del file dei conducenti.\n");
@@ -275,5 +299,8 @@ int save_drivers(driver drivers[], int count) {
 }
 
 int is_same_driver(driver *lhs, driver *rhs) {
+    if (lhs == NULL || rhs == NULL) {
+        return 0;
+    }
     return is_equal_insensitive((*lhs).code, (*rhs).code);
 }

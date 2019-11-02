@@ -38,3 +38,10 @@ void test_is_string_lenght(void)  {
     CU_ASSERT_FALSE(is_string_lenght(NULL, 0));
 }
 
+void test_is_equal_insensitive(void) {
+    CU_ASSERT_TRUE(is_equal_insensitive("AlBerto", "alberto"));
+    CU_ASSERT_TRUE(is_equal_insensitive("123", "123"));
+    CU_ASSERT_TRUE(is_equal_insensitive("", ""));
+    CU_ASSERT_FALSE(is_equal_insensitive("alberto", "saltarelli"));
+    CU_ASSERT_FALSE(is_equal_insensitive(NULL, ""));
+}

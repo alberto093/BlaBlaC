@@ -21,10 +21,14 @@ void test_load_drivers(void) {
 }
 
 void test_remove_driver(void) {
+    int total_drivers = 1;
+    driver drivers[total_drivers];
     driver test_driver;
     strcpy(test_driver.code, "sltlrt93c22l109n");
-
-    remove_driver(<#driver *remove_driver#>, <#driver *drivers#>, <#int *count#>)
+    drivers[0] = test_driver;
+    
+    CU_ASSERT_EQUAL(remove_driver(&test_driver, drivers, &total_drivers), 0);
+    CU_ASSERT_FALSE(remove_driver(NULL, drivers, &total_drivers));
 }
 
 void test_existing_driver(void) {

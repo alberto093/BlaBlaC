@@ -15,5 +15,6 @@ void test_is_included(void);
 void test_is_valid_date(void);
 void test_is_valid_time(void);
 void test_is_string_lenght(void);
+void test_is_equal_insensitive(void);
 
 #endif /* utils_test_h */
