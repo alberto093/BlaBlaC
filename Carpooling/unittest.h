@@ -11,6 +11,11 @@
 
 #include <stdio.h>
 
+/**
+ This method runs all tests of the current program using CUnit framework.
+
+ @return The current error condition code.
+ */
 int run_all_test(void);
 
 #endif /* unittest_h */

@@ -13,12 +13,40 @@
 #include "passenger+test.h"
 #include "ride+test.h"
 
+/**
+ Creates a new utils test suite in which utils' tests are added and adds it to the environment test registry
+ */
 void create_utils_suite(void);
+
+/**
+  Creates a new drivers test suite in which drivers' tests are added and adds it to the environment test registry
+ */
 void create_drivers_suite(void);
+
+/**
+  Creates a new passengers test suite in which passengers' tests are added and adds it to the environment test registry
+ */
 void create_passengers_suite(void);
+
+/**
+  Creates a new rides test suite in which rides' tests are added and adds it to the environment test registry
+ */
 void create_rides_suite(void);
 
+/**
+ This method is called by a test suite before it's begin in order to initialize the test state.
+ Default implementation does nothing and returns 0.
+ 
+ @return exit code to the current suite
+ */
 int init_suite_default(void);
+
+/**
+ This method is called by a test suite after it's end in order to clean the test state.
+ Default implementation does nothing and returns 0.
+ 
+ @return exit code to the current suite
+ */
 int clean_suite_default(void);
 
 int run_all_test(void) {
