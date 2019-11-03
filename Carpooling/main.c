@@ -156,6 +156,7 @@ int main() {
     
     if (RESET) {
         setup_default();
+        return 0;
     }
 
     driver drivers[DRIVERS_MAX];
