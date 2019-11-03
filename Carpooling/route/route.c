@@ -58,14 +58,15 @@ passengers_result show_passengers_menu(void) {
         printf("• Premi 1 per creare un nuovo passeggero\n");
         printf("• Premi 2 per modificare un passeggero\n");
         printf("• Premi 3 per eliminare un passeggero\n");
-        printf("• Premi 4 per tornare alla home\n\n");
+        printf("• Premi 4 per lasciare una recensione\n");
+        printf("• Premi 5 per tornare alla home\n\n");
         scanf("%i", &result);
         fflush(stdin);
         result--;
-        if (!is_included(result, 0, 3)) {
+        if (!is_included(result, 0, 4)) {
             printf("\nScelta non valida\n\n");
         }
-    } while (!is_included(result, 0, 3));
+    } while (!is_included(result, 0, 4));
     
     return result;
 }
@@ -79,15 +80,14 @@ rides_result show_rides_menu(void) {
         printf("• Premi 2 per modificare un viaggio\n");
         printf("• Premi 3 per eliminare un viaggio\n");
         printf("• Premi 4 per cercare/prenotare un viaggio\n");
-        printf("• Premi 5 per lasciare una recensione\n");
-        printf("• Premi 6 per tornare alla home\n\n");
+        printf("• Premi 5 per tornare alla home\n\n");
         scanf("%i", &result);
         fflush(stdin);
         result--;
-        if (!is_included(result, 0, 5)) {
+        if (!is_included(result, 0, 4)) {
             printf("\nScelta non valida\n\n");
         }
-    } while (!is_included(result, 0, 5));
+    } while (!is_included(result, 0, 4));
     
     return result;
 }

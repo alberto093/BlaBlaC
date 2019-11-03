@@ -16,8 +16,8 @@
 #include "unittest.h"
 #include "mock.h"
 
-#define RUN_TEST 0
-#define RESET 0
+#define RUN_TEST 0 // Change to 1 to run only the tests
+#define RESET 0 // Change to 1 to clean and setup initial state of files
 
 /**
  It accepts an array of drivers in which will be appended the driver was created by the user using stdin and an int pointer of its count that will be increased by one.
@@ -76,6 +76,20 @@ void show_passengers_edit(passenger passengers[], int total_passengers);
 void show_passengers_delete(passenger passengers[], int *total_passengers);
 
 /**
+ It requires an array of rides, an array of drivers, an array of passengers and their count.
+ show_passengers_review takes a passenger code input from stdin in order to select and to review a ride.
+ At the end of function the array of drivers will be saved into the drivers file.
+ 
+ @param rides array of ride struct
+ @param total_rides count of the rides array
+ @param drivers array of driver struct
+ @param total_drivers count of the drivers array
+ @param passengers array of passenger struct
+ @param total_passengers count of the passengers array
+ */
+void show_passengers_review(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers);
+
+/**
  It accepts an array of rides in which will be appended the ride was created by the user using stdin and an int pointer of its count that will be increased by one.
  show_rides_create requires an array of drivers and its count in order to select the ride's driver.
  At the end of function both the arrays will be saved into their files.
@@ -125,20 +139,6 @@ void show_rides_delete(ride rides[], int *total_rides, driver drivers[], int tot
  @param total_passengers count of the passengers array
  */
 void show_rides_search(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers);
-
-/**
- It requires an array of rides, an array of drivers, an array of passengers and their count.
- show_rides_review takes input from stdin in order to show the selected driver's rides and allows user to select and to review a ride.
- At the end of function the array of drivers will be saved into the drivers file.
-
- @param rides array of ride struct
- @param total_rides count of the rides array
- @param drivers array of driver struct
- @param total_drivers count of the drivers array
- @param passengers array of passenger struct
- @param total_passengers count of the passengers array
- */
-void show_rides_review(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers);
 
 /**
  It requires an array of rides, an array of drivers and their count.
@@ -216,6 +216,9 @@ int main() {
                         case passengers_delete:
                             show_passengers_create(passengers, &total_passengers);
                             break;
+                        case passengers_review:
+                            show_passengers_review(rides, total_rides, drivers, total_drivers, passengers, total_passengers);
+                            break;
                         case passengers_back:
                             break;
                     }
@@ -239,9 +242,6 @@ int main() {
                             break;
                         case rides_search:
                             show_rides_search(rides, total_rides, drivers, total_drivers, passengers, total_passengers);
-                            break;
-                        case rides_review:
-                            show_rides_review(rides, total_rides, drivers, total_drivers, passengers, total_passengers);
                             break;
                         case rides_back:
                             break;
@@ -346,6 +346,79 @@ void show_passengers_delete(passenger passengers[], int *total_passengers) {
             save_passengers(passengers, *total_passengers);
             printf("Passeggero eliminato con successo!");
         }
+    }
+}
+
+void show_passengers_review(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers) {
+    passenger *actual_passenger;
+    do {
+        actual_passenger = find_passenger(passengers, total_passengers);
+    } while (actual_passenger == NULL);
+    
+    driver *available_drivers[total_drivers];
+    int total_available_drivers = 0;
+    int has_reservations = 0;
+    int is_review_available = 1;
+    
+    for (int i=0; i<total_drivers; i++) {
+        if (is_equal_insensitive(drivers[i].code, (*actual_passenger).code)) {
+            continue;
+        }
+        
+        for (int j=0; j<drivers[i].total_reviews && is_review_available; j++) {
+            if (is_equal_insensitive(drivers[i].reviews[j].passenger_code, (*actual_passenger).code)) {
+                is_review_available = 0;
+            }
+        }
+        
+        if (is_review_available) {
+            for (int k=0; k<total_drivers; k++) {
+                for (int l=0; l<rides[k].total_passenger_codes; l++) {
+                    if (is_equal_insensitive(rides[k].passenger_codes[l], (*actual_passenger).code)) {
+                        available_drivers[total_available_drivers] = &drivers[i];
+                        total_available_drivers++;
+                    }
+                }
+            }
+            has_reservations = 1;
+        }
+        is_review_available = 1;
+    }
+    
+    if (total_available_drivers == 0) {
+        if (has_reservations) {
+            printf("\nHai già lasciato una o più recensioni per i tuoi viaggi. Prenotane altri per poter lasciare una recensione!\n");
+        } else {
+            printf("\nNon puoi lasciare una recensione se non hai prenotato alcun viaggio!\n");
+        }
+        return;
+    }
+    
+    printf("\n\n    _________________________________________________________\n");
+    printf("   |            NOME            |          COGNOME           |\n");
+    
+    for (int i=0; i<total_available_drivers; i++) {
+        printf("%2i.| %-26s | %-26s |\n", i+1, (*available_drivers[i]).name, (*available_drivers[i]).surname);
+    }
+    
+    printf("    ---------------------------------------------------------\n\n");
+    
+    int selection = 0;
+    int is_valid_selection = 0;
+    do {
+        printf("Seleziona il conducente per il quale vuole lasciare una recensione: ");
+        scanf("%i", &selection);
+        fflush(stdin);
+        is_valid_selection = is_included(selection, 1, total_available_drivers);
+        selection--;
+        if (!is_valid_selection) {
+            printf("\nScelta non valida\n");
+        }
+    } while (!is_valid_selection);
+    
+    if (add_review(available_drivers[selection], (*actual_passenger).code)) {
+        save_drivers(drivers, total_drivers);
+        printf("\nRecensione aggiunta con successo!\n");
     }
 }
 
@@ -468,55 +541,6 @@ void show_rides_search(ride rides[], int total_rides, driver drivers[], int tota
     (*find_rides)[selection].total_passenger_codes++;
     save_rides(rides, total_rides);
     printf("\nViaggio prenotato con successo!\n");
-}
-
-void show_rides_review(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers) {
-    passenger *actual_passenger;
-    do {
-        actual_passenger = find_passenger(passengers, total_passengers);
-    } while (actual_passenger == NULL);
-    
-    ride *find_rides[total_rides];
-    int total_find_rides = 0;
-    
-    for (int i=0; i<total_rides; i++) {
-        for (int j=0; j<rides[i].total_passenger_codes; j++) {
-            if (is_equal_insensitive(rides[i].passenger_codes[j], (*actual_passenger).code)) {
-                find_rides[total_find_rides] = &rides[i];
-                total_find_rides++;
-            }
-        }
-    }
-    
-    print_full_rides((*find_rides), total_find_rides, drivers, total_drivers);
-    
-    if (total_find_rides == 0) {
-        return;
-    }
-    
-    int selection = 0;
-    int is_valid_selection = 0;
-    do {
-        printf("\nInserisci il numero del viaggio che vuoi recensire: ");
-        scanf("%2i", &selection);
-        fflush(stdin);
-        is_valid_selection = is_included(selection, 1, total_find_rides);
-        selection--;
-        if (!is_valid_selection) {
-            printf("\nScelta non valida\n");
-        }
-    } while (!is_valid_selection);
-    
-    driver *actual_driver = existing_driver((*find_rides)[selection].driver_code, drivers, total_drivers);
-    if (actual_driver == NULL) {
-        printf("\nERRORE: Il conducente non è stato trovato!\n");
-        return;
-    }
-    
-    if (add_review(actual_driver, (*actual_passenger).code)) {
-        save_drivers(drivers, total_drivers);
-        printf("\nRecensione aggiunta con successo!\n");
-    }
 }
 
 void print_full_rides(const ride rides[], int total_rides, driver drivers[], int total_drivers) {

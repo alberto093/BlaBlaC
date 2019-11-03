@@ -272,7 +272,7 @@ int add_review(driver *driver, const hash_code passenger_code) {
         }
     } while (!is_valid);
     new_review.rating = rating;
-    printf("Inserisci un breve commento: ");
+    printf("\nInserisci un breve commento: ");
     scanf("%250[a-zA-Z ]", new_review.text);
     fflush(stdin);
     

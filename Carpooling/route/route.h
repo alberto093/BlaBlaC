@@ -36,25 +36,25 @@ typedef enum {
 
 /**
  The passengers menu options.
- Values of the enum goes by 0 to 3. It is intended to be used to evaluate the user input in the passengers menu.
+ Values of the enum goes by 0 to 4. It is intended to be used to evaluate the user input in the passengers menu.
  */
 typedef enum {
     passengers_create,
     passengers_edit,
     passengers_delete,
+    passengers_review,
     passengers_back
 } passengers_result;
 
 /**
  The rides menu options.
- Values of the enum goes by 0 to 5. It is intended to be used to evaluate the user input in the rides menu.
+ Values of the enum goes by 0 to 4. It is intended to be used to evaluate the user input in the rides menu.
  */
 typedef enum {
     rides_create,
     rides_edit,
     rides_delete,
     rides_search,
-    rides_review,
     rides_back
 } rides_result;
 
