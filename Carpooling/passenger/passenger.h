@@ -45,7 +45,7 @@ typedef struct {
 } passenger;
 
 /**
- This function load passengers from the file using "ab" format by populating the input passenger array and returns the total number of the passengers.
+ This function load passengers from the file using "rb" format by populating the input passenger array and returns the total number of the passengers.
 
  @param passengers pointer to the passenger struct
  @param max_passengers the max number of the passengers that can be retrived from the file

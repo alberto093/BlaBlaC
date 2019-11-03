@@ -28,7 +28,7 @@ int load_drivers(driver *drivers, int max_drivers) {
         return 0;
     }
     
-    FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/drivers.dat", "ab");
+    FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/drivers.dat", "rb");
     if (rstream == NULL) {
         printf("\nErrore durante l'apertura del file dei conducenti.\n");
         return 0;

@@ -73,7 +73,7 @@ typedef struct {
 } driver;
 
 /**
- This function load drivers from the file using "ab" format by populating the input drivers array and returns the total number of the drivers.
+ This function load drivers from the file using "rb" format by populating the input drivers array and returns the total number of the drivers.
 
  @param drivers pointer to the driver struct
  @param max_drivers the max number of the drivers that can be retrived from the file

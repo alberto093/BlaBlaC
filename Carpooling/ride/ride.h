@@ -71,7 +71,7 @@ typedef struct {
 } ride;
 
 /**
- This function load rides from the file using "ab" format by populating the input rides array and returns the total number of the rides.
+ This function load rides from the file using "rb" format by populating the input rides array and returns the total number of the rides.
 
  @param rides pointer to the ride struct
  @param max_rides the max number of the rides that can be retrived from the file

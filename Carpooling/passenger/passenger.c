@@ -26,7 +26,7 @@ int load_passengers(passenger *passengers, int max_passengers) {
     if (passengers == NULL || max_passengers < 1) {
         return 0;
     }
-    FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/passengers.dat", "ab");
+    FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/passengers.dat", "rb");
     if (rstream == NULL) {
         printf("\nErrore durante l'apertura del file dei passeggeri.\n");
         return 0;

@@ -108,7 +108,7 @@ int load_rides(ride *rides, int max_rides) {
         return 0;
     }
     
-    FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/rides.dat", "ab");
+    FILE *rstream = fopen("/Users/Alberto/Università/Informatica/I anno/Laboratorio di Informatica/BlaBlaC/Carpooling/rides.dat", "rb");
     if (rstream == NULL) {
         printf("\nErrore durante l'apertura del file dei viaggi.\n");
         return 0;
