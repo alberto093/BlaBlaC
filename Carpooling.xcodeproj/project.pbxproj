@@ -18,6 +18,7 @@
 		D3CDBCA1236D2BE6001ED7EB /* passenger+test.c in Sources */ = {isa = PBXBuildFile; fileRef = D3CDBCA0236D2BE6001ED7EB /* passenger+test.c */; };
 		D3CDBCA5236D2BF7001ED7EB /* ride+test.c in Sources */ = {isa = PBXBuildFile; fileRef = D3CDBCA4236D2BF7001ED7EB /* ride+test.c */; };
 		D3CDBCA9236DD823001ED7EB /* unittest.c in Sources */ = {isa = PBXBuildFile; fileRef = D3CDBCA8236DD823001ED7EB /* unittest.c */; };
+		D3CDBCBF236EE57F001ED7EB /* mock.c in Sources */ = {isa = PBXBuildFile; fileRef = D3CDBCBE236EE57F001ED7EB /* mock.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +56,8 @@
 		D3CDBCA4236D2BF7001ED7EB /* ride+test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "ride+test.c"; sourceTree = "<group>"; };
 		D3CDBCA7236DD823001ED7EB /* unittest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = unittest.h; sourceTree = "<group>"; };
 		D3CDBCA8236DD823001ED7EB /* unittest.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = unittest.c; sourceTree = "<group>"; };
+		D3CDBCBD236EE57F001ED7EB /* mock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mock.h; sourceTree = "<group>"; };
+		D3CDBCBE236EE57F001ED7EB /* mock.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mock.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 				D32649242367923D00A2B542 /* main.c */,
 				D3CDBCA8236DD823001ED7EB /* unittest.c */,
 				D3CDBCA7236DD823001ED7EB /* unittest.h */,
+				D3CDBCBD236EE57F001ED7EB /* mock.h */,
+				D3CDBCBE236EE57F001ED7EB /* mock.c */,
 				D3CDBC9A236D2BBD001ED7EB /* driver */,
 				D3CDBC9E236D2BDB001ED7EB /* passenger */,
 				D3CDBCA2236D2BEB001ED7EB /* ride */,
@@ -211,6 +216,7 @@
 				D3CDBCA1236D2BE6001ED7EB /* passenger+test.c in Sources */,
 				D32649302367B87200A2B542 /* route.c in Sources */,
 				D32649252367923D00A2B542 /* main.c in Sources */,
+				D3CDBCBF236EE57F001ED7EB /* mock.c in Sources */,
 				D3CDBC99236D284C001ED7EB /* utils+test.c in Sources */,
 				D32649332367B99F00A2B542 /* driver.c in Sources */,
 				D32649392367B9C400A2B542 /* ride.c in Sources */,

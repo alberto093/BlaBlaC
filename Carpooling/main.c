@@ -14,8 +14,10 @@
 #include "passenger.h"
 #include "ride.h"
 #include "unittest.h"
+#include "mock.h"
 
 #define RUN_TEST 0
+#define RESET 0
 
 /**
  It accepts an array of drivers in which will be appended the driver was created by the user using stdin and an int pointer of its count that will be increased by one.
@@ -151,6 +153,10 @@ int main() {
 //    if (RUN_TEST) {
 //        return run_all_tests();
 //    }
+    
+    if (RESET) {
+        setup_default();
+    }
 
     driver drivers[DRIVERS_MAX];
     int total_drivers = load_drivers(drivers, DRIVERS_MAX);
