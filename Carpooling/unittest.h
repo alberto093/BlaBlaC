@@ -1,21 +1,21 @@
+////
+////  unittest.h
+////  Carpooling
+////
+////  Created by Alberto Saltarelli on 02/11/2019.
+////  Copyright © 2019 Alberto Saltarelli. All rights reserved.
+////
 //
-//  unittest.h
-//  Carpooling
+//#ifndef unittest_h
+//#define unittest_h
 //
-//  Created by Alberto Saltarelli on 02/11/2019.
-//  Copyright © 2019 Alberto Saltarelli. All rights reserved.
+//#include <stdio.h>
 //
-
-#ifndef unittest_h
-#define unittest_h
-
-#include <stdio.h>
-
-/**
- This method runs all tests of the current program using CUnit framework.
-
- @return The current error condition code.
- */
-int run_all_test(void);
-
-#endif /* unittest_h */
+///**
+// This method runs all tests of the current program using CUnit framework.
+//
+// @return The current error condition code.
+// */
+//int run_all_tests(void);
+//
+//#endif /* unittest_h */

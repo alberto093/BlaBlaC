@@ -334,7 +334,7 @@ void search_rides(ride rides[], int count, ride *find_rides[], int *find_rides_c
     
     (*find_rides_count) = 0;
     for (int i=0; i<count; i++) {
-        if (is_similar_place(&rides[i].source, &source) && is_similar_place(&rides[i].destination, &destination) && is_same_day(&rides[i].date, &date) && (rides[i].total_seats - rides[i].total_passenger_codes) >= total_seats) {
+        if (rides[i].total_seats > 0 && (rides[i].total_seats - rides[i].total_passenger_codes) >= total_seats && is_similar_place(&rides[i].source, &source) && is_similar_place(&rides[i].destination, &destination) && is_same_day(&rides[i].date, &date)) {
             find_rides[(*find_rides_count)] = &rides[i];
             (*find_rides_count)++;
         }
@@ -507,7 +507,7 @@ int is_similar_place(const place *complete, const place *partial) {
         return 0;
     }
     
-    return strstr((*complete).city, (*partial).city) != NULL && strstr((*complete).province, (*partial).province) != NULL;
+    return strstr((*complete).city, (*partial).city) != NULL || strstr((*complete).province, (*partial).province) != NULL;
 }
 
 int is_same_day(const date *lhs, const date *rhs) {

@@ -148,9 +148,9 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
 void print_full_rides(const ride rides[], int total_rides, driver drivers[], int total_drivers);
 
 int main() {
-    if (RUN_TEST) {
-        return run_all_test();
-    }
+//    if (RUN_TEST) {
+//        return run_all_tests();
+//    }
 
     driver drivers[DRIVERS_MAX];
     int total_drivers = load_drivers(drivers, DRIVERS_MAX);
