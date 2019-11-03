@@ -11,6 +11,7 @@
 #include <string.h>
 
 #define RIDE_FILE_NAME "rides.dat"
+#define PLACE_DESC_MAX 72
 
 /**
  This method edits the place parameter using the user's input (stdin).
@@ -160,14 +161,14 @@ void edit_ride(ride *edit_ride) {
         int is_valid_selection = 0;
         do {
             printf("\n• Premi 1 per modificare il luogo di partenza\n");
-            printf("\n• Premi 2 per modificare il luogo di arrivo\n");
-            printf("\n• Premi 3 per modificare la data del viaggio\n");
-            printf("\n• Premi 4 per modificare l'orario di partenza\n");
-            printf("\n• Premi 5 per modificare il prezzo\n");
-            printf("\n• Premi 6 per modificare il numero di posti disponibili\n");
-            printf("\n• Premi 7 per modificare la descrizione del viaggio\n");
-            printf("\n• Premi 8 per aggiungere un messaggio\n");
-            printf("\n• Premi 9 per annullare\n\n");
+            printf("• Premi 2 per modificare il luogo di arrivo\n");
+            printf("• Premi 3 per modificare la data del viaggio\n");
+            printf("• Premi 4 per modificare l'orario di partenza\n");
+            printf("• Premi 5 per modificare il prezzo\n");
+            printf("• Premi 6 per modificare il numero di posti disponibili\n");
+            printf("• Premi 7 per modificare la descrizione del viaggio\n");
+            printf("• Premi 8 per aggiungere un messaggio\n");
+            printf("• Premi 9 per annullare\n\n");
             scanf("%i", &selection);
             fflush(stdin);
             
@@ -198,7 +199,7 @@ void edit_ride(ride *edit_ride) {
             }
             case 4: {
                 printf("L'orario del viaggio è: %02hd:%02hd", (*edit_ride).date.hour, (*edit_ride).date.minutes);
-                printf("\nInserisci il nuovo orario\n");
+                printf("\nInserisci il nuovo orario nel formato 24 ore hh:mm\n");
                 edit_time(&(*edit_ride).date);
                 break;
             }
@@ -244,7 +245,7 @@ void edit_ride(ride *edit_ride) {
             default:
                 break;
         }
-    } while (selection != 8);
+    } while (selection != 9);
 }
 
 int remove_ride(const ride *remove_ride, ride rides[], int *count) {
@@ -287,20 +288,34 @@ void print_rides(ride rides[], int count, driver drivers[], int drivers_count, r
     }
 
     printf("\nViaggi pubblicati dal conducente con codice fiscale %s\n\n", (*ride_driver).code);
-    printf("    ______________________________________________________________________________________________________");
+    printf("    ________________________________________________________________________");
     printf("__________________________________________________________________________________________\n");
-    printf("   |    Data    |                                    Luogo di Partenza                                    |");
-    printf("                                     Luogo di Arrivo                                     |\n");
+    printf("   |    Data    |                             Luogo di Partenza                            |");
+    printf("                              Luogo di Arrivo                             |\n");
+    
     (*find_rides_count) = 0;
+    char source_description[PLACE_DESC_MAX];
+    char destination_description[PLACE_DESC_MAX];
+    
     for (int i=0; i<drivers_count; i++) {
         if (is_equal_insensitive((*ride_driver).code, rides[i].driver_code)) {
-            printf("%2i.| %02hd/%02hd/%4hd | %-50s, %-35s | %-50s, %-35s |\n", (*find_rides_count)+1, rides[i].date.day, rides[i].date.month, rides[i].date.year, rides[i].source.address, rides[i].source.city, rides[i].destination.address, rides[i].destination.city);
+            strcpy(source_description, "");
+            strncat(source_description, rides[i].source.address, 35);
+            strcat(source_description, ", ");
+            strcat(source_description, rides[i].source.city);
+            
+            strcpy(destination_description, "");
+            strncat(destination_description, rides[i].destination.address, 35);
+            strcat(destination_description, ", ");
+            strcat(destination_description, rides[i].destination.city);
+            
+            printf("%2i.| %02hd/%02hd/%4hd | %-72s | %-72s |\n", (*find_rides_count)+1, rides[i].date.day, rides[i].date.month, rides[i].date.year, source_description, destination_description);
             find_rides[(*find_rides_count)] = &rides[i];
             (*find_rides_count)++;
         }
     }
     
-    printf("    ------------------------------------------------------------------------------------------------------");
+    printf("    ------------------------------------------------------------------------");
     printf("------------------------------------------------------------------------------------------\n");
 }
 
@@ -434,7 +449,7 @@ void edit_time(date *date) {
     
     int is_valid_24time = 0;
     do {
-        printf("\nInserisci l'orario di partenza nel formato 24 ore: ");
+        printf("\nInserisci l'orario di partenza nel formato 24 ore hh:mm: ");
         scanf("%hd:%hd", &(*date).hour, &(*date).minutes);
         fflush(stdin);
         is_valid_24time = is_valid_time((*date).hour, (*date).minutes);

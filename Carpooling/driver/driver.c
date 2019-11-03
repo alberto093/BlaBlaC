@@ -233,7 +233,7 @@ void print_toprated_drivers(const driver drivers[], int count) {
             printf("Il conducente è: %s", toprated_drivers[0]);
         } else {
             printf("I conducenti sono:\n\n");
-            printf("%-25s %-25s\n", "NOME", "COGNOME");
+            printf("%-26s %-26s\n", "NOME", "COGNOME");
             for (int i=0; i<toprated_drivers_count; i++) {
                 printf("%s\n", toprated_drivers[i]);
             }
@@ -262,7 +262,7 @@ int add_review(driver *driver, const hash_code passenger_code) {
         printf("2: Mediocre\n");
         printf("3: Buono\n");
         printf("4: Ottimo\n");
-        printf("5: Eccellente\n");
+        printf("5: Eccellente\n\n");
         scanf("%i", &rating);
         fflush(stdin);
         

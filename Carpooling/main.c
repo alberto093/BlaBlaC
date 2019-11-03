@@ -354,7 +354,7 @@ void show_rides_create(ride rides[], int *total_rides, driver drivers[], int tot
     int is_valid = 0;
     do {
         new_ride = create_ride((*actual_driver).code);
-        is_valid = contains_ride(&new_ride, rides, *total_rides);
+        is_valid = !contains_ride(&new_ride, rides, *total_rides);
         if (!is_valid) {
             printf("\nDati non validi! Hai già inserito questo viaggio.\n\n");
         }
@@ -477,21 +477,7 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
     
     for (int i=0; i<total_rides; i++) {
         for (int j=0; j<rides[i].total_passenger_codes; j++) {
-            int is_reserved = is_equal_insensitive(rides[i].passenger_codes[j], (*actual_passenger).code);
-            int is_review_available = 1;
-            
-            for (int k=0; k<total_drivers; k++) {
-                for (int l=0; l<drivers[k].total_reviews; l++) {
-                    if (is_equal_insensitive(drivers[k].reviews[l].passenger_code, (*actual_passenger).code)) {
-                        is_review_available = 0;
-                        l=drivers[k].total_reviews;
-                        k=total_drivers;
-                        break;
-                    }
-                }
-            }
-            
-            if (is_reserved && is_review_available) {
+            if (is_equal_insensitive(rides[i].passenger_codes[j], (*actual_passenger).code)) {
                 find_rides[total_find_rides] = &rides[i];
                 total_find_rides++;
             }
@@ -499,6 +485,10 @@ void show_rides_review(ride rides[], int total_rides, driver drivers[], int tota
     }
     
     print_full_rides((*find_rides), total_find_rides, drivers, total_drivers);
+    
+    if (total_find_rides == 0) {
+        return;
+    }
     
     int selection = 0;
     int is_valid_selection = 0;
@@ -535,7 +525,7 @@ void print_full_rides(const ride rides[], int total_rides, driver drivers[], int
     }
     
     printf("\n    ___________________________________________________________________________________________________________________________________\n");
-    printf("   |  Ora  |          Luogo di Partenza          |           Luogo di Arrivo           |  Prezzo  |       Valutazione Conducente       |\n");
+    printf("   |  Ora  |          Luogo di Partenza          |           Luogo di Arrivo           | Prezzo  |       Valutazione Conducente       |\n");
 
     char driver_name[NAME_MAX + 3];
     for (int i=0; i<total_rides; i++) {
