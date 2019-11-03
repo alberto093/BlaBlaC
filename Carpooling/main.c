@@ -467,7 +467,7 @@ void show_rides_search(ride rides[], int total_rides, driver drivers[], int tota
     strcpy((*find_rides)[selection].passenger_codes[(*find_rides)[selection].total_passenger_codes], (*actual_passenger).code);
     (*find_rides)[selection].total_passenger_codes++;
     save_rides(rides, total_rides);
-    printf("Viaggio prenotato con successo!");
+    printf("\nViaggio prenotato con successo!\n");
 }
 
 void show_rides_review(ride rides[], int total_rides, driver drivers[], int total_drivers, passenger passengers[], int total_passengers) {
@@ -528,7 +528,7 @@ void print_full_rides(const ride rides[], int total_rides, driver drivers[], int
         return;
     }
     
-    printf("\n    ___________________________________________________________________________________________________________________________________\n");
+    printf("\n    __________________________________________________________________________________________________________________________________\n");
     printf("   |  Ora  |          Luogo di Partenza          |           Luogo di Arrivo           | Prezzo  |       Valutazione Conducente       |\n");
 
     char driver_name[NAME_MAX + 3];
@@ -544,5 +544,5 @@ void print_full_rides(const ride rides[], int total_rides, driver drivers[], int
         printf(" %-28s %-3.1f/5 |\n", driver_name, driver_rating(ride_driver));
     }
 
-    printf("    -------------------------------------------------------------------------------------------------------------------------------\n");
+    printf("    ----------------------------------------------------------------------------------------------------------------------------------\n");
 }

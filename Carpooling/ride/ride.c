@@ -522,7 +522,7 @@ int is_same_place(const place *lhs, const place *rhs) {
         return 0;
     }
     
-    return !strcmp((*lhs).address, (*rhs).address) && !strcmp((*lhs).city, (*rhs).city) && !strcmp((*lhs).province, (*rhs).province) && (*lhs).postal_code == (*rhs).postal_code;
+    return !strcasecmp((*lhs).address, (*rhs).address) && !strcasecmp((*lhs).city, (*rhs).city) && !strcasecmp((*lhs).province, (*rhs).province) && (*lhs).postal_code == (*rhs).postal_code;
 }
 
 int is_same_date(const date *lhs, const date *rhs) {
@@ -537,8 +537,8 @@ int is_similar_place(const place *complete, const place *partial) {
     if (complete == NULL || partial == NULL) {
         return 0;
     }
-    
-    return strstr((*complete).city, (*partial).city) != NULL || strstr((*complete).province, (*partial).province) != NULL;
+
+    return strcasestr((*complete).city, (*partial).city) != NULL || strcasestr((*complete).province, (*partial).province) != NULL;
 }
 
 int is_same_day(const date *lhs, const date *rhs) {
