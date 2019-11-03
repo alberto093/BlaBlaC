@@ -67,7 +67,7 @@ int is_equal_insensitive(const char lhs[], const char rhs[]) {
     }
     
     for (int i=0; i<lhs_len; i++) {
-        if (tolower(lhs[i] != tolower(rhs[i]))) {
+        if (tolower(lhs[i]) != tolower(rhs[i])) {
             return 0;
         }
     }

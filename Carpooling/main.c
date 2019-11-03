@@ -534,17 +534,18 @@ void print_full_rides(const ride rides[], int total_rides, driver drivers[], int
         return;
     }
     
-    printf("\n    _______________________________________________________________________________________________________________________________\n");
-    printf("   |  Ora  |         Luogo di Partenza         |          Luogo di Arrivo          |  Prezzo  |       Valutazione Conducente       |\n");
+    printf("\n    ___________________________________________________________________________________________________________________________________\n");
+    printf("   |  Ora  |          Luogo di Partenza          |           Luogo di Arrivo           |  Prezzo  |       Valutazione Conducente       |\n");
 
+    char driver_name[NAME_MAX + 3];
     for (int i=0; i<total_rides; i++) {
         driver *ride_driver = existing_driver(rides[i].driver_code, drivers, total_drivers);
         printf("%2i.| %02hd:%02hd | %-35s |", i+1, rides[i].date.hour, rides[i].date.minutes, rides[i].source.city);
         printf(" %-35s | € %-5.2f |", rides[i].destination.city, rides[i].price);
-        char driver_name[NAME_MAX + 3];
+        strcpy(driver_name, "");
         strcat(driver_name, (*ride_driver).name);
         strcat(driver_name, " ");
-        strlcat(driver_name, (*ride_driver).surname, 1);
+        strncat(driver_name, (*ride_driver).surname, 1);
         strcat(driver_name, ".");
         printf(" %-28s %-3.1f/5 |\n", driver_name, driver_rating(ride_driver));
     }
