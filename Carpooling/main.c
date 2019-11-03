@@ -39,12 +39,14 @@ void show_drivers_edit(driver drivers[], int total_drivers);
 
 /**
  It accepts an array of drivers in which will be removed the driver was selected by the user using stdin and an int pointer of its count that will be decreased by one.
- At the end of function the new array will be saved into the drivers file.
+ At the end of function all the driver's rides will be removed and the new arrays will be saved into the files.
 
  @param drivers array of driver struct
- @param total_drivers pointer to the count of the array
+ @param total_drivers pointer to the count of the drivers array
+ @param rides array of ride struct
+ @param total_rides pointer to the count of the rides array
  */
-void show_drivers_delete(driver drivers[], int *total_drivers);
+void show_drivers_delete(driver drivers[], int *total_drivers, ride rides[], int *total_rides);
 
 /**
  It accepts an array of passengers in which will be appended the passenger was created by the user using stdin and an int pointer of its count that will be increased by one.
@@ -187,7 +189,7 @@ int main() {
                             show_drivers_edit(drivers, total_drivers);
                             break;
                         case drivers_delete:
-                            show_drivers_delete(drivers, &total_drivers);
+                            show_drivers_delete(drivers, &total_drivers, rides, &total_rides);
                             break;
                         case drivers_list:
                             print_toprated_drivers(drivers, total_drivers);
@@ -280,7 +282,7 @@ void show_drivers_edit(driver drivers[], int total_drivers) {
     }
 }
 
-void show_drivers_delete(driver drivers[], int *total_drivers) {
+void show_drivers_delete(driver drivers[], int *total_drivers, ride rides[], int *total_rides) {
     driver *actual_driver = find_driver(drivers, *total_drivers);
     if (actual_driver != NULL) {
         int selection = 0;
@@ -294,7 +296,9 @@ void show_drivers_delete(driver drivers[], int *total_drivers) {
             }
         } while (!is_included(selection, 1, 2));
         if (selection == 1 && remove_driver(actual_driver, drivers, total_drivers)) {
+            remove_rides((*actual_driver).code, rides, total_rides);
             save_drivers(drivers, *total_drivers);
+            save_rides(rides, *total_rides);
             printf("Conducente eliminato con successo!");
         }
     }

@@ -100,10 +100,19 @@ void edit_ride(ride *edit_ride);
 
  @param remove_ride pointer to a ride struct
  @param rides array of ride struct
- @param count count of the rides array
+ @param count pointer to the count of the rides array
  @return It returns 1 if the ride was removed from the input array else 0.
  */
 int remove_ride(const ride *remove_ride, ride rides[], int *count);
+
+/**
+ This method removes the driver's rides from the rides array and decrease the value pointed by the count pointer.
+
+ @param driver_code code of the driver
+ @param rides array of ride struct
+ @param count pointer to the count of the rides array
+ */
+void remove_rides(const hash_code driver_code, ride rides[], int *count);
 
 /**
  It takes an array of rides and the array of drivers in order to improve printing values.

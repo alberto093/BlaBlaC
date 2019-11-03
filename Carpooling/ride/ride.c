@@ -253,21 +253,37 @@ int remove_ride(const ride *remove_ride, ride rides[], int *count) {
         return 0;
     }
     
+    int current_index = 0;
     int end = *count;
-    int found = 0;
+    
     for (int i=0; i<end; i++) {
-        if (!found && is_same_ride(remove_ride, &rides[i])) {
-            end--;
-            found = 1;
-        }
-        if (found) {
-            rides[i] = rides[i+1];
+        if (!is_same_ride(remove_ride, &rides[i])) {
+            rides[current_index] = rides[i];
+            current_index++;
+        } else {
+            (*count)--;
         }
     }
-    if (found) {
-        (*count)--;
+
+    return *count < end;
+}
+
+void remove_rides(const hash_code driver_code, ride rides[], int *count) {
+    if (driver_code == NULL || rides == NULL || count == NULL) {
+        return;
     }
-    return found;
+    
+    int current_index = 0;
+    int end = *count;
+    
+    for (int i=0; i<end; i++) {
+        if (!is_equal_insensitive(rides[i].driver_code, driver_code)) {
+            rides[current_index] = rides[i];
+            current_index++;
+        } else {
+            (*count)--;
+        }
+    }
 }
 
 void print_rides(ride rides[], int count, driver drivers[], int drivers_count, ride *find_rides[], int *find_rides_count) {
