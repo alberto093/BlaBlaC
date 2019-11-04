@@ -26,7 +26,7 @@
 //    strcpy(test_driver.code, "sltlrt93c22l109n");
 //    drivers[0] = test_driver;
 //    
-//    CU_ASSERT_EQUAL(remove_driver(&test_driver, drivers, &total_drivers), 0);
+//    CU_ASSERT_TRUE(remove_driver(&test_driver, drivers, &total_drivers));
 //    CU_ASSERT_EQUAL(total_drivers, 0);
 //    CU_ASSERT_FALSE(remove_driver(NULL, drivers, &total_drivers));
 //}
